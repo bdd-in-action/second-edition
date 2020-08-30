@@ -21,4 +21,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: cd chapter-1/java/online-banking && mvn -B verify
+      run: cd chapter-2/java/train-timetables && mvn -B verify
