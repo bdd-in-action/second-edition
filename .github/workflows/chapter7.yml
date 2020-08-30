@@ -34,7 +34,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install node modules
-        run: cd chapter-07/typescript/flyinig-high && npm ci
+        run: cd chapter-07/typescript/flying-high && npm ci
       - name: Lint
         run: npm run lint
       - name: Test
