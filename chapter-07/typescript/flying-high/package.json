@@ -1,0 +1,53 @@
+{
+  "name": "@bdd-in-action/chapter-07",
+  "version": "0.0.1",
+  "description": "BDD in Action - Chapter 7",
+  "author": {
+    "name": "Jan Molak",
+    "email": "jan.molak@serenity.io",
+    "url": "https://janmolak.com"
+  },
+  "homepage": "https://www.manning.com/books/bdd-in-action",
+  "license": "Apache-2.0",
+  "private": true,
+  "config": {
+    "access": "private"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "postinstall": "serenity-bdd update --ignoreSSL",
+    "test": "failsafe test:clean test:acceptance test:report",
+    "test:clean": "rimraf target",
+    "test:acceptance": "cucumber-js --require-module ts-node/register --require 'features/**/*.ts' --format node_modules/@serenity-js/cucumber --no-strict",
+    "test:report": "serenity-bdd run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@serenity-js/core": "^2.15.0",
+    "@serenity-js/cucumber": "^2.15.0",
+    "@serenity-js/console-reporter": "^2.15.0",
+    "@serenity-js/serenity-bdd": "^2.15.0",
+    "@types/cucumber": "^6.0.1",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "cucumber": "^6.0.5",
+    "eslint": "^7.7.0",
+    "npm-failsafe": "^0.4.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bdd-in-action/second-edition.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bdd-in-action/second-edition"
+  },
+  "engines": {
+    "node": ">= 10",
+    "npm": ">= 6"
+  }
+}
