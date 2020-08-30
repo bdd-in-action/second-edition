@@ -20,7 +20,7 @@
     "postinstall": "serenity-bdd update --ignoreSSL",
     "test": "failsafe test:clean test:acceptance test:report",
     "test:clean": "rimraf target",
-    "test:acceptance": "cucumber-js --require-module ts-node/register --require 'features/**/*.ts' --format node_modules/@serenity-js/cucumber --no-strict",
+    "test:acceptance": "cucumber-js --require-module ts-node/register --require 'features/**/*.ts' --format node_modules/@serenity-js/cucumber --no-strict features/frequent_flyer/earning_points/earning_points_from_flights.feature",
     "test:report": "serenity-bdd run"
   },
   "dependencies": {},

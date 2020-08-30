@@ -3,7 +3,7 @@ import { TripDistanceRecorder } from './TripDistanceRecorder';
 
 export class FlightDatabase {
 
-    private readonly flightPlans: FlightPlan[]
+    private readonly flightPlans: FlightPlan[] = []
 
     recordTripDistance(): TripDistanceRecorder {
         return new TripDistanceRecorder(this)
