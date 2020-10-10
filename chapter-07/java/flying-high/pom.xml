@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.examplcom.manning.bddinaction</groupId>
-	<artifactId>frequentflyer</artifactId>
+	<artifactId>flying-high</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>frequentflyer</name>
 	<description>BDD In Action Chapter 7 - sample application</description>
