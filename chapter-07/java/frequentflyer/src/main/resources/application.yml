@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  datasource:
+#    url: "jdbc:postgresql://localhost:5432/flyinghighdb"
+    url: "jdbc:tc:postgresql://localhost:5432/flyinghighdb"
+    username: flyinghigh
+    password: flyinghigh
