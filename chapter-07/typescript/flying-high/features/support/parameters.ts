@@ -2,7 +2,7 @@ import { defineParameterType } from 'cucumber';
 
 defineParameterType({
     regexp: /(Standard|Bronze|Silver|Gold) Frequent Flyer member/,
-    transformer(value) {
+    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
         // FrequentFlyerStatus status = FrequentFlyerStatus.valueOf(statusName);
         // return FrequentFlyerMember.newMember().withStatus(status);
         return null
@@ -12,7 +12,7 @@ defineParameterType({
 
 defineParameterType({
     regexp: /Economy|Business|First/,
-    transformer(value) {
+    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
         // return CabinClass.valueOf(cabinClass);
         return null
     },
@@ -37,7 +37,7 @@ defineParameterType({
 
 defineParameterType({
     regexp: /(.*)/,
-    transformer(value) {
+    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
         // return FrequentFlyerMember.newMember().named(name);
         return null;
     },
@@ -46,7 +46,7 @@ defineParameterType({
 
 defineParameterType({
     regexp: /(Standard|Bronze|Silver|Gold|) Frequent Flyer member/,
-    transformer(value) {
+    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
         return null;
     },
     name: 'frequentFlyer'
