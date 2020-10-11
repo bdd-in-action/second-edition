@@ -1,6 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('frequent_flyer_member')
+@Entity()
 export class FrequentFlyerMember {
 
     @PrimaryGeneratedColumn()
