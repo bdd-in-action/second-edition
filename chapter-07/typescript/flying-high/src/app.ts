@@ -1,9 +1,11 @@
 import * as express from 'express'
 
-const app = express()
+export = function flyingHigh() {
+    const app = express()
 
-app.get('/', (request, response) => {
-    response.send('BDD In Action Chapter 7')
-})
+    app.get('/', (request, response) => {
+        response.send('BDD In Action Chapter 7')
+    })
 
-export = app
+    return app
+}
