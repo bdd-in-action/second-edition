@@ -1,9 +1,23 @@
-import { Given, When, Then, TableDefinition } from 'cucumber';
+import { BeforeAll, Given, When, Then, TableDefinition, AfterAll } from 'cucumber';
 
-import { FlightDatabase } from '../../src';
 import { CabinClass } from '../../src/domain';
+import { GenericContainer } from 'testcontainers';
+import { StartedTestContainer } from 'testcontainers/dist/test-container';
 
-const flightDatabase = new FlightDatabase()
+let db: StartedTestContainer;
+
+BeforeAll(async () => {
+    db = await new GenericContainer('postgres')
+        .withEnv('POSTGRES_USER', 'postgres')
+        .withEnv('POSTGRES_PASSWORD', 'postgres')
+        .withEnv('POSTGRES_DB', 'postgres')
+        .withExposedPorts(5432)
+        .start();
+});
+
+AfterAll(async () => {
+    await db.stop();
+})
 
 Given('the following flight points schedule:', function (table: TableDefinition) {
 
