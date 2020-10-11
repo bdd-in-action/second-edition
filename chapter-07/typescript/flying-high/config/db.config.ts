@@ -26,7 +26,7 @@ export = {
         password: 'postgres',
         database: 'flying_high',
         synchronize: true,
-        logging: true,
+        logging: false,
     }),
     production: (): PostgresConnectionOptions => ({
         ... all,
