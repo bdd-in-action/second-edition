@@ -6,7 +6,7 @@ import { StartedTestContainer } from 'testcontainers/dist/test-container';
 
 let db: StartedTestContainer;
 
-BeforeAll(async () => {
+BeforeAll({ timeout: 30 * 1000 }, async () => {
     db = await new GenericContainer('postgres')
         .withEnv('POSTGRES_USER', 'postgres')
         .withEnv('POSTGRES_PASSWORD', 'postgres')
