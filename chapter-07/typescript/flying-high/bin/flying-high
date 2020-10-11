@@ -2,8 +2,8 @@
 
 require('ts-node/register')
 
-const { flyingHighApp } = require('../src')
+const port = process.env.PORT || 3000
+const host = process.env.HOST || 'localhost'
+const mode = process.env.NODE_ENV || 'development'
 
-flyingHighApp.listen(3000, 'localhost', () => {
-    console.log('Flying High listening on port 3000')
-})
+require('../src/bootstrap')(port, host, mode)

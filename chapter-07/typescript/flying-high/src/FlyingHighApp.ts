@@ -1,19 +1,34 @@
-import * as express from 'express';
-import * as http from 'http';
-import * as bodyParser from 'body-parser';
-import { Routes } from './config/routes';
+import 'reflect-metadata';
+import * as express from 'express'
+import * as http from 'http'
+import * as bodyParser from 'body-parser'
+import { Router } from './controllers/Router'
+import { createConnection } from 'typeorm';
+import { ConnectionOptions } from 'typeorm/connection/ConnectionOptions';
+import * as path from 'path';
 
 export class FlyingHighApp {
     private readonly server: express.Application;
-    private readonly routes: Routes = new Routes();
+    private readonly router: Router = new Router();
 
-    constructor() {
+    constructor(private readonly dbConfig: ConnectionOptions) {
         this.server = FlyingHighApp.createServer();
-        this.routes.routes(this.server)
+        this.router.routes(this.server)
     }
 
     listen(port: number, hostname = 'localhost', callback = () => void 0): http.Server {
-        return this.server.listen(port, hostname, callback)
+        return this.server.listen(port, hostname, () => {
+            createConnection({
+                ... {
+                    entities:   [ path.join(__dirname, './entities/*.ts') ],
+                    migrations: [ path.join(__dirname, './migration/*.ts') ],
+                    synchronize: true,
+                },
+                ...this.dbConfig
+            }).then(() => {
+                callback();
+            })
+        })
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

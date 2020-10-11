@@ -1,0 +1,6 @@
+{
+  "development": {
+    "type": "sqlite",
+    "database": "target/dev.db"
+  }
+}

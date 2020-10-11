@@ -1,7 +1,7 @@
 import * as express from 'express'
-import { StatusController } from '../controllers/StatusController'
+import { StatusController } from './StatusController'
 
-export class Routes {
+export class Router {
     public nodesController = new StatusController()
 
     public routes(server: express.Application): void {

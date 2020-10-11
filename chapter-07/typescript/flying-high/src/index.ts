@@ -1,5 +1,2 @@
-import { FlyingHighApp } from './FlyingHighApp';
-
-export * from './domain'
+export * from './entities'
 export * from './FlyingHighApp'
-export const flyingHighApp = new FlyingHighApp()

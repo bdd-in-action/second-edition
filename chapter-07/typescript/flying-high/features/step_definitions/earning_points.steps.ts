@@ -1,6 +1,6 @@
 import { BeforeAll, Given, When, Then, TableDefinition, AfterAll } from 'cucumber';
 
-import { CabinClass } from '../../src/domain';
+import { CabinClass } from '../../src/entities';
 import { GenericContainer } from 'testcontainers';
 import { StartedTestContainer } from 'testcontainers/dist/test-container';
 
