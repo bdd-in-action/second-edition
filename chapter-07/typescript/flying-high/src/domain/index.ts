@@ -1,1 +1,1 @@
-export * from './CabinClass';
+export * from './CabinClass'

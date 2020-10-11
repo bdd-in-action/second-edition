@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+require('ts-node/register')
+
+require('../src/app').listen(3000, () => {
+    console.log('Flying High listening on port 3000')
+})
