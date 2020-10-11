@@ -1,27 +1,20 @@
-import { BeforeAll, Given, When, Then, TableDefinition, AfterAll } from 'cucumber';
+import { AfterAll, BeforeAll, Given, TableDefinition, Then, When } from 'cucumber';
 import { createConnection, getRepository } from 'typeorm';
-
-import dbConfig = require('../../config/db.config');
-import { CabinClass } from '../../src/entities';
-import { GenericContainer } from 'testcontainers';
+import { CabinClass, FrequentFlyerMember } from '../../src/entities';
 import { StartedTestContainer } from 'testcontainers/dist/test-container';
 import { PointsSchedule } from '../../src/entities/PointsSchedule';
 import { asPointSchedules, PointsScheduleRow } from '../support/tables';
+import { DatabaseContainer } from '../support/containers';
+import dbConfig = require('../../config/db.config');
 
 let dbContainer: StartedTestContainer;
 
 BeforeAll({ timeout: 30 * 1000 }, async () => {
-    const config = dbConfig.test();
-
-    dbContainer = await new GenericContainer('postgres')
-        .withEnv('POSTGRES_USER', config.username)
-        .withEnv('POSTGRES_PASSWORD', config.username)
-        .withEnv('POSTGRES_DB', config.database)
-        .withExposedPorts(5432)
+    dbContainer = await new DatabaseContainer(dbConfig.test())
         .start();
 
     await createConnection({
-        ...config,
+        ...dbConfig.test(),
         host: dbContainer.getContainerIpAddress(),
         port: dbContainer.getMappedPort(5432),
     });
@@ -40,10 +33,6 @@ Given('the following flight points schedule:', async function (table: TableDefin
 Given('the following flyer types multipliers:', function (table: TableDefinition) {
 
 });
-
-interface FrequentFlyerMember {
-    name: string;
-}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
 Given('{} is a {frequentFlyer}', function (name: string, member: FrequentFlyerMember) {

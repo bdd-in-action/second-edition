@@ -17,7 +17,7 @@ export = {
         logging: true,
         synchronize: true,
     }),
-    test: (): PostgresConnectionOptions => ({
+    test: (): PostgresConnectionOptions & { username: string, password: string, database: string } => ({
         ... all,
         type: 'postgres',
         host: 'localhost',
@@ -28,7 +28,7 @@ export = {
         synchronize: true,
         logging: false,
     }),
-    production: (): PostgresConnectionOptions => ({
+    production: (): PostgresConnectionOptions & { username: string, password: string, database: string } => ({
         ... all,
         type: 'postgres',
         host: ensure('env.DB_HOST', process.env.DB_USERNAME, isNotBlank()),

@@ -1,53 +1,49 @@
 import { defineParameterType } from 'cucumber';
+import { CabinClass, FrequentFlyerMember } from '../../src/entities';
+import { FrequentFlyerStatus } from '../../src/entities/FrequentFlyerStatus';
 
 defineParameterType({
     regexp: /(Standard|Bronze|Silver|Gold) Frequent Flyer member/,
-    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
-        // FrequentFlyerStatus status = FrequentFlyerStatus.valueOf(statusName);
-        // return FrequentFlyerMember.newMember().withStatus(status);
-        return null
+    transformer(value): FrequentFlyerMember {
+        return new FrequentFlyerMember({
+            name: 'A Frequent Flyer Member',
+            status: FrequentFlyerStatus[value],
+        });
     },
-    name: 'statusName'
-})
+    name: 'frequentFlyer',
+});
 
 defineParameterType({
     regexp: /Economy|Business|First/,
-    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
-        // return CabinClass.valueOf(cabinClass);
-        return null
+    transformer(value) {
+        return CabinClass[value];
     },
-    name: 'cabinClass'
-})
+    name: 'cabinClass',
+});
 
 defineParameterType({
     regexp: /(\d{4}-\d{2}-\d{2})/,
     transformer(value) {
         return new Date(Date.parse(value));
     },
-    name: 'ISO-date'
-})
+    name: 'ISO-date',
+});
 
 defineParameterType({
     regexp: /(.*)/,
     transformer(value) {
         return value.split(',').map(item => item.trim());
     },
-    name: 'string-values'
-})
+    name: 'string-values',
+});
 
 defineParameterType({
     regexp: /(.*)/,
-    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
-        // return FrequentFlyerMember.newMember().named(name);
-        return null;
+    transformer(name): FrequentFlyerMember {
+        return new FrequentFlyerMember({
+            name,
+            status: FrequentFlyerStatus.Standard,
+        });
     },
-    name: 'member'
-})
-
-defineParameterType({
-    regexp: /(Standard|Bronze|Silver|Gold|) Frequent Flyer member/,
-    transformer(value) { // eslint-disable-line @typescript-eslint/no-unused-vars
-        return null;
-    },
-    name: 'frequentFlyer'
-})
+    name: 'member',
+});
