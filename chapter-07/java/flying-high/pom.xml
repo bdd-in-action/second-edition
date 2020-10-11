@@ -11,11 +11,11 @@
 	<groupId>com.examplcom.manning.bddinaction</groupId>
 	<artifactId>flying-high</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>frequentflyer</name>
+	<name>flying-high</name>
 	<description>BDD In Action Chapter 7 - sample application</description>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>12</java.version>
 		<serenity.version>2.3.4</serenity.version>
 		<serenity.maven.version>2.3.4</serenity.maven.version>
 		<serenity.cucumber.version>2.3.4</serenity.cucumber.version>
