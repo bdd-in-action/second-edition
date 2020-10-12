@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { FrequentFlyerStatus } from './FrequentFlyerStatus';
 
 @Entity()
 export class FrequentFlyerMember {
@@ -11,4 +12,14 @@ export class FrequentFlyerMember {
 
     @Column()
     joinedAt: Date;
+
+    @Column()
+    initialPoints: number;
+
+    @Column()
+    status: FrequentFlyerStatus;
+
+    constructor(frequentFlyerMember: Partial<FrequentFlyerMember>) {
+        Object.assign(this, frequentFlyerMember);
+    }
 }

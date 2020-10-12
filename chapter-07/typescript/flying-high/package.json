@@ -22,7 +22,7 @@
     "start": "bin/flying-high",
     "test": "failsafe test:clean test:acceptance test:report",
     "test:clean": "rimraf target",
-    "test:acceptance": "cucumber-js features/frequent_flyer/earning_points_from_flights.feature",
+    "test:acceptance": "cucumber-js 'features/**/*.feature'",
     "test:report": "serenity-bdd run"
   },
   "dependencies": {
