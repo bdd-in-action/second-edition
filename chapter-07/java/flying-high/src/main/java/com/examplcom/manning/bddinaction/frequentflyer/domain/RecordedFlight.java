@@ -12,8 +12,7 @@ public class RecordedFlight {
     @Column(name="flight_id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_member_id", referencedColumnName = "member_id") // here the exact field name of your comment id in your DB
+    @ManyToOne(optional=false,fetch=FetchType.LAZY)
     private FrequentFlyerMember member;
 
     private LocalDate date;
@@ -76,5 +75,9 @@ public class RecordedFlight {
 
     public Period getDelay() {
         return delay;
+    }
+
+    public void setMember(FrequentFlyerMember member) {
+        this.member = member;
     }
 }

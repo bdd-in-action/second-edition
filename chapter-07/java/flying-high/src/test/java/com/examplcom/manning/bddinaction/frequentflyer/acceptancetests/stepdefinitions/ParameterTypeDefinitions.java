@@ -1,12 +1,16 @@
 package com.examplcom.manning.bddinaction.frequentflyer.acceptancetests.stepdefinitions;
 
 import com.examplcom.manning.bddinaction.frequentflyer.domain.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.ParameterType;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,7 +45,7 @@ public class ParameterTypeDefinitions {
         return CabinClass.valueOf(cabinClass);
     }
 
-    @ParameterType(name = "ISO-date", value = "(\\d{4}-\\d{2}-\\d{2})")
+    @ParameterType(value = "(\\d{4}-\\d{2}-\\d{2})")
     public LocalDate isoDate(String formattedDate) {
         return LocalDate.parse(formattedDate);
     }
@@ -53,19 +57,34 @@ public class ParameterTypeDefinitions {
                 .collect(Collectors.toList());
     }
 
+    @ParameterType(value = "(.*)")
+    public List<String> cities(String destinationList) {
+        return Stream.of(destinationList.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
     @ParameterType(".*")
     public FrequentFlyerMember member(String name) {
         return FrequentFlyerMember.newMember().named(name);
     }
 
+    private ObjectMapper fromJsonTestData() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        return mapper;
+    }
+
     @DataTableType
-    public PastFlight mapRowToPastFlight(Map<String, String> entry) {
-        return new PastFlight(
-                optional(entry.get("Flight Number"),""),
-                LocalDate.parse(optional(entry.get("Date"), "2020-10-01")),
-                FlightStatus.valueOf(optional(entry.get("Status"), "COMPLETED")),
-                isDelayed(entry),
-                delayDurationOf(entry));
+    public PastFlight mapRowToPastFlight(Map<String, String> entry) throws IOException {
+        URL pastFlightTestData = getClass().getResource("/testdata/past-flight.json");
+        PastFlight pastFlight = fromJsonTestData().readValue(pastFlightTestData, PastFlight.class);
+        pastFlight.setScheduledDate(LocalDate.parse(optional(entry.get("Date"), "2020-10-01")));
+        pastFlight.setStatus(FlightStatus.valueOf(optional(entry.get("Status"), "COMPLETED")));
+        pastFlight.setWasDelayed("Yes".equalsIgnoreCase(entry.get("Delayed")));
+        pastFlight.setDelayedBy(delayDurationOf(entry));
+        return pastFlight;
     }
 
     private <T> T optional(T cellValue, T defaultValue) {

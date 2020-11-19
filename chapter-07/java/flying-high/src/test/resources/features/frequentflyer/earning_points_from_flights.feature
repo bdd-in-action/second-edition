@@ -77,18 +77,25 @@ Feature: Earning Frequent Flyer points from flights
       | Flight Number | Date       | Status    |
       | FH-101        | 2019-12-01 | COMPLETED |
 
+  Scenario: Flights outside Europe earn points based on distance
+    Given the distance from London to New York is 5500 km
+    And Tara is a Frequent Flyer traveller
+    When she completes a flight from London to New York
+    Then she should earn 550 points
+
+
   Scenario Outline: Frequent flyer members are awarded extra points for late flights
   10 extra points are earned for each hour delayed after 1 hour.
-    Given Tracy has travelled on the following flight:
-      | From   | To   | Delayed   | Delayed By   | Extra Points   |
-      | <From> | <To> | <Delayed> | <Delayed By> | <Extra Points> |
+    Given Tracy has travelled on the following flights:
+      | Flight Number   | Delayed   | Delayed By   | Extra Points   |
+      | <Flight Number> | <Delayed> | <Delayed By> | <Extra Points> |
     When the flight is credited to her account
     Then she should be credited with <Extra Points> additional points
     Examples:
-      | From     | To          | Delayed | Delayed By | Extra Points |
-      | London   | New York    | No      |            | 0            |
-      | London   | Paris       | Yes     | 10m        | 0            |
-      | New York | Los Angeles | Yes     | 60m        | 10           |
-      | London   | Berlin      | Yes     | 2h30m      | 20           |
-      | Berlin   | Dublin      | Yes     | 5h         | 50           |
+      | Delayed | Delayed By | Extra Points |
+      | No      |            | 0            |
+      | Yes     | 10m        | 0            |
+      | Yes     | 60m        | 10           |
+      | Yes     | 2h30m      | 20           |
+      | Yes     | 5h         | 50           |
 

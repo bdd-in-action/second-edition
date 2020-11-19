@@ -30,17 +30,19 @@ public class JPAFrequentFlyerPointsService implements FrequentFlyerPointsService
     @Override
     public void recordFlight(FrequentFlyerMember member, String departure, String destination, CabinClass cabinClass) {
 
+        FrequentFlyerMember savedMember = frequentFlyers.save(member);
         pointScheduleBetween(departure, destination, cabinClass).ifPresent(
-                schedule -> recordedFlightRepository.save(
+                schedule ->
+                        recordedFlightRepository.save(
                         new RecordedFlight(
                                 LocalDate.now(),
-                                member,
+                                savedMember,
                                 departure,
                                 destination,
                                 cabinClass,
                                 false,
                                 Period.ZERO,
-                                (int) (schedule.getPoints() * multiplierFor(member) * loyaltyBonusFor(member)))
+                                (int) (schedule.getPoints() * multiplierFor(savedMember) * loyaltyBonusFor(savedMember)))
                 )
         );
     }

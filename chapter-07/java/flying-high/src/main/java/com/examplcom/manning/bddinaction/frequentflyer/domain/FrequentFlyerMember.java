@@ -2,6 +2,8 @@ package com.examplcom.manning.bddinaction.frequentflyer.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class FrequentFlyerMember {
@@ -17,6 +19,10 @@ public class FrequentFlyerMember {
     @Enumerated(EnumType.ORDINAL)
     private FrequentFlyerStatus status;
 
+//    @OneToMany(cascade = {CascadeType.ALL},fetch= FetchType.EAGER, mappedBy = "member")
+    @OneToMany(mappedBy = "member")
+    private Collection<RecordedFlight> recordedFlights;
+
     public FrequentFlyerMember() {}
 
     private FrequentFlyerMember(String name, FrequentFlyerStatus status) {
@@ -27,8 +33,8 @@ public class FrequentFlyerMember {
     public static FrequentFlyerMember newMember() {
         return new FrequentFlyerMember("A Frequent Flyer Member", FrequentFlyerStatus.Standard);
     }
-    public FrequentFlyerMember named(String name) {
-        return new FrequentFlyerMember(name, this.status);
+    public static FrequentFlyerMember named(String name) {
+        return new FrequentFlyerMember(name, FrequentFlyerStatus.Standard);
     }
 
     public FrequentFlyerMember withStatus(FrequentFlyerStatus status) {
@@ -61,5 +67,22 @@ public class FrequentFlyerMember {
 
     public void setInitialPoints(int initialPoints) {
         this.initialPoints = initialPoints;
+    }
+
+    public void setRecordedFlights(Collection<RecordedFlight> recordedFlights) {
+        this.recordedFlights  =recordedFlights;
+    }
+
+    public Collection<RecordedFlight> getRecordedFlight() {
+        return recordedFlights;
+    }
+
+    public void addRecordedFlight(RecordedFlight flight) {
+        recordedFlights.add(flight);
+        flight.setMember(this);
+    }
+
+    public void removeRecordedFlight(RecordedFlight flight) {
+        recordedFlights.remove(flight);
     }
 }

@@ -1,23 +1,39 @@
 package com.examplcom.manning.bddinaction.frequentflyer.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class PastFlight {
     private String flightNumber;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate scheduledDate;
+
+    private String departure;
+    private String destination;
     private FlightStatus status;
     private Boolean wasDelayed;
     private Duration delayedBy;
 
-    public PastFlight(String flightNumber, LocalDate scheduledDate, FlightStatus status, Boolean wasDelayed, Duration delayedBy) {
+    public PastFlight(String flightNumber,
+                      LocalDate scheduledDate,
+                      String departure, String destination, FlightStatus status,
+                      Boolean wasDelayed,
+                      Duration delayedBy) {
         this.flightNumber = flightNumber;
         this.scheduledDate = scheduledDate;
+        this.departure = departure;
+        this.destination = destination;
         this.status = status;
         this.wasDelayed = wasDelayed;
         this.delayedBy = delayedBy;
     }
+
+    public PastFlight() {}
 
     public String getFlightNumber() {
         return flightNumber;
@@ -37,6 +53,34 @@ public class PastFlight {
 
     public Duration getDelayedBy() {
         return delayedBy;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public void setScheduledDate(LocalDate scheduledDate) {
+        this.scheduledDate = scheduledDate;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
+    }
+
+    public void setWasDelayed(Boolean wasDelayed) {
+        this.wasDelayed = wasDelayed;
+    }
+
+    public void setDelayedBy(Duration delayedBy) {
+        this.delayedBy = delayedBy;
     }
 
     @Override
