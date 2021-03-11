@@ -6,7 +6,6 @@ Feature: Modify an existing booking
 
   Scenario: Change a flight to another date
     Given Tara is a Frequent Flyer traveller
-    And Tara has logged on to the Frequent Flyer application using tara@email.com
     And Tara has booked the following flight:
       | Departure | Destination | Date       | Class   |
       | London    | New York    | 13-01-2020 | Economy |
@@ -16,7 +15,7 @@ Feature: Modify an existing booking
       | Departure | Destination | Date       | Class   |
       | London    | New York    | 15-01-2020 | Economy |
 
-  Scenario: Change a flight to another date
+  Scenario: Change a flight to another date with a fare difference
     Given Tara has booked the following flight:
       | Departure | Destination | Date       | Class   |
       | London    | New York    | 13-01-2020 | Economy |
@@ -26,3 +25,4 @@ Feature: Modify an existing booking
     And the booking should be updated to the following:
       | Departure | Destination | Date       | Class           |
       | London    | New York    | 15-01-2020 | Premium Economy |
+

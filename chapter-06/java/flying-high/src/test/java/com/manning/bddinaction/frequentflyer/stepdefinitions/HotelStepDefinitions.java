@@ -1,5 +1,6 @@
 package com.manning.bddinaction.frequentflyer.stepdefinitions;
 
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -187,4 +188,28 @@ public class HotelStepDefinitions {
     public void her_upcoming_trips_should_include(io.cucumber.datatable.DataTable dataTable) {
     }
 
+    @Given("the following hotels availability:")
+    public void theFollowingHotelsAvailability() {
+    }
+
+    @When("Bindi searches for a company-approved hotel within {int} km of Paris")
+    public void bindiSearchesForACompanyApprovedHotelWithinKmOfParis(int arg0) {
+    }
+
+    @Then("she should be presented with the following hotel:")
+    public void sheShouldBePresentedWithTheFollowingHotel() {
+    }
+
+    @Then("she should be informed that there are no matching company-approved hotels")
+    public void sheShouldBeInformedThatThereAreNoMatchingCompanyApprovedHotels() {
+    }
+
+    @But("she should be informed that the following non-matching company-approaved hotels are available:")
+    public void sheShouldBeInformedThatTheFollowingNonMatchingCompanyApproavedHotelsAreAvailable() {
+    }
+
+    @When("he books a hotel on the corporate booking system")
+    public void heBooksAHotelOnTheCorporateBookingSystem() {
+        
+    }
 }

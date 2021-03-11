@@ -7,9 +7,9 @@
         </encoder>
     </appender>
 
-    <logger name="root" level="DEBUG"/>
-    <logger name="net.serenitybdd" level="INFO"/>
-    <logger name="net.thucydides" level="INFO"/>
+    <logger name="root" level="INFO"/>
+    <logger name="net.serenitybdd" level="WARNING"/>
+    <logger name="net.thucydides" level="WARNING"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

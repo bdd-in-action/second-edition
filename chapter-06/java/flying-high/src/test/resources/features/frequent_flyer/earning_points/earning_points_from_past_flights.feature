@@ -6,7 +6,7 @@ Feature: Earning points from past flights
 
   Scenario Outline: Eligble flights in the past 90 days can be claimed
     Given Todd has just joined the Frequent Flyer programme
-    And Todd asks for the following flight to be credited to his account:
+    When Todd asks for the following flight to be credited to his account:
       | Flight Number   | Flight Date   | Status   |
       | <Flight Number> | <Flight Date> | <Status> |
     Then the flight should be considered <Eligibility>

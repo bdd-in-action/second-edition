@@ -135,4 +135,24 @@ public class FrequentFlyerPointsStepDefinitions {
     @When("Terry requests credit for flight {} on {} with Other Air")
     public void terry_requests_credit_for_flight_oa_on_with_other_air(String flight, String date) {
     }
+
+    @Given("the following Frequent Flyer members:")
+    public void theFollowingFrequentFlyerMembers(DataTable members) {
+    }
+
+    @Given("the following Frequent Flyer account balances:")
+    public void theFollowingFrequentFLyerAccountBalances(DataTable members) {
+    }
+
+    @When("Sarah tries to transfer {int} points to Fred")
+    public void sarahTriesToTransferPointsToFred(int arg0) {
+    }
+
+    @Then("the transfer should not be allowed")
+    public void theTransferShouldNotBeAllowed() {
+    }
+
+    @When("Steve tries to transfer {int} points to Sarah")
+    public void steveTriesToTransferPointsToSarah(int arg0) {
+    }
 }
