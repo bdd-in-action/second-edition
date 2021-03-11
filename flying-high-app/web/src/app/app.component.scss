@@ -1,0 +1,19 @@
+mat-toolbar {
+    .logo {
+        margin-left: -10px;
+        width: 135px;
+    }
+    display: flex;
+    justify-content: space-between;
+    span {
+        cursor: pointer;
+    }
+    .operation-section {
+        display: flex;
+        justify-content: flex-start;
+        .email {
+            font-size: small;
+            cursor: default;
+        }
+    }
+}

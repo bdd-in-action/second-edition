@@ -1,0 +1,36 @@
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: transparent;
+}
+.input-align {
+    top: 12px;
+}
+.search-container {
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    margin: 10px auto 0;
+    width: 80vw;
+    height: 150px;
+    justify-content: space-between;
+    background-color: #e8e8e8;
+    mat-form-field {
+        display: block;
+        width: 15vw;
+    }
+    .datepicker-align {
+        top: -1px;
+    }
+    button {
+        margin-top: 10px;
+    }
+}
+
+.flight-container {
+    width: 80vw;
+    margin: 0 auto;
+    .flex-container {
+        display: flex;
+        justify-content: space-between;
+    }
+}

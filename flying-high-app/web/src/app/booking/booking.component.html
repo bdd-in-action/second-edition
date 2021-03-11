@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="card" *ngFor="let booking of bookings">
+        <p>Order number: {{booking.orderNumber}}</p>
+        <small>{{ booking.departureDate | date: 'yyyy-MM-dd, h:mm a' }}</small>
+        <p>Departure: {{ booking.departure.name }}</p>
+        <small>{{ booking.arrivalDate | date: 'yyyy-MM-dd, h:mm a' }}</small>
+        <p>Arrival: {{booking.destination.name}} </p>
+        <p>Class: {{ booking.class }}</p>
+    </div>
+    <h2 *ngIf="bookings.length === 0">No bookings yet</h2>
+</div>

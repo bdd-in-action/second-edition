@@ -1,0 +1,24 @@
+<div class="user-info-container">Point Balance: {{totalPoints}} &nbsp;&nbsp; User Level: {{userLevel | uppercase}}
+    <button mat-raised-button (click)="openUserModal()">Edit User Profile</button>
+    <button mat-button color="primary" (click)="toUserProfile()">To User Profile</button>
+</div>
+<table mat-table [dataSource]="usersAccount" *ngIf="totalPoints !== 0">
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.flightInfo.date | date: 'yyyy-MM-dd, h:mm a'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="departure">
+        <th mat-header-cell *matHeaderCellDef> Departure </th>
+        <td mat-cell *matCellDef="let element"> {{element.flightInfo.departure}} </td>
+    </ng-container>
+    <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef> Destination </th>
+        <td mat-cell *matCellDef="let element"> {{element.flightInfo.destination}} </td>
+    </ng-container>
+    <ng-container matColumnDef="pointsEarned">
+        <th mat-header-cell *matHeaderCellDef> Points Earned </th>
+        <td mat-cell *matCellDef="let element"> {{element.flightInfo.point}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

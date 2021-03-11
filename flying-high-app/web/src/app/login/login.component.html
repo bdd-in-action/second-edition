@@ -1,0 +1,18 @@
+<div class="login-container">
+    <form [formGroup]="form" (submit)="login(form)">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" id="email" data-test-id="email">
+            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" id="password"  data-test-id="password">
+            <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
+        </mat-form-field>
+        <br>
+        <button id="register-button" type="button" class="align-right" mat-button [routerLink]="['/register']">Or Register</button>
+        <button id="login-button" class="align-right" mat-raised-button type="submit">Login</button>
+    </form>
+</div>

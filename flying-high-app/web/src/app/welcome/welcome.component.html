@@ -1,0 +1,12 @@
+<div class="welcome-container">
+    Welcome to Flying High! <br>
+    <div *ngIf="!isLogin()">
+        <a [routerLink]="['/login']">Login</a> to view your account and booking <br>
+        OR <a [routerLink]="['/register']">Register</a> to continue
+    </div>
+    <div *ngIf="isLogin()">
+        To <a [routerLink]="['/search']">Search</a> <br>
+        To <a [routerLink]="['/bookings']">My Bookings</a> <br>
+        To <a [routerLink]="['/users']">My Account</a> <br>
+    </div>
+</div>

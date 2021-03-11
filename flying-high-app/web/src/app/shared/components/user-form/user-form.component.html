@@ -1,0 +1,77 @@
+<div class="user-form-container">
+    <form [formGroup]="form">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" id="email" data-test-id="email">
+            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" id="password" data-test-id="password">
+            <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <mat-select formControlName="title" id="title" data-test-id="title">
+                <mat-option value="Mr">Mr</mat-option>
+                <mat-option value="Mrs">Mrs</mat-option>
+            </mat-select>
+            <mat-error *ngIf="title.invalid">Please choose a title</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName" id="firstName" data-test-id="firstName">
+            <mat-error *ngIf="firstName.invalid">Please enter your first name</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName" id="lastName" data-test-id="lastName">
+            <mat-error *ngIf="lastName.invalid">Please enter your last name</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" id="address" data-test-id="address">
+            <mat-error *ngIf="address.invalid">Please enter your address</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input-align">
+            <input type="text" placeholder="Country" matInput formControlName="country" [matAutocomplete]="auto"
+                id="country" data-test-id="country">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let country of countries" [value]="country.name">
+                    <img [src]="country.flag" class="width-30px">
+                    <span class="margin-left-sm">{{country.name}}</span>
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="country.invalid">{{getCountryErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br>
+        <div class="medium-text">
+            <label>Seat Preference</label>
+            <input type="radio" id="aisle" formControlName="seatPreference" value="aisle" id="seat-aisle" data-test-id="seat-aisle">
+            <label for="aisle">Aisle</label>
+            <input type="radio" id="window" value="window" formControlName="seatPreference" id="seat-window" data-test-id="seat-window">
+            <label for="window">Window</label>
+        </div>
+        <br>
+        <div class="medium-text">
+            <input type="checkbox" formControlName="newsletterSub" checked id="newsletter"  data-test-id="newsletter">
+            <mat-label>Newsletter subscription</mat-label>
+        </div>
+        <br>
+        <div>
+            <input type="checkbox" formControlName="terms" checked id="terms" data-test-id="terms">
+            <mat-label class="medium-text">Terms & Conditions</mat-label>
+            <mat-error *ngIf="terms.invalid" class="small-text">Please confirm the terms and conditions to continue</mat-error>
+        </div>
+        <br>
+        <button *ngIf="!this.user" type="button" class="align-right" mat-button [routerLink]="['/login']"
+            id="login-button">Or Login</button>
+        <button class="align-right" (click)="submit(form)" mat-raised-button type="button"
+            id="register-button">{{this.user ? 'Edit' : 'Register'}}</button>
+    </form>
+</div>

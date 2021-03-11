@@ -1,0 +1,91 @@
+<block-ui>
+    <form class="search-container" [formGroup]="form" (submit)="submit(form)">
+        <mat-form-field class="input-align">
+            <input type="text" placeholder="From *" matInput formControlName="departure" [matAutocomplete]="auto" id="departure" data-test-id="departure">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let city of cities" [value]="city.name">
+                    {{city.name}} - {{city.short}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="input-align">
+            <input type="text" placeholder="To *" matInput formControlName="destination" [matAutocomplete]="auto" id="arrival" data-test-id="arrival">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let city of cities" [value]="city.name">
+                    {{city.name}} - {{city.short}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="datepicker-align">
+            <mat-label>Departure date *</mat-label>
+            <input matInput [min]="minDepartureDate" [max]="maxDepartureDate" [matDatepicker]="departurePicker" id="departure-datepicker"
+                formControlName="departureDate"  data-test-id="departure-date">
+            <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
+            <mat-datepicker #departurePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="datepicker-align">
+            <mat-label>Return date</mat-label>
+            <input matInput [min]="minReturnDate" [matDatepicker]="returnPicker" formControlName="returnDate" id="return-datepicker"  data-test-id="return-date">
+            <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+            <mat-datepicker #returnPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Travel class *</mat-label>
+            <mat-select formControlName="class" id="travel-class" data-test-id="travel-class">
+                <mat-option *ngFor="let class of classes" [value]="class">
+                    {{class}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" type="submit" [disabled]="!form.valid" id="search-button" data-test-id="search">
+            <mat-icon>search</mat-icon>
+        </button>
+    </form>
+    <div class="flight-container">
+        <div *ngFor="let resourceFlight of resourceFlights" class="card">
+            <h2>{{resourceFlight.departure.name}} -> {{resourceFlight.destination.name}}</h2>
+            <h3>{{ resourceFlight.departureTime | date: 'yyyy-MM-dd, h:mm a' }} ->
+                {{ resourceFlight.arrivalTime | date: 'yyyy-MM-dd, h:mm a' }}</h3>
+            <p>Travelling time {{resourceFlight.duration}}</p>
+            <p>{{resourceFlight.class}}</p>
+            <button mat-raised-button color="primary" (click)="bookFlight(resourceFlight)" data-test-id="book-flight">$ {{resourceFlight.price}}
+                Book flight</button>
+        </div>
+        <div *ngFor="let resourceFlightReturn of resourceFlightsReturn" class="card">
+            <div class="flex-container">
+                <div *ngFor="let flight of resourceFlightReturn" class="width-50">
+                    <h2><span data-test-id="flight-departure">{{flight.departure.name}}</span> -> <span data-test-id="flight-destination">{{flight.destination.name}}</span></h2>
+                    <h3><span data-test-id="flight-departure-time">{{ flight.departureTime | date: 'yyyy-MM-dd, h:mm a' }}</span> ->
+                        <span data-test-id="flight-arrival-time">{{ flight.arrivalTime | date: 'yyyy-MM-dd, h:mm a' }}</span></h3>
+                    <p>Travelling time <span data-test-id="flight-travel-time">{{flight.duration}}</span></p>
+                    <p data-test-id="flight-travel-class">{{flight.class}}</p>
+                </div>
+            </div>
+            <button mat-raised-button color="primary" (click)="bookFlight(resourceFlightReturn)" data-test-id="book-flight">
+                $ {{getReturnFlightPrice(resourceFlightReturn)}} Book flight
+            </button>
+        </div>
+        <div *ngIf="successfulBook">
+            <h1>You're all set!</h1>
+            <div class="card" *ngIf="!isSuccessBookArray()">
+                <h2><span data-test-id="confirmed-flight-departure">{{successfulBook?.departure.name}}</span> -> <span data-test-id="confirmed-flight-destination">{{successfulBook?.destination.name}}</span></h2>
+                <h3><span data-test-id="confirmed-flight-departure-time">{{ successfulBook?.departureTime | date: 'yyyy-MM-dd, h:mm a' }}</span> ->
+                    <span data-test-id="confirmed-flight-arrival-time">{{ successfulBook?.arrivalTime | date: 'yyyy-MM-dd, h:mm a' }}</span></h3>
+                <p>Travelling time <span data-test-id="confirmed-flight-travel-time">{{successfulBook?.duration}}</span></p>
+                <p data-test-id="confirmed-flight-travel-class">{{successfulBook?.class}}</p>
+
+            </div>
+            <div class="card" *ngIf="isSuccessBookArray()">
+                <div class="flex-container">
+                    <div *ngFor="let flight of successfulBook" class="width-50">
+                        <h2><span data-test-id="booked-flight-departure">{{flight.departure.name}}</span> -> <span data-test-id="booked-flight-destination">{{flight.destination.name}}</span></h2>
+                        <h3><span data-test-id="booked-flight-departure-time">{{ flight.departureTime | date: 'yyyy-MM-dd, h:mm a' }}</span> ->
+                            <span data-test-id="booked-flight-arrival-time">{{ flight.arrivalTime | date: 'yyyy-MM-dd, h:mm a' }}</span></h3>
+                        <p>Travelling time <span data-test-id="booked-flight-travel-time">{{flight.duration}}</span></p>
+                        <p data-test-id="booked-flight-travel-class">{{flight.class}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block-ui>

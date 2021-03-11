@@ -1,6 +1,8 @@
 package com.examplcom.manning.bddinaction.frequentflyer.acceptancetests.tasks.automobile;
 
+import net.serenitybdd.screenplay.AnonymousTask;
 import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.SilentTask;
 
 public class ProvideDetails {
     public static ProvideDetails from(DriverDetails driverDetails) {
@@ -8,10 +10,10 @@ public class ProvideDetails {
     }
 
     public Performable aboutTheirCar() {
-        return null;
+        return SilentTask.where();
     }
 
     public Performable aboutThemselves() {
-        return null;
+        return SilentTask.where();
     }
 }

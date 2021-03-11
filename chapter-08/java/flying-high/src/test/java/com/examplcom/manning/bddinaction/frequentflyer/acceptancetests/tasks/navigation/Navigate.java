@@ -7,9 +7,9 @@ import net.serenitybdd.screenplay.actions.Open;
 
 public class Navigate {
     public static Performable toTheFrequentFlyerRegistrationPage() {
-        return Task.where("{0} opens the Frequent Flyer registration page",
-                Open.url("https://frequent-flyer.flying-high.com"),
-                Click.on(MenuBar.REGISTER)
+        return Task.where("{0} opens the Frequent Flyer registration page"
+//                Open.url("https://frequent-flyer.flying-high.com"),
+//                Click.on(MenuBar.REGISTER)
         );
     }
 }

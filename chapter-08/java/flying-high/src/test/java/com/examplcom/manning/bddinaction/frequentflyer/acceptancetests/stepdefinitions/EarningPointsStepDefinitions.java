@@ -165,4 +165,32 @@ public class EarningPointsStepDefinitions {
     public void theAvailableDestinationsShouldBe(List<String> cities) {
 
     }
+
+    @Given("the following Frequent Flyer members:")
+    public void theFollowingFrequentFlyerMembers() {
+    }
+
+    @Given("the following Frequent Flyer account balances:")
+    public void theFollowingFrequentFlyerAccountBalances() {
+    }
+
+    @When("Sarah transfers {int} points to Steve")
+    public void sarahTransfersPointsToSteve(int arg0) {
+    }
+
+    @Then("the accounts should be as follows:")
+    public void theAccountsShouldBeAsFollows() {
+    }
+
+    @When("Sarah tries to transfer {int} points to Fred")
+    public void sarahTriesToTransferPointsToFred(int arg0) {
+    }
+
+    @Then("the transfer should not be allowed")
+    public void theTransferShouldNotBeAllowed() {
+    }
+
+    @When("Steve tries to transfer {int} points to Sarah")
+    public void steveTriesToTransferPointsToSarah(int arg0) {
+    }
 }

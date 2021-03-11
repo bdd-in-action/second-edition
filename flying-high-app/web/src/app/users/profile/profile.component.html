@@ -1,0 +1,17 @@
+<div class="profile-container" *ngIf="user">
+    <div class="card">
+            <div class="name">{{user.email}}</div>
+            <div class="fullname">{{user.title}}: {{user.firstName}} {{user.lastName}}</div>
+            <div>{{user.address}}, {{user.country}}</div>
+            <br>
+            <div class="level">
+                <div>User Level: <b>{{user.userLevel | uppercase}}</b></div>
+                <div>Earned Points: <b>{{user.points}}</b></div>
+            </div>
+            <div>Seat Preference: <b>{{user.seatPreference | uppercase}}</b></div>
+            <div>You have <b>{{ user.newsletterSub ? 'Booked' : 'Not Booked' }}</b> the Newsletter subscription</div>
+            <div class="button-container">
+                <button mat-raised-button (click)="openEditUserDialog()">Edit User Profile</button>
+            </div>
+    </div>
+</div>

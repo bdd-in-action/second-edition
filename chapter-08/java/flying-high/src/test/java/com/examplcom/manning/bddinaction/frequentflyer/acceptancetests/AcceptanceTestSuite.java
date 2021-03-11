@@ -9,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        tags = "@auto",
         features = "classpath:features"
 )
 @SpringBootTest

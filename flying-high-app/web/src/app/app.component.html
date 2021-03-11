@@ -1,0 +1,35 @@
+<p>
+  <mat-toolbar>
+    <span (click)="clickLogo()">
+      <img src="/assets/image/logo.png" class="logo">
+    </span>
+    <div class="operation-section">
+      <button mat-button *ngIf="!isLogin()" color="primary" (click)="toLogin()">
+        Login
+      </button>
+      <button mat-button *ngIf="!isLogin()" color="primary" (click)="toRegister()">
+        Register
+      </button>
+      <div *ngIf="isLogin()">
+        <button id="search" mat-button color="primary" (click)="toSearch()">
+          Book Flights
+        </button>
+        <button id="my-bookings" mat-button color="primary" (click)="toMyBookings()">
+          My Bookings
+        </button>
+        <button id="my-account" mat-button color="primary" (click)="toMyAccount()">
+          My Account
+        </button>
+        <button id="logout" mat-button color="warn" (click)="logout()">
+          Logout
+        </button>
+        <button id="current-user" mat-button [matMenuTriggerFor]="menu" (click)="getUserPoint()">{{email}}</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngIf="points !== undefined || points !== null">Earned Points: <b>{{points}}</b></button>
+          <button mat-menu-item (click)="toUserProfile()">To User Profile</button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</p>

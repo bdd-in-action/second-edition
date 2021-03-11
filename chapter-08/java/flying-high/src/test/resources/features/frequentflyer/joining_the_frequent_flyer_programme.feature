@@ -9,3 +9,4 @@ Feature: Joining the Frequent Flyer Programme
     When Jane registers for a new account
     Then she should be sent a confirmation email
     And she should receive 500 bonus points
+

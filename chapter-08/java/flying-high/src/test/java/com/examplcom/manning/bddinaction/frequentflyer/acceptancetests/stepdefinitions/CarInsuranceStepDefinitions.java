@@ -72,9 +72,14 @@ public class CarInsuranceStepDefinitions {
 
     @Then("{actor} should be shown a {} quote")
     public void shouldBeShownAQuote(Actor actor, String quoteType) {
+        
     }
 
     @And("{actor} should receive a copy of the quote via email")
     public void shouldReceiveACopyOfTheQuoteViaEmail(Actor actor) {
+    }
+
+    @Then("(his/her) application should be rejected")
+    public void herApplicationShouldBeRejected() {
     }
 }

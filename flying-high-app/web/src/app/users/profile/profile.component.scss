@@ -1,0 +1,21 @@
+.profile-container {
+    width: 40vw;
+    margin: 10px auto;
+    div {
+        line-height: 30px;
+    }
+    .name {
+        font-size: x-large;
+    }
+    .fullname {
+        font-size: medium;
+    }
+    .level {
+        display: flex;
+        justify-content: space-between;
+    }
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
