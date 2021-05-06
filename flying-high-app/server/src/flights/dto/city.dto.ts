@@ -7,4 +7,6 @@ export class CityDto {
     point: number;
     @ApiProperty()
     short: string;
+    @ApiProperty()
+    region: string;
 }

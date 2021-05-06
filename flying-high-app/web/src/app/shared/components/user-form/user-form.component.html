@@ -2,45 +2,46 @@
     <form [formGroup]="form">
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" id="email" data-test-id="email">
+            <input matInput formControlName="email" id="email" data-testid="email">
             <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" id="password" data-test-id="password">
+            <input matInput type="password" formControlName="password" id="password" data-testid="password">
             <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
-            <mat-select formControlName="title" id="title" data-test-id="title">
+            <mat-select formControlName="title" id="title" data-testid="title">
                 <mat-option value="Mr">Mr</mat-option>
+                <mat-option value="Ms">Ms</mat-option>
                 <mat-option value="Mrs">Mrs</mat-option>
             </mat-select>
             <mat-error *ngIf="title.invalid">Please choose a title</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>First name</mat-label>
-            <input matInput formControlName="firstName" id="firstName" data-test-id="firstName">
+            <input matInput formControlName="firstName" id="firstName" data-testid="firstName">
             <mat-error *ngIf="firstName.invalid">Please enter your first name</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Last name</mat-label>
-            <input matInput formControlName="lastName" id="lastName" data-test-id="lastName">
+            <input matInput formControlName="lastName" id="lastName" data-testid="lastName">
             <mat-error *ngIf="lastName.invalid">Please enter your last name</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Address</mat-label>
-            <input matInput formControlName="address" id="address" data-test-id="address">
+            <input matInput formControlName="address" id="address" data-testid="address">
             <mat-error *ngIf="address.invalid">Please enter your address</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field class="input-align">
             <input type="text" placeholder="Country" matInput formControlName="country" [matAutocomplete]="auto"
-                id="country" data-test-id="country">
+                id="country" data-testid="country">
             <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let country of countries" [value]="country.name">
                     <img [src]="country.flag" class="width-30px">
@@ -52,19 +53,19 @@
         <br>
         <div class="medium-text">
             <label>Seat Preference</label>
-            <input type="radio" id="aisle" formControlName="seatPreference" value="aisle" id="seat-aisle" data-test-id="seat-aisle">
+            <input type="radio" id="aisle" formControlName="seatPreference" value="aisle" data-testid="seat-aisle">
             <label for="aisle">Aisle</label>
-            <input type="radio" id="window" value="window" formControlName="seatPreference" id="seat-window" data-test-id="seat-window">
+            <input type="radio" id="window" value="window" formControlName="seatPreference" data-testid="seat-window">
             <label for="window">Window</label>
         </div>
         <br>
         <div class="medium-text">
-            <input type="checkbox" formControlName="newsletterSub" checked id="newsletter"  data-test-id="newsletter">
+            <input type="checkbox" formControlName="newsletterSub" checked id="newsletter"  data-testid="newsletter">
             <mat-label>Newsletter subscription</mat-label>
         </div>
         <br>
         <div>
-            <input type="checkbox" formControlName="terms" checked id="terms" data-test-id="terms">
+            <input type="checkbox" formControlName="terms" checked id="terms" data-testid="terms">
             <mat-label class="medium-text">Terms & Conditions</mat-label>
             <mat-error *ngIf="terms.invalid" class="small-text">Please confirm the terms and conditions to continue</mat-error>
         </div>

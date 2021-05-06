@@ -14,10 +14,10 @@ export class UsersService {
             firstName: 'Tracy',
             lastName: 'Traveller',
             address: '1677 S Havana St, Aurora',
-            title: USER_TITLE.MR,
+            title: USER_TITLE.MS,
             newsletterSub: true,
-            userLevel: USER_LEVEL.BRONZE,
-            points: 1200,
+            userLevel: USER_LEVEL.STANDARD,
+            points: 0,
             country: 'United States of America (the)',
             seatPreference: SEAT_PREFERENCE.AISLE
         }
@@ -89,20 +89,40 @@ export class UsersService {
                 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle'
             )
         } else if (
-            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MRS
+            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MS && user.title !== USER_TITLE.MRS
         ) {
             throw new BadRequestException(
                 HttpStatus.BAD_REQUEST,
-                'User title is the type of enum: USER_TITLE: Mr OR Mrs'
+                'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs'
             )
         }
         // create userId
         const userId = this.generateRandomString(10);
+
         const newUser = {
             ...user,
-            points: 0,
             userLevel: USER_LEVEL.STANDARD,
+            points: 0,
             userId
+        }
+        if (user.userLevel) {
+            newUser.userLevel = user.userLevel;
+            switch(newUser.userLevel) {
+                case USER_LEVEL.BRONZE: 
+                    newUser.points = 1000;
+                    break;
+                case USER_LEVEL.SILVER: 
+                    newUser.points = 2000;
+                    break;
+                case USER_LEVEL.GOLD: 
+                    newUser.points = 5000;
+                    break;
+                default:
+                    newUser.points = 0;
+            }
+        }
+        if (user.points) {
+            newUser.points = user.points * 1
         }
         this.users.push(newUser);
         return newUser;
@@ -162,11 +182,11 @@ export class UsersService {
                 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle'
             )
         } else if (
-            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MRS
+            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MS && user.title !== USER_TITLE.MRS
         ) {
             throw new BadRequestException(
                 HttpStatus.BAD_REQUEST,
-                'User title is the type of enum: USER_TITLE: Mr OR Mrs'
+                'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs'
             )
         }
         const index = this.users.findIndex(u => userId === u.userId);
@@ -195,62 +215,76 @@ export class UsersService {
         };
     }
 
-    updateUserPointsAndLevel(authUser: User, points: number): number {
-        const userLevel = authUser.userLevel;
-        const currentUserIndex = this.users.findIndex(u => u.userId === authUser.userId);
-        const currentPoints = authUser.points;
-        const totalPoints = points + currentPoints;
-        let newTotalPoints: number;
-        let earnedPoints: number;
-        switch (userLevel) {
-            case USER_LEVEL.BRONZE: {
-                if (totalPoints >= 2000) {
-                    const pointsOfNextLevel = totalPoints - 2000;
-                    earnedPoints = (1 + 0.25) * (points - pointsOfNextLevel) + (1 + 0.5) * pointsOfNextLevel
-                    newTotalPoints = earnedPoints + currentPoints;
-                } else {
-                    earnedPoints = (1 + 0.25) * points;
-                    newTotalPoints = earnedPoints + currentPoints;
+    /**  
+     * Reset earned points to 0 and status level to STANDARD.
+     */
+    resetPoints(userId: string) {
+        this.getUserById(userId).userLevel = USER_LEVEL.STANDARD
+        this.getUserById(userId).points = 0
+    }
+
+    /**
+     * Threshold levels are:
+     *  - BRONZE: 1000 points (25% bonus)
+     *  - SILVER: 2000 points (50% bonus)
+     *  - GOLD: 5000 points (100% bonus)
+     * Only flights booked at a given status level earn the bonus points at that level.
+     * @param authUser 
+     * @param points 
+     * @returns 
+     */
+    updateUserPointsAndLevel(userEmail: string, points: number): number {
+
+        const user = this.getUserByEmail(userEmail)
+        const pointsEarned = this.pointsEarned(user, points)
+        this.addPointsToUser(userEmail, pointsEarned)
+        return Math.round(pointsEarned);
+    }
+
+    userWithId(userId: string) {
+        const currentUserIndex = this.users.findIndex(u => u.userId === userId);
+        return this.users[currentUserIndex];
+    }
+
+    addPointsToUser(userEmail: string, points: number) {
+        const user = this.getUserByEmail(userEmail)
+        const pointsEarned = user.points + points;
+        const userLevel = this.statusLevelForPoints(pointsEarned)
+        user.points = pointsEarned;
+        user.userLevel = userLevel;
+    }
+
+    pointsEarned(user: User, points: number) {
+        if (user) {
+            switch (user.userLevel) {
+                case USER_LEVEL.BRONZE: {
+                    return (1 + 0.25) * points;
+                }
+                case USER_LEVEL.SILVER: {
+                    return (1 + 0.5) * points;
+                }
+                case USER_LEVEL.GOLD: {
+                    return points * 2;
+                }
+                default: {
+                    return points * 1;
                 }
             }
-            case USER_LEVEL.SILVER: {
-                if (totalPoints >= 5000) {
-                    const pointsOfNextLevel = totalPoints - 5000;
-                    earnedPoints = (1 + 0.5) * (points - pointsOfNextLevel) + (1 + 1) * pointsOfNextLevel;
-                    newTotalPoints = earnedPoints + currentPoints;
-                } else {
-                    earnedPoints = (1 + 0.5) * points;
-                    newTotalPoints = earnedPoints + currentPoints;
-                }
-            }
-            case USER_LEVEL.GOLD: {
-                earnedPoints = points * 2;
-                newTotalPoints = currentPoints + points * 2;
-            }
-            default: {
-                // standard level
-                if (totalPoints >= 1000) {
-                    const pointsOfNextLevel = totalPoints - 1000;
-                    earnedPoints = (points - pointsOfNextLevel) + (1 + 0.25) * pointsOfNextLevel;
-                    newTotalPoints = earnedPoints + currentPoints;
-                } else {
-                    earnedPoints = points;
-                    newTotalPoints = earnedPoints + currentPoints;
-                }
-            }
-        }
-        newTotalPoints = Math.round(newTotalPoints);
-        if (newTotalPoints >= 5000) {
-            this.users[currentUserIndex].userLevel = USER_LEVEL.GOLD;
-        } else if (newTotalPoints < 5000 && newTotalPoints >= 2000) {
-            this.users[currentUserIndex].userLevel = USER_LEVEL.SILVER;
-        } else if (newTotalPoints < 2000 && newTotalPoints >= 1000) {
-            this.users[currentUserIndex].userLevel = USER_LEVEL.BRONZE;
         } else {
-            this.users[currentUserIndex].userLevel = USER_LEVEL.STANDARD;
+            return points * 1;
         }
-        this.users[currentUserIndex].points = newTotalPoints;
-        return Math.round(earnedPoints);
+    }
+
+    statusLevelForPoints(points: number) {
+        if (points >= 5000) {
+            return USER_LEVEL.GOLD;
+        } else if (points < 5000 && points >= 2000) {
+            return USER_LEVEL.SILVER;
+        } else if (points < 2000 && points >= 1000) {
+            return USER_LEVEL.BRONZE;
+        } else {
+            return USER_LEVEL.STANDARD;
+        }        
     }
 
     generateRandomString(length: number, charSet?: string): string {

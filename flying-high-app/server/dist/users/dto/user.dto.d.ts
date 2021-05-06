@@ -1,4 +1,4 @@
-import { SEAT_PREFERENCE, USER_TITLE } from "../interface/users.interface";
+import { SEAT_PREFERENCE, USER_LEVEL, USER_TITLE } from "../interface/users.interface";
 export declare class UserDto {
     email: string;
     password: string;
@@ -9,4 +9,6 @@ export declare class UserDto {
     title: USER_TITLE;
     newsletterSub: boolean;
     seatPreference: SEAT_PREFERENCE;
+    userLevel: USER_LEVEL;
+    points: number;
 }

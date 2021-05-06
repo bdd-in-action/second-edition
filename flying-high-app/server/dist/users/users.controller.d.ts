@@ -9,8 +9,8 @@ export declare class UsersController {
         userAccount: import("./interface/account.interface").Account[];
     };
     createUser(user: UserDto): {
-        points: number;
         userLevel: import("./interface/users.interface").USER_LEVEL;
+        points: number;
         userId: string;
         email: string;
         password: string;
@@ -24,5 +24,7 @@ export declare class UsersController {
     };
     updateUser(user: UserDto, userId: string): import("./interface/users.interface").User;
     getUserById(userId: string): import("./interface/users.interface").User;
+    earnPoints(userId: string, points: number): import("./interface/users.interface").User;
+    resetPoints(userId: string): import("./interface/users.interface").User;
     deleteUser(userId: string): string;
 }

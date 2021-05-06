@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { SEAT_PREFERENCE, USER_TITLE } from "../interface/users.interface";
+import { SEAT_PREFERENCE, USER_LEVEL, USER_TITLE } from "../interface/users.interface";
 
 export class UserDto {
     @ApiProperty()
@@ -16,8 +16,8 @@ export class UserDto {
     country: string;
     @ApiProperty(
         {
-            enum: ['Mr', 'Mrs'],
-            description: 'Only Mr and Mrs are allowed when creating user'
+            enum: ['Mr', 'Ms', 'Mrs'],
+            description: 'Only Mr, Ms and Mrs are allowed when creating user'
         }
     )
     title: USER_TITLE;
@@ -30,4 +30,11 @@ export class UserDto {
         }
     )
     seatPreference: SEAT_PREFERENCE;
+
+    @ApiProperty()
+    userLevel: USER_LEVEL = USER_LEVEL.STANDARD;
+
+    @ApiProperty()
+    points: number = 0;
+
 }

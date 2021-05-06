@@ -11,24 +11,52 @@ export class FlightsService {
     private readonly flightSpeed = 800 / 60;
     private readonly flights: Flight[] = [];
     cityList = [
-        { name: 'Sydney', point: 150, short: 'SYD' },
-        { name: 'Melbourne', point: 138, short: 'MEL' },
-        { name: 'Perth', point: 129, short: 'PER' },
-        { name: 'Auckland', point: 131, short: 'AKL' },
-        { name: 'Wellington', point: 129, short: 'WLG' },
-        { name: 'London', point: 162, short: 'LHR' },
-        { name: 'San Francisco', point: 142, short: 'SFO' },
-        { name: 'New York', point: 150, short: 'JFK' },
-        { name: 'Los Angeles', point: 147, short: 'LAX' },
-        { name: 'Toronto', point: 132, short: 'YYZ' },
-        { name: 'Singapore', point: 162, short: 'SIN' },
-        { name: 'Hong Kong', point: 188, short: 'HKG' },
-        { name: 'Seattle', point: 122, short: 'SEA' },
-        { name: 'Shanghai', point: 167, short: 'PVG' },
-        { name: 'Seoul', point: 132, short: 'ICN' },
-        { name: 'Sao Paulo', point: 133, short: 'GRU' },
-        { name: 'Amsterdam', point: 166, short: 'AMS' }
+        { name: 'Sydney', point: 150, short: 'SYD', region: 'ANZ' },
+        { name: 'Melbourne', point: 138, short: 'MEL', region: 'ANZ' },
+        { name: 'Perth', point: 129, short: 'PER', region: 'ANZ' },
+        { name: 'Auckland', point: 131, short: 'AKL', region: 'ANZ' },
+        { name: 'Wellington', point: 129, short: 'WLG', region: 'ANZ' },
+        { name: 'London', point: 162, short: 'LHR', region:'EUR' },
+        { name: 'Paris', point: 162, short: 'PAR', region:'EUR' },
+        { name: 'Berlin', point: 162, short: 'BER', region:'EUR' },
+        { name: 'Madrid', point: 162, short: 'MAD', region:'EUR' },
+        { name: 'Amsterdam', point: 166, short: 'AMS', region:'EUR' },
+        { name: 'San Francisco', point: 142, short: 'SFO', region:'AMERICA' },
+        { name: 'New York', point: 150, short: 'JFK', region:'AMERICA' },
+        { name: 'Los Angeles', point: 147, short: 'LAX', region:'AMERICA' },
+        { name: 'Buenos Aires', point: 147, short: 'BUA', region:'AMERICA' },
+        { name: 'Toronto', point: 132, short: 'YYZ', region:'AMERICA' },
+        { name: 'Seattle', point: 122, short: 'SEA',region: 'AMERICA' },
+        { name: 'Singapore', point: 162, short: 'SIN', region:'ASIA' },
+        { name: 'Hong Kong', point: 188, short: 'HKG', region:'ASIA' },
+        { name: 'Shanghai', point: 167, short: 'PVG', region:'ASIA' },
+        { name: 'Seoul', point: 132, short: 'ICN', region:'ASIA' },
     ];
+
+    pointsEarned = new Map([
+        ['ANZ-EUR', 250],
+        ['EUR-ANZ', 250],
+        ['ANZ-AMERICA', 150],
+        ['AMERICA-ANZ', 150],
+        ['ANZ-ASIA', 100],
+        ['ASIA-ANZ', 100],
+        ['EUR-AMERICA', 125],
+        ['AMERICA-EUR', 125],
+        ['EUR-ASIA', 200],
+        ['ASIA-EUR', 200],
+        ['AMERICA-ASIA', 150],
+        ['ASIA-AMERICA', 150],
+        ['ANZ-ANZ', 25],
+        ['EUR-EUR', 20],
+        ['AMERICA-AMERICA', 35],
+        ['ASIA-ASIA', 50],
+    ])
+
+    cabinClassPointWeight = new Map([
+        ['Economy', 1.0],
+        ['Premium Economy', 1.5],
+        ['Business', 2.0],
+    ]);
 
     constructor(
         private readonly http: HttpService,
@@ -55,9 +83,11 @@ export class FlightsService {
     }
 
     createFlight(flight: Flight) {
+        var itinerary = flight.departure.region + '-' + flight.destination.region
+        var earnedPoints = this.pointsEarned.get(itinerary) * this.cabinClassPointWeight.get(flight.class);
         flight = {
             ...flight,
-            points: this.usersService.updateUserPointsAndLevel(this.authService.getAuthUser(), flight.departure.point + flight.destination.point),
+            points: this.usersService.updateUserPointsAndLevel(flight.email, earnedPoints),
             // generate random string to make an id of the order
             orderNumber: this.generateRandomString(8)
         };

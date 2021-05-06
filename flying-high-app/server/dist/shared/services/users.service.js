@@ -22,15 +22,15 @@ let UsersService = class UsersService {
         this.users = [
             {
                 userId: '8XDGVLsNUp',
-                email: 'tracy@flyinghigh.com',
-                password: 'trac3',
+                email: 'admin@flyinghigh.com',
+                password: 'admin',
                 firstName: 'Tracy',
                 lastName: 'Traveller',
                 address: '1677 S Havana St, Aurora',
-                title: users_interface_1.USER_TITLE.MR,
+                title: users_interface_1.USER_TITLE.MS,
                 newsletterSub: true,
-                userLevel: users_interface_1.USER_LEVEL.BRONZE,
-                points: 1200,
+                userLevel: users_interface_1.USER_LEVEL.STANDARD,
+                points: 0,
                 country: 'United States of America (the)',
                 seatPreference: users_interface_1.SEAT_PREFERENCE.AISLE
             }
@@ -74,11 +74,30 @@ let UsersService = class UsersService {
             user.seatPreference !== users_interface_1.SEAT_PREFERENCE.WINDOW) {
             throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle');
         }
-        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MRS) {
-            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr OR Mrs');
+        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MS && user.title !== users_interface_1.USER_TITLE.MRS) {
+            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs');
         }
         const userId = this.generateRandomString(10);
-        const newUser = Object.assign(Object.assign({}, user), { points: 0, userLevel: users_interface_1.USER_LEVEL.STANDARD, userId });
+        const newUser = Object.assign(Object.assign({}, user), { userLevel: users_interface_1.USER_LEVEL.STANDARD, points: 0, userId });
+        if (user.userLevel) {
+            newUser.userLevel = user.userLevel;
+            switch (newUser.userLevel) {
+                case users_interface_1.USER_LEVEL.BRONZE:
+                    newUser.points = 1000;
+                    break;
+                case users_interface_1.USER_LEVEL.SILVER:
+                    newUser.points = 2000;
+                    break;
+                case users_interface_1.USER_LEVEL.GOLD:
+                    newUser.points = 5000;
+                    break;
+                default:
+                    newUser.points = 0;
+            }
+        }
+        if (user.points) {
+            newUser.points = user.points * 1;
+        }
         this.users.push(newUser);
         return newUser;
     }
@@ -115,8 +134,8 @@ let UsersService = class UsersService {
             user.seatPreference !== users_interface_1.SEAT_PREFERENCE.WINDOW) {
             throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle');
         }
-        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MRS) {
-            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr OR Mrs');
+        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MS && user.title !== users_interface_1.USER_TITLE.MRS) {
+            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs');
         }
         const index = this.users.findIndex(u => userId === u.userId);
         const points = this.users[index].points;
@@ -142,67 +161,61 @@ let UsersService = class UsersService {
             userAccount
         };
     }
-    updateUserPointsAndLevel(authUser, points) {
-        const userLevel = authUser.userLevel;
-        const currentUserIndex = this.users.findIndex(u => u.userId === authUser.userId);
-        const currentPoints = authUser.points;
-        const totalPoints = points + currentPoints;
-        let newTotalPoints;
-        let earnedPoints;
-        switch (userLevel) {
-            case users_interface_1.USER_LEVEL.BRONZE: {
-                if (totalPoints >= 2000) {
-                    const pointsOfNextLevel = totalPoints - 2000;
-                    earnedPoints = (1 + 0.25) * (points - pointsOfNextLevel) + (1 + 0.5) * pointsOfNextLevel;
-                    newTotalPoints = earnedPoints + currentPoints;
+    resetPoints(userId) {
+        this.getUserById(userId).userLevel = users_interface_1.USER_LEVEL.STANDARD;
+        this.getUserById(userId).points = 0;
+    }
+    updateUserPointsAndLevel(userEmail, points) {
+        const user = this.getUserByEmail(userEmail);
+        const pointsEarned = this.pointsEarned(user, points);
+        this.addPointsToUser(userEmail, pointsEarned);
+        return Math.round(pointsEarned);
+    }
+    userWithId(userId) {
+        const currentUserIndex = this.users.findIndex(u => u.userId === userId);
+        return this.users[currentUserIndex];
+    }
+    addPointsToUser(userEmail, points) {
+        const user = this.getUserByEmail(userEmail);
+        const pointsEarned = user.points + points;
+        const userLevel = this.statusLevelForPoints(pointsEarned);
+        user.points = pointsEarned;
+        user.userLevel = userLevel;
+    }
+    pointsEarned(user, points) {
+        if (user) {
+            switch (user.userLevel) {
+                case users_interface_1.USER_LEVEL.BRONZE: {
+                    return (1 + 0.25) * points;
                 }
-                else {
-                    earnedPoints = (1 + 0.25) * points;
-                    newTotalPoints = earnedPoints + currentPoints;
+                case users_interface_1.USER_LEVEL.SILVER: {
+                    return (1 + 0.5) * points;
                 }
-            }
-            case users_interface_1.USER_LEVEL.SILVER: {
-                if (totalPoints >= 5000) {
-                    const pointsOfNextLevel = totalPoints - 5000;
-                    earnedPoints = (1 + 0.5) * (points - pointsOfNextLevel) + (1 + 1) * pointsOfNextLevel;
-                    newTotalPoints = earnedPoints + currentPoints;
+                case users_interface_1.USER_LEVEL.GOLD: {
+                    return points * 2;
                 }
-                else {
-                    earnedPoints = (1 + 0.5) * points;
-                    newTotalPoints = earnedPoints + currentPoints;
-                }
-            }
-            case users_interface_1.USER_LEVEL.GOLD: {
-                earnedPoints = points * 2;
-                newTotalPoints = currentPoints + points * 2;
-            }
-            default: {
-                if (totalPoints >= 1000) {
-                    const pointsOfNextLevel = totalPoints - 1000;
-                    earnedPoints = (points - pointsOfNextLevel) + (1 + 0.25) * pointsOfNextLevel;
-                    newTotalPoints = earnedPoints + currentPoints;
-                }
-                else {
-                    earnedPoints = points;
-                    newTotalPoints = earnedPoints + currentPoints;
+                default: {
+                    return points * 1;
                 }
             }
-        }
-        newTotalPoints = Math.round(newTotalPoints);
-        if (newTotalPoints >= 5000) {
-            this.users[currentUserIndex].userLevel = users_interface_1.USER_LEVEL.GOLD;
-        }
-        else if (newTotalPoints < 5000 && newTotalPoints >= 2000) {
-            this.users[currentUserIndex].userLevel = users_interface_1.USER_LEVEL.SILVER;
-        }
-        else if (newTotalPoints < 2000 && newTotalPoints >= 1000) {
-            this.users[currentUserIndex].userLevel = users_interface_1.USER_LEVEL.BRONZE;
         }
         else {
-            this.users[currentUserIndex].userLevel = users_interface_1.USER_LEVEL.STANDARD;
+            return points * 1;
         }
-        this.users[currentUserIndex].points = newTotalPoints;
-        return Math.round(earnedPoints);
+    }
+    statusLevelForPoints(points) {
+        if (points >= 5000) {
+            return users_interface_1.USER_LEVEL.GOLD;
+        }
+        else if (points < 5000 && points >= 2000) {
+            return users_interface_1.USER_LEVEL.SILVER;
+        }
+        else if (points < 2000 && points >= 1000) {
+            return users_interface_1.USER_LEVEL.BRONZE;
+        }
+        else {
+            return users_interface_1.USER_LEVEL.STANDARD;
+        }
     }
     generateRandomString(length, charSet) {
         charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

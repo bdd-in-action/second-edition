@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
 
   login(form: FormGroup) {
     if (form.valid) {
+      console.log('email: ' + form.value.email + ', pwd: ' + form.value.password);
       this.authService.login({ email: form.value.email, password: form.value.password });
     }
   }

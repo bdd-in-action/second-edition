@@ -10,8 +10,8 @@ export declare class UsersService {
     getUserById(userId: string): User;
     getUserByEmail(email: string): User;
     createUser(user: UserDto): {
-        points: number;
         userLevel: USER_LEVEL;
+        points: number;
         userId: string;
         email: string;
         password: string;
@@ -29,6 +29,11 @@ export declare class UsersService {
         totalPoints: number;
         userAccount: Account[];
     };
-    updateUserPointsAndLevel(authUser: User, points: number): number;
+    resetPoints(userId: string): void;
+    updateUserPointsAndLevel(userEmail: string, points: number): number;
+    userWithId(userId: string): User;
+    addPointsToUser(userEmail: string, points: number): void;
+    pointsEarned(user: User, points: number): number;
+    statusLevelForPoints(points: number): USER_LEVEL;
     generateRandomString(length: number, charSet?: string): string;
 }

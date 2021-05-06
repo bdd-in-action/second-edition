@@ -1442,8 +1442,8 @@
         "affectsGlobalScope": false
       },
       "../src/users/interface/users.interface.ts": {
-        "version": "80eb124795ad4295c477bd15cb4075f39783c029e2cd44d81eb59dfe50974a80",
-        "signature": "1931382201ecf873d8d6033b46893a6e0fb8362c994de2cf11577ce15a281f59",
+        "version": "158da369ee8af3aa55c0607f44b3661c14e7322e2d10cded68556cf2e7c77fe6",
+        "signature": "5a342056f14e90c4713c06782bce4aaf8adc12668ff911d7079698d615e5189a",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/swagger/dist/decorators/api-basic.decorator.d.ts": {
@@ -1637,8 +1637,8 @@
         "affectsGlobalScope": false
       },
       "../src/flights/interface/city.interface.ts": {
-        "version": "77a275061160c9b9dfce58f60fbb429fa6dc0a613ea8b150fc684ef0759d05a5",
-        "signature": "555ba96dda98bb3f49394cc48f0b327d082e16ff2ffcf2ab9c069af141626640",
+        "version": "695fb47234213b2849b14a82a53bd446b318372d35f8aba5fea2dd8ccfa91add",
+        "signature": "7ad4820d2706ef2aea35a2cbb0555b4e8e2f8067b65277453a2506f7fb63dd40",
         "affectsGlobalScope": false
       },
       "../src/flights/interface/flight.interface.ts": {
@@ -2167,13 +2167,13 @@
         "affectsGlobalScope": false
       },
       "../src/shared/services/flights.service.ts": {
-        "version": "14b2c16ecaeb1a91df9f1429bdca03c1146055c61594f042b9f4fbb1bf5f4cdb",
-        "signature": "9b199850faf57b4dd842f64ad9b36833979ffd222b221c44e474c89675829716",
+        "version": "8c1948558fa1cc5a48cdfc0d29c4158b4ed6981c04204853572518e18e5dea31",
+        "signature": "ea18c700f0de9ee7707da13b6fa4c219bcf61c68a63f87df1b57233da8eaaeb3",
         "affectsGlobalScope": false
       },
       "../src/users/dto/user.dto.ts": {
-        "version": "a790288dbba483743aa45cb6e4eea44032a7dfec7910be7b9e7a1e31e0fd1a77",
-        "signature": "0eec81dcab5736892b523aaaeb0bad451f33bcd8729cc601d8875bc4fc824df6",
+        "version": "c663a5e9223f1616cf6c735f79fb71597f5faec45831decd081dd498035d8e43",
+        "signature": "99d001c01268a26b0d9e218391f72a3c08a238b3a1de6fb7df79388f040f6c89",
         "affectsGlobalScope": false
       },
       "../src/users/interface/account.interface.ts": {
@@ -2182,8 +2182,8 @@
         "affectsGlobalScope": false
       },
       "../src/shared/services/users.service.ts": {
-        "version": "da2c3389721ed1471dadb9801cf13c2c69daf86832dce587e972aee83a95cae6",
-        "signature": "beed38efa4feb885d3d41fa0680bb52e8d9541de799f0ca3bf904aa855424da7",
+        "version": "162bde288bb8fc374eb5e2224a63bf425bcd7febd1b675bc99c210a5f072635b",
+        "signature": "fe86343b108439d5631c218c5666e64405df22a75b57570cba545b5986364eba",
         "affectsGlobalScope": false
       },
       "../src/shared/services/auth.service.ts": {
@@ -2303,7 +2303,7 @@
       },
       "../src/app.controller.ts": {
         "version": "1ddd7df13abe776fe807bc4ad185bceb4ab9d570e3c6c9a44c0b42c9d0ab09df",
-        "signature": "801e93d1415a762ffd36f4134a001f11f838b342d87b2f9a18fc89ba18b81fe5",
+        "signature": "e6a8350c88ba4a5b04bfbaeb28c0f0d52d58d96e47cdfd9ad7c408f4e0f54021",
         "affectsGlobalScope": false
       },
       "../node_modules/@nestjs/serve-static/dist/interfaces/serve-static-options.interface.d.ts": {
@@ -2562,8 +2562,8 @@
         "affectsGlobalScope": false
       },
       "../src/flights/dto/city.dto.ts": {
-        "version": "c4d9d0f5e5d110ad13920fc6d1efa5b6524c2f093cedc4f37bd3de765f8cdca1",
-        "signature": "8b26541668ee96e119fca9e518c283ae3d5c10bb1c642656762c32d64449e303",
+        "version": "90967f52fa102dc23a9499db5b1a0245f0141e9a01016d987150fb96fa8538bb",
+        "signature": "cf042384a465ca71505f15b7968b6004f20b0bbf5e00f73db62b0f096b1bf2c3",
         "affectsGlobalScope": false
       },
       "../src/flights/dto/create-flight.dto.ts": {
@@ -2577,7 +2577,7 @@
         "affectsGlobalScope": false
       },
       "../src/flights/flights.controller.ts": {
-        "version": "bcb2e0348bacd83fe345d117a65f6dc46ab21a3bef9b93170cf9486f0a77c22c",
+        "version": "cb251e7524e78a40a0a90bcb09e25a830949ac3c3b12b77aae67ba91a24a67f6",
         "signature": "bc497b36aef6670a64fb6ef392e1b91b6d2f322e7eba8cfa44b80af21d51281d",
         "affectsGlobalScope": false
       },
@@ -2587,8 +2587,8 @@
         "affectsGlobalScope": false
       },
       "../src/users/users.controller.ts": {
-        "version": "f40e2766d1f70dffea0002edceead93fe74992286f085194268e7146f452c06d",
-        "signature": "1e4d1561703dba6c95151a1af60c9da05711d80c5d8300099e72d03c6c06e8d1",
+        "version": "5923fbd39f4aded30f85b2f40958e710481b5ec0afd188baf38951f1f6015718",
+        "signature": "b8eae65005cf467db75211bf51e44c773851aa0ea25959016154aaa67e8268f8",
         "affectsGlobalScope": false
       },
       "../src/users/users.module.ts": {
@@ -2916,72 +2916,87 @@
         "signature": "05f62e0850c9912b5bb8004ce7e238497a095a7c016693842195302a92a8c51f",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/color-name/index.d.ts": {
-        "version": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
-        "signature": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+      "../../node_modules/@types/minimatch/index.d.ts": {
+        "version": "95c22bc19835e28e2e524a4bb8898eb5f2107b640d7279a6d3aade261916bbf2",
+        "signature": "95c22bc19835e28e2e524a4bb8898eb5f2107b640d7279a6d3aade261916bbf2",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/q/index.d.ts": {
-        "version": "026aa0540cf6376b64fff7c22f4dc127c2bbe7885daeabbc88f0a3513faaf78a",
-        "signature": "026aa0540cf6376b64fff7c22f4dc127c2bbe7885daeabbc88f0a3513faaf78a",
+      "../../node_modules/@types/glob/index.d.ts": {
+        "version": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
+        "signature": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": {
-        "version": "f6347d3913f8a74952f8f7b76b0c735e0250af2336ea3c4a6865056ecf3ab6a7",
-        "signature": "f6347d3913f8a74952f8f7b76b0c735e0250af2336ea3c4a6865056ecf3ab6a7",
+      "../../node_modules/@types/q/index.d.ts": {
+        "version": "f9a2dd6a6084665f093ed0e9664b8e673be2a45e342a59dd4e0e4e552e68a9ad",
+        "signature": "f9a2dd6a6084665f093ed0e9664b8e673be2a45e342a59dd4e0e4e552e68a9ad",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts": {
-        "version": "eec632398d8634f151c2d53596c28b223a25bbea092a925e58e88013e2397d7d",
-        "signature": "eec632398d8634f151c2d53596c28b223a25bbea092a925e58e88013e2397d7d",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": {
-        "version": "2fa05bd69948d76ef4513626a8aaf427f818eb4ff6e905dfe664f808441a5553",
-        "signature": "2fa05bd69948d76ef4513626a8aaf427f818eb4ff6e905dfe664f808441a5553",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": {
-        "version": "d4fd0745a2c152be86bc27e4acd08efcce7beec83de39dace9eb742682e7674e",
-        "signature": "d4fd0745a2c152be86bc27e4acd08efcce7beec83de39dace9eb742682e7674e",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": {
-        "version": "b80ebb1b98c07eff3b4d489fd7be8589d175bd7a8fead09398d968537988db2a",
-        "signature": "b80ebb1b98c07eff3b4d489fd7be8589d175bd7a8fead09398d968537988db2a",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": {
-        "version": "d18a5e48d10a4a792c8cb2a20c1f682207973a80dd81ecf62c2ce4d4918c3b84",
-        "signature": "d18a5e48d10a4a792c8cb2a20c1f682207973a80dd81ecf62c2ce4d4918c3b84",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": {
-        "version": "86dfbbb377eb292dfd702390c9bf386012a5ec24b3269fbd87d3eef71a402cd7",
-        "signature": "86dfbbb377eb292dfd702390c9bf386012a5ec24b3269fbd87d3eef71a402cd7",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": {
-        "version": "6ebb7c2a7f339a3968de46421dbdbd65d0233199cf572e6d2de31033f5704386",
-        "signature": "6ebb7c2a7f339a3968de46421dbdbd65d0233199cf572e6d2de31033f5704386",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts": {
-        "version": "253ad34774a7cb9cc2748179bfcdf355ea6745c30622925b5f4dca1411679ad5",
-        "signature": "253ad34774a7cb9cc2748179bfcdf355ea6745c30622925b5f4dca1411679ad5",
-        "affectsGlobalScope": false
-      },
-      "../../../../../../../../../../node_modules/@types/sinonjs__fake-timers/index.d.ts": {
+      "../../node_modules/@types/sinonjs__fake-timers/index.d.ts": {
         "version": "558a9770503071d5a6fc6c596f7230bb79f2d034ced4a205bd1ebcad3b5879ec",
         "signature": "558a9770503071d5a6fc6c596f7230bb79f2d034ced4a205bd1ebcad3b5879ec",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/sizzle/index.d.ts": {
+      "../../node_modules/@types/sizzle/index.d.ts": {
         "version": "7ddac8a4ba398441cfd6d8a69380401378f122ee8cc2d848e6e32f4db2b6c876",
         "signature": "7ddac8a4ba398441cfd6d8a69380401378f122ee8cc2d848e6e32f4db2b6c876",
         "affectsGlobalScope": false
       },
-      "../../../../../../../../../../node_modules/@types/yauzl/index.d.ts": {
+      "../../node_modules/@types/validator/index.d.ts": {
+        "version": "4538d6984fc78e9886c00aa0cc7910dd25dc7a82edf7935aaf2141a3683f1bbb",
+        "signature": "4538d6984fc78e9886c00aa0cc7910dd25dc7a82edf7935aaf2141a3683f1bbb",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/color-name/index.d.ts": {
+        "version": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+        "signature": "f0cb4b3ab88193e3e51e9e2622e4c375955003f1f81239d72c5b7a95415dad3e",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": {
+        "version": "f6347d3913f8a74952f8f7b76b0c735e0250af2336ea3c4a6865056ecf3ab6a7",
+        "signature": "f6347d3913f8a74952f8f7b76b0c735e0250af2336ea3c4a6865056ecf3ab6a7",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/http.d.ts": {
+        "version": "eec632398d8634f151c2d53596c28b223a25bbea092a925e58e88013e2397d7d",
+        "signature": "eec632398d8634f151c2d53596c28b223a25bbea092a925e58e88013e2397d7d",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": {
+        "version": "2fa05bd69948d76ef4513626a8aaf427f818eb4ff6e905dfe664f808441a5553",
+        "signature": "2fa05bd69948d76ef4513626a8aaf427f818eb4ff6e905dfe664f808441a5553",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": {
+        "version": "d4fd0745a2c152be86bc27e4acd08efcce7beec83de39dace9eb742682e7674e",
+        "signature": "d4fd0745a2c152be86bc27e4acd08efcce7beec83de39dace9eb742682e7674e",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": {
+        "version": "b80ebb1b98c07eff3b4d489fd7be8589d175bd7a8fead09398d968537988db2a",
+        "signature": "b80ebb1b98c07eff3b4d489fd7be8589d175bd7a8fead09398d968537988db2a",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": {
+        "version": "d18a5e48d10a4a792c8cb2a20c1f682207973a80dd81ecf62c2ce4d4918c3b84",
+        "signature": "d18a5e48d10a4a792c8cb2a20c1f682207973a80dd81ecf62c2ce4d4918c3b84",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": {
+        "version": "86dfbbb377eb292dfd702390c9bf386012a5ec24b3269fbd87d3eef71a402cd7",
+        "signature": "86dfbbb377eb292dfd702390c9bf386012a5ec24b3269fbd87d3eef71a402cd7",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": {
+        "version": "6ebb7c2a7f339a3968de46421dbdbd65d0233199cf572e6d2de31033f5704386",
+        "signature": "6ebb7c2a7f339a3968de46421dbdbd65d0233199cf572e6d2de31033f5704386",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/selenium-webdriver/index.d.ts": {
+        "version": "253ad34774a7cb9cc2748179bfcdf355ea6745c30622925b5f4dca1411679ad5",
+        "signature": "253ad34774a7cb9cc2748179bfcdf355ea6745c30622925b5f4dca1411679ad5",
+        "affectsGlobalScope": false
+      },
+      "../../../../../node_modules/@types/yauzl/index.d.ts": {
         "version": "3845d3b64286c12c60d39fc90ac1cc5e47cbc951530658d2567d578b2faa1f26",
         "signature": "3845d3b64286c12c60d39fc90ac1cc5e47cbc951530658d2567d578b2faa1f26",
         "affectsGlobalScope": false
@@ -3001,6 +3016,54 @@
       "configFilePath": "../tsconfig.build.json"
     },
     "referencedMap": {
+      "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/http.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/index.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/yauzl/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/glob/index.d.ts": [
+        "../../node_modules/@types/minimatch/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts"
+      ],
       "../node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "../node_modules/@babel/types/lib/index-ts3.7.d.ts"
       ],
@@ -5114,52 +5177,57 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/shared/shared.module.ts",
         "../src/users/users.controller.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/edge.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/ie.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/opera.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/safari.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/yauzl/index.d.ts": [
-        "../node_modules/@types/node/events.d.ts",
-        "../node_modules/@types/node/index.d.ts",
-        "../node_modules/@types/node/stream.d.ts"
       ]
     },
     "exportedModulesMap": {
+      "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/http.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/index.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+        "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": [
+        "../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
+      ],
+      "../../../../../node_modules/@types/yauzl/index.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/glob/index.d.ts": [
+        "../../node_modules/@types/minimatch/index.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/index.d.ts"
+      ],
       "../node_modules/@babel/parser/typings/babel-parser.d.ts": [
         "../node_modules/@babel/types/lib/index-ts3.7.d.ts"
       ],
@@ -7190,52 +7258,26 @@
         "../src/users/dto/user.dto.ts",
         "../src/users/interface/account.interface.ts",
         "../src/users/interface/users.interface.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/edge.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/http.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/ie.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/edge.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/ie.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/opera.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/safari.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/opera.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/remote.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/selenium-webdriver/safari.d.ts": [
-        "../../../../../../../../../../node_modules/@types/selenium-webdriver/index.d.ts"
-      ],
-      "../../../../../../../../../../node_modules/@types/yauzl/index.d.ts": [
-        "../node_modules/@types/node/events.d.ts",
-        "../node_modules/@types/node/index.d.ts",
-        "../node_modules/@types/node/stream.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
+      "../../../../../node_modules/@types/color-name/index.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/chrome.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/edge.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/firefox.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/http.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/ie.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/index.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/opera.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/remote.d.ts",
+      "../../../../../node_modules/@types/selenium-webdriver/safari.d.ts",
+      "../../../../../node_modules/@types/yauzl/index.d.ts",
+      "../../node_modules/@types/glob/index.d.ts",
+      "../../node_modules/@types/minimatch/index.d.ts",
+      "../../node_modules/@types/q/index.d.ts",
+      "../../node_modules/@types/sinonjs__fake-timers/index.d.ts",
+      "../../node_modules/@types/sizzle/index.d.ts",
+      "../../node_modules/@types/validator/index.d.ts",
       "../node_modules/@babel/parser/typings/babel-parser.d.ts",
       "../node_modules/@babel/types/lib/index-ts3.7.d.ts",
       "../node_modules/@nestjs/common/cache/cache.constants.d.ts",

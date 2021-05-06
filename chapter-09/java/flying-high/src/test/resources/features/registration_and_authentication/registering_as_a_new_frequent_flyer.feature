@@ -1,33 +1,40 @@
+@webtest
 Business Need: Registering as a new Frequent Flyer
 
   New Frequent Flyer members need to register to book a flight.
 
   Rule: Customers must register to be able to use the Frequent Flyer members area
+    @current
     Example: Trevor registers as a Frequent Flyer member
       Given Trevor does not have a Frequent Flyer account
       When he registers as a Frequent Flyer member
-      And he logs on to the Frequent Flyer application
-      Then he should be taken to the Frequent Flyer members area
-      And he should be greeted by his name
+      Then Trevor should be able to log on to the Frequent Flyer application
+      And he should have a Frequent Flyer account with:
+        | Status Level | STANDARD |
+        | Points       | 0        |
 
   Rule: The unique username should be a valid email address
+    @current
     Scenario Outline: Only correctly structured emails should be accepted
       Given Candy does not have a Frequent Flyer account
-      When she tries to register with a username of "<username>"
+      When she tries to register with an email of "<email>"
       Then she should be told "Not a valid email format"
       Examples:
-        | username     |
+        | email        |
         | not-an-email |
         | notemail.com |
         | candy@#.com  |
 
+    @webtest
     Scenario: Email addresses need to be well formed
-      When Candy wants to register a new Frequent Flyer accoun
+    @current
+      Given Candy does not have a Frequent Flyer account
+      When she wants to register a new Frequent Flyer account
       Then the following emails should not be considered valid:
-        | email        | Reason Rejected    |
+        | Email        | Reason Rejected    |
         | not-an-email | Missing @ section  |
         | wrong.com    | Missing @          |
-        | wrong@com    | Mission domain     |
+        | wrong@       | Mission domain     |
         | wrong@#.com  | Invalid characters |
         |              | Cannot be empty    |
 

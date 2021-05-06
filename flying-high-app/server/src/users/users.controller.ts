@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from '../shared/services/users.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiBody, ApiQuery } from '@nestjs/swagger';
@@ -46,6 +46,23 @@ export class UsersController {
     @ApiBearerAuth()
     getUserById(@Query('userId') userId: string) {
         return this.service.getUserById(userId);
+    }
+
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/:userId/earn-points')
+    @ApiBearerAuth()
+    earnPoints(@Param('userId') userId: string, @Query('points') points: number) {
+        this.service.updateUserPointsAndLevel(this.service.getUserById(userId).email, points)
+        return this.service.getUserById(userId);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/:userId/reset-points')
+    @ApiBearerAuth()
+    resetPoints(@Param('userId') userId: string) {
+        this.service.resetPoints(userId)
+        return this.service.getUserById(userId);;
     }
 
     @Delete()

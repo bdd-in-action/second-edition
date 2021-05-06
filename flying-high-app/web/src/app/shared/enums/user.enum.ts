@@ -1,5 +1,6 @@
 export enum USER_TITLE {
     MR = 'Mr',
+    MS = 'Ms',
     MRS = 'Mrs'
 }
 
@@ -9,8 +10,8 @@ export enum SEAT_PREFERENCE {
 }
 
 export enum USER_LEVEL {
-    STANDARD = 'standard',
-    BRONZE = 'bronze',
-    SILVER = 'silver',
-    GOLD = 'gold'
+    STANDARD = 'STANDARD',
+    BRONZE = 'BRONZE',
+    SILVER = 'SILVER',
+    GOLD = 'GOLD'
 }

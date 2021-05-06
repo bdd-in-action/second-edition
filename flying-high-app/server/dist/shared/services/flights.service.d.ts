@@ -13,13 +13,17 @@ export declare class FlightsService {
         name: string;
         point: number;
         short: string;
+        region: string;
     }[];
+    pointsEarned: Map<string, number>;
+    cabinClassPointWeight: Map<string, number>;
     constructor(http: HttpService, authService: AuthService, usersService: UsersService);
     getCities(filter: string): City[];
     getCity(cityName: any): {
         name: string;
         point: number;
         short: string;
+        region: string;
     };
     createFlight(flight: Flight): Flight[];
     getFlights(): Flight[];

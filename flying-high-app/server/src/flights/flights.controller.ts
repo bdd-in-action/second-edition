@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateFlightDto } from './dto/create-flight.dto';
@@ -22,10 +22,14 @@ export class FlightsController {
     @Get('cities')
     @ApiQuery({
         name: 'cityname',
-        description: 'get city list by searching with city name'
+            description: 'get a list of cities with a specified name'
     })
     getCities(@Query('cityname') cityname: string) {
-        return this.service.getCities(cityname);
+        let matchingCities = this.service.getCities(cityname)
+        if (matchingCities.length == 0) {
+            throw new HttpException('No such city found', HttpStatus.NOT_FOUND);
+        }
+        return matchingCities;
     }
 
     @UseGuards(JwtAuthGuard)

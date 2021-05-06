@@ -13,6 +13,10 @@ exports.UserDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const users_interface_1 = require("../interface/users.interface");
 class UserDto {
+    constructor() {
+        this.userLevel = users_interface_1.USER_LEVEL.STANDARD;
+        this.points = 0;
+    }
 }
 __decorate([
     swagger_1.ApiProperty(),
@@ -40,8 +44,8 @@ __decorate([
 ], UserDto.prototype, "country", void 0);
 __decorate([
     swagger_1.ApiProperty({
-        enum: ['Mr', 'Mrs'],
-        description: 'Only Mr and Mrs are allowed when creating user'
+        enum: ['Mr', 'Ms', 'Mrs'],
+        description: 'Only Mr, Ms and Mrs are allowed when creating user'
     }),
     __metadata("design:type", String)
 ], UserDto.prototype, "title", void 0);
@@ -56,5 +60,13 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], UserDto.prototype, "seatPreference", void 0);
+__decorate([
+    swagger_1.ApiProperty(),
+    __metadata("design:type", String)
+], UserDto.prototype, "userLevel", void 0);
+__decorate([
+    swagger_1.ApiProperty(),
+    __metadata("design:type", Number)
+], UserDto.prototype, "points", void 0);
 exports.UserDto = UserDto;
 //# sourceMappingURL=user.dto.js.map

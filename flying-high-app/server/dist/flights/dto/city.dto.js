@@ -25,5 +25,9 @@ __decorate([
     swagger_1.ApiProperty(),
     __metadata("design:type", String)
 ], CityDto.prototype, "short", void 0);
+__decorate([
+    swagger_1.ApiProperty(),
+    __metadata("design:type", String)
+], CityDto.prototype, "region", void 0);
 exports.CityDto = CityDto;
 //# sourceMappingURL=city.dto.js.map

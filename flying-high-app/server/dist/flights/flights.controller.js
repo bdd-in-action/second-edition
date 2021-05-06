@@ -27,7 +27,11 @@ let FlightsController = class FlightsController {
         return this.service.getFlights();
     }
     getCities(cityname) {
-        return this.service.getCities(cityname);
+        let matchingCities = this.service.getCities(cityname);
+        if (matchingCities.length == 0) {
+            throw new common_1.HttpException('No such city found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return matchingCities;
     }
     createFlight(createFlightDto) {
         const flight = Object.assign(Object.assign({}, createFlightDto), { points: createFlightDto.departure.point + createFlightDto.destination.point, orderNumber: this.service.generateRandomString(8), price: 0, returnTime: new Date(), departureTime: new Date(), returnDate: new Date() });
@@ -49,7 +53,7 @@ __decorate([
     common_1.Get('cities'),
     swagger_1.ApiQuery({
         name: 'cityname',
-        description: 'get city list by searching with city name'
+        description: 'get a list of cities with a specified name'
     }),
     __param(0, common_1.Query('cityname')),
     __metadata("design:type", Function),

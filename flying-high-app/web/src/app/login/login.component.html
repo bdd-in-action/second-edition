@@ -2,13 +2,13 @@
     <form [formGroup]="form" (submit)="login(form)">
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" id="email" data-test-id="email">
+            <input matInput formControlName="email" id="email" data-testid="email">
             <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" id="password"  data-test-id="password">
+            <input matInput type="password" formControlName="password" id="password"  data-testid="password">
             <mat-error *ngIf="password.invalid">Please enter your password</mat-error>
         </mat-form-field>
         <br>

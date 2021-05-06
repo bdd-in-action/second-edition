@@ -14,6 +14,7 @@ export interface User {
 }
 export declare enum USER_TITLE {
     MR = "Mr",
+    MS = "Ms",
     MRS = "Mrs"
 }
 export declare enum SEAT_PREFERENCE {
@@ -21,8 +22,8 @@ export declare enum SEAT_PREFERENCE {
     WINDOW = "window"
 }
 export declare enum USER_LEVEL {
-    STANDARD = "standard",
-    BRONZE = "bronze",
-    SILVER = "silver",
-    GOLD = "gold"
+    STANDARD = "STANDARD",
+    BRONZE = "BRONZE",
+    SILVER = "SILVER",
+    GOLD = "GOLD"
 }

@@ -14,8 +14,8 @@ export declare class AppController {
         userId: string;
     }>;
     register(user: UserDto): {
-        points: number;
         userLevel: import("./users/interface/users.interface").USER_LEVEL;
+        points: number;
         userId: string;
         email: string;
         password: string;
