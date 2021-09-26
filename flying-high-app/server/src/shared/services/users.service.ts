@@ -20,6 +20,20 @@ export class UsersService {
             points: 0,
             country: 'United States of America (the)',
             seatPreference: SEAT_PREFERENCE.AISLE
+        },
+        {
+            userId: '8XDGVLsNUq',
+            email: 'bryony@flyinghigh.com',
+            password: 'admin',
+            firstName: 'Bryony',
+            lastName: 'Tripper',
+            address: '100 Main St, St Cloud',
+            title: USER_TITLE.MS,
+            newsletterSub: true,
+            userLevel: USER_LEVEL.STANDARD,
+            points: 0,
+            country: 'United States of America (the)',
+            seatPreference: SEAT_PREFERENCE.AISLE
         }
     ]
 
