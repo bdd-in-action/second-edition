@@ -5,9 +5,9 @@
     "start": "npm start --prefix server",
     "postinstall": "npm install --prefix server",
     "start-server": "npm start --prefix server &",
-    "pretest": "npm run start-server",    
+    "pretest": "npm run start-server",
     "test": "npx cypress run",
-    "posttest":"$npm_config_github || pkill -f npm"
+    "posttest": "$npm_config_github || pkill -f npm"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^0.1102.8",

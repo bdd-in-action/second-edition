@@ -1,0 +1,13 @@
+  {
+    "frequentFlyerNumber": "12345678",
+    "status": "PENDING",
+    "firstName": "Tracy",
+    "lastName": "Traveler",
+    "title": "Ms",
+    "email": "tracy@traveler.com",
+    "password": "secret",
+    "address": "Transitville",
+    "country": "USA"
+  }
+
+
