@@ -24,20 +24,26 @@ describe('TokenService', () => {
 
     it('should allow the token validated for the corresponding email', () => {
       const token = service.newToken('some@email.com',12345678)
-      const validated = service.validate('some@email.com', token)
+      const validated = service.validate('some@email.com', 12345678, token)
       expect(validated).toBeTruthy()
     })
 
     it('should not allow the token validated for a different email', () => {
       const token = service.newToken('some@email.com',12345678)
-      const validated = service.validate('some.other@email.com', token)
+      const validated = service.validate('some.other@email.com', 12345678, token)
+      expect(validated).toBeFalsy()
+    })
+
+    it('should not allow the token validated for a different frequent flyer number', () => {
+      const token = service.newToken('some@email.com',12345678)
+      const validated = service.validate('some.other@email.com', 99999999, token)
       expect(validated).toBeFalsy()
     })
 
     it('should not allow a token to be validated twice', () => {
       const token = service.newToken('some@email.com',12345678)
-      service.validate('some@email.com', token)
-      const validated = service.validate('some@email.com', token)
+      service.validate('some@email.com', 12345678, token)
+      const validated = service.validate('some@email.com', 12345678, token)
       expect(validated).toBeFalsy()
     })
   })

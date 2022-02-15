@@ -40,10 +40,10 @@ export class FrequentFlyerController {
   @Get(':id')
   @ApiOperation({summary: 'Find a frequent flyer by frequent flyer number'})
   @ApiResponse({status:400, description: 'Missing mandatory fields'})
-  findByFrequentFlyerNumber(@Param('id') id: string) {
+  findByFrequentFlyerNumber(@Param('id') id: number) {
     const frequentFlyer = this.frequentFlyerService.findByFrequentFlyerNumber(+id);
     if (!frequentFlyer) {
-      throw new HttpException('No matching Frequent Flyer found with this email', HttpStatus.NOT_FOUND)
+      throw new HttpException('No matching Frequent Flyer found with this number', HttpStatus.NOT_FOUND)
     } else {
       return frequentFlyer;
     }

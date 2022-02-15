@@ -10,6 +10,6 @@ export declare class FrequentFlyerController {
     } & CreateFrequentFlyerDto;
     confirmEmail(validateEmailDto: ValidateEmailDto): void;
     findAll(): any[];
-    findByFrequentFlyerNumber(id: string): any;
+    findByFrequentFlyerNumber(id: number): any;
     remove(id: string): void;
 }

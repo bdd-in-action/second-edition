@@ -1,19 +1,20 @@
-import {Body, Controller, Get, HttpException, HttpStatus, Param, Post} from '@nestjs/common';
+import {Body, Controller, Get, HttpException, HttpStatus, Param, Post, Query} from '@nestjs/common';
 import {TokenService} from "./token.service";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import * as Path from "path";
 
 @Controller('api/tokens')
 export class TokenController {
     constructor(private readonly tokenService: TokenService) {}
 
-    @Get(':email')
+    @Get('/frequent-flyer/:id')
     @ApiOperation({summary:'Single-use tokens',
-                           description:'Find the current token for a given email. Used to generate the validation email.'})
-    @ApiResponse({status: 404, description:'Unknown email'})
-    findByEmail(@Param('email') email: string) {
-        const token = this.tokenService.findByEmail(email)
+                           description:'Find the current token for a given frequent flyer. Used to generate the validation email.'})
+    @ApiResponse({status: 404, description:'Unknown frequent flyer'})
+    findByID(@Param('id') frequentFlyerNumber: number) {
+        const token = this.tokenService.findByFrequentFlyerNumber(frequentFlyerNumber)
         if (!token) {
-            throw new HttpException('Unknown email', HttpStatus.NOT_FOUND)
+            throw new HttpException('Unknown frequent flyer', HttpStatus.NOT_FOUND)
         }
         return token;
     }

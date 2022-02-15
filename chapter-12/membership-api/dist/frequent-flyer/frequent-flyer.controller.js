@@ -24,7 +24,7 @@ let FrequentFlyerController = class FrequentFlyerController {
     }
     create(createFrequentFlyerDto) {
         if (this.frequentFlyerService.findByEmail(createFrequentFlyerDto.email)) {
-            throw new common_1.HttpException('Email already exists', common_1.HttpStatus.BAD_REQUEST);
+            throw new common_1.HttpException('Email already exists', common_1.HttpStatus.CONFLICT);
         }
         return this.frequentFlyerService.create(createFrequentFlyerDto);
     }
@@ -39,7 +39,7 @@ let FrequentFlyerController = class FrequentFlyerController {
     findByFrequentFlyerNumber(id) {
         const frequentFlyer = this.frequentFlyerService.findByFrequentFlyerNumber(+id);
         if (!frequentFlyer) {
-            throw new common_1.HttpException('No matching Frequent Flyer found with this email', common_1.HttpStatus.NOT_FOUND);
+            throw new common_1.HttpException('No matching Frequent Flyer found with this number', common_1.HttpStatus.NOT_FOUND);
         }
         else {
             return frequentFlyer;
@@ -52,8 +52,7 @@ let FrequentFlyerController = class FrequentFlyerController {
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiOperation)({ summary: 'Register a new Frequent Flyer member' }),
-    (0, swagger_1.ApiResponse)({ status: 400, description: 'Missing mandatory fields' }),
-    (0, swagger_1.ApiResponse)({ status: 400, description: 'Email already exists' }),
+    (0, swagger_1.ApiResponse)({ status: 409, description: 'Email already exists' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_frequent_flyer_dto_1.CreateFrequentFlyerDto]),
@@ -81,7 +80,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Missing mandatory fields' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], FrequentFlyerController.prototype, "findByFrequentFlyerNumber", null);
 __decorate([

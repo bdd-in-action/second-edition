@@ -20,7 +20,6 @@ let FrequentFlyerService = class FrequentFlyerService {
         this.tokenService = tokenService;
     }
     create(frequentFlyerDetails) {
-        console.log("Create: " + frequentFlyerDetails);
         const nextFrequentFlyerNumber = this.frequentFlyerRepository.findLargestFrequentFlyerNumber(1000000) + 1;
         const newFrequentFlyer = { frequentFlyerNumber: nextFrequentFlyerNumber, status: status_1.Status.Pending };
         const frequentFlyer = Object.assign(newFrequentFlyer, frequentFlyerDetails);
@@ -41,7 +40,7 @@ let FrequentFlyerService = class FrequentFlyerService {
         this.frequentFlyerRepository.removeByFrequentFlyerNumber(id);
     }
     confirmEmail(validateEmailDto) {
-        if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.token)) {
+        if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.frequentFlyerNumber, validateEmailDto.token)) {
             let frequentFlyer = this.frequentFlyerRepository.findByEmail(validateEmailDto.email);
             frequentFlyer.status = status_1.Status.Active;
             return true;

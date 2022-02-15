@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFrequentFlyerDto } from './dto/create-frequent-flyer.dto';
-import { UpdateFrequentFlyerDto } from './dto/update-frequent-flyer.dto';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
 import {Status} from "./entities/status";
 import {TokenService} from "../token/token.service";
@@ -14,8 +13,6 @@ export class FrequentFlyerService {
   ) {}
 
   create(frequentFlyerDetails: CreateFrequentFlyerDto) {
-    console.log("Create: " + frequentFlyerDetails);
-
     const nextFrequentFlyerNumber = this.frequentFlyerRepository.findLargestFrequentFlyerNumber(1000000) + 1
     const newFrequentFlyer = {frequentFlyerNumber: nextFrequentFlyerNumber, status: Status.Pending}
 
@@ -47,7 +44,7 @@ export class FrequentFlyerService {
   }
 
   confirmEmail(validateEmailDto: ValidateEmailDto) {
-    if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.token)) {
+    if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.frequentFlyerNumber, validateEmailDto.token)) {
       let frequentFlyer = this.frequentFlyerRepository.findByEmail(validateEmailDto.email);
       frequentFlyer.status = Status.Active
       return true;

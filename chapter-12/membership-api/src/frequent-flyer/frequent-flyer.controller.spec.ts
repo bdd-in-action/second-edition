@@ -33,7 +33,6 @@ describe('FrequentFlyerController', () => {
         country: 'USA'
     }
 
-
     const anotherFrequentFlyer = {
         email: 'another@email.com',
         password: 'secret',
@@ -61,10 +60,24 @@ describe('FrequentFlyerController', () => {
 
         it('should return an error if the email is already used ', () => {
             controller.create(newFrequentFlyer);
-            const token = tokenService.findByEmail('some@email.com');
 
             const createANewAccountWithAnExistingEmail = () => controller.create(newFrequentFlyer);
             expect(createANewAccountWithAnExistingEmail).toThrow('Email already exists')
+        })
+    });
+
+    describe('When finding a frequent flyer using the frequent flyer number', () => {
+
+        it('should find a frequent flyer with a given number', () => {
+            const result = controller.create(newFrequentFlyer);
+            const frequentFlyerNumber = result.frequentFlyerNumber;
+
+            expect(controller.findByFrequentFlyerNumber(frequentFlyerNumber)).toBeDefined()
+        })
+
+        it('should produce an error if no such frequent flyer exists', () => {
+            const findFrequentFlyerWithIncorrectNumber = () => controller.findByFrequentFlyerNumber(9999999);
+            expect(findFrequentFlyerWithIncorrectNumber).toThrow("No matching Frequent Flyer found with this number")
         })
 
     });
@@ -75,26 +88,37 @@ describe('FrequentFlyerController', () => {
             const result = controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
-            const token = tokenService.findByEmail('some@email.com');
+            const token = tokenService.findByFrequentFlyerNumber(frequentFlyerNumber);
 
-            controller.confirmEmail({email: 'some@email.com', token: token})
+            controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'some@email.com', token: token})
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
             expect(frequentFlyerAccount.status).toEqual(Status.Active)
         })
 
         it('should return an error if the token is incorrect ', () => {
-            controller.create(newFrequentFlyer);
+            const result = controller.create(newFrequentFlyer);
+            const frequentFlyerNumber = result.frequentFlyerNumber;
 
-            const confirmWithWrongToken = () => controller.confirmEmail({email: 'some@email.com', token: "WRONG-TOKEN"})
+            const confirmWithWrongToken = () => controller.confirmEmail({
+                frequentFlyerNumber: frequentFlyerNumber,
+                email: 'some@email.com',
+                token: "WRONG-TOKEN"
+            })
             expect(confirmWithWrongToken).toThrow('Could not confirm this email with this token')
         })
 
         it('should return an error if the email is incorrect ', () => {
-            controller.create(newFrequentFlyer);
-            const token = tokenService.findByEmail('some@email.com');
+            const result = controller.create(newFrequentFlyer);
+            const frequentFlyerNumber = result.frequentFlyerNumber;
 
-            const confirmWithWrongEmail = () => controller.confirmEmail({email: 'wrong@email.com', token: token})
+            const token = tokenService.findByFrequentFlyerNumber(frequentFlyerNumber);
+
+            const confirmWithWrongEmail = () => controller.confirmEmail({
+                frequentFlyerNumber: frequentFlyerNumber,
+                email: 'wrong@email.com',
+                token: token
+            })
             expect(confirmWithWrongEmail).toThrow('Could not confirm this email with this token')
         })
     });
@@ -103,7 +127,7 @@ describe('FrequentFlyerController', () => {
 
         it('should remove the frequent flyer from the list', () => {
             const flyer1 = controller.create(newFrequentFlyer);
-            const flyer2 = controller.create(anotherFrequentFlyer);
+            controller.create(anotherFrequentFlyer);
 
             controller.remove(flyer1.frequentFlyerNumber)
 
