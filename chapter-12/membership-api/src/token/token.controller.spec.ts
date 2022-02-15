@@ -23,11 +23,11 @@ describe('TokenController', () => {
   it('should find a token for a given email', () => {
     const token = service.newToken("some@email.com", 12345678);
 
-    expect(controller.findByID(12345678)).toEqual(token)
+    expect(controller.findByID("12345678")).toEqual(token)
   })
 
   it('should return an error if no email is present ', () => {
-    expect(() => controller.findByID(10000000)).toThrow('Unknown frequent flyer')
+    expect(() => controller.findByID("10000000")).toThrow('Unknown frequent flyer')
   })
 
 });

@@ -11,12 +11,11 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const frequent_flyer_module_1 = require("./frequent-flyer/frequent-flyer.module");
-const token_module_1 = require("./token/token.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [frequent_flyer_module_1.FrequentFlyerModule, token_module_1.TokenModule],
+        imports: [frequent_flyer_module_1.FrequentFlyerModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

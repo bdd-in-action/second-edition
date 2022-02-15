@@ -1,18 +1,19 @@
 import * as request from 'supertest';
 import {Test} from '@nestjs/testing';
-import {INestApplication} from '@nestjs/common';
-import {FrequentFlyerModule} from "./frequent-flyer.module";
-import {Status} from "./entities/status";
+import {INestApplication, ValidationPipe} from '@nestjs/common';
+import {AppModule} from "./app.module";
+import {Status} from "./frequent-flyer/entities/status";
 
 describe('Frequent Flyer Registration', () => {
     let app: INestApplication;
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [FrequentFlyerModule],
+            imports: [AppModule],
         }).compile()
 
         app = moduleRef.createNestApplication();
+        app.useGlobalPipes(new ValidationPipe());
         await app.init();
     });
 
@@ -55,6 +56,13 @@ describe('Frequent Flyer Registration', () => {
                 .expect(201);
 
             expect(response.body.status).toEqual(Status.Pending);
+        });
+
+        it(`should return an error if mandatory fields are missing`, async () => {
+            await request(app.getHttpServer())
+                .post('/api/frequent-flyer')
+                .send(aFrequentFlyerWithMissingInfo)
+                .expect(400);
         });
 
         it(`should create a new email token for each new account`, async () => {

@@ -9,19 +9,16 @@ export class TokenService {
     /**
      * Generate a new token for a given email and frequent flyer number
      */
-    newToken(email:string, id: number) {
-        const data = {email: email, id: id};
+    newToken(email:string, frequentFlyerNumber: number) {
+        const data = {email: email, id: frequentFlyerNumber, nonce: this.tokenEmails.size};
 
         const token = require('crypto')
             .createHash('sha256')
             .update(JSON.stringify(data))
             .digest('hex');
 
-        this.pendingTokens.set(id, token);
+        this.pendingTokens.set(frequentFlyerNumber, token);
         this.tokenEmails.set(email, token);
-
-        console.log("PENDING TOKENS: " + this.pendingTokens.size)
-        console.log("EMAIL TOKENS: " + this.tokenEmails.size)
         return token;
     }
 
@@ -39,8 +36,6 @@ export class TokenService {
     }
 
     findByFrequentFlyerNumber(frequentFlyerNumber: number) {
-        console.log("PENDING TOKENS: " + this.pendingTokens.size)
-        console.log("EMAIL TOKENS: " + this.tokenEmails.size)
         return this.pendingTokens.get(frequentFlyerNumber)
     }
 }

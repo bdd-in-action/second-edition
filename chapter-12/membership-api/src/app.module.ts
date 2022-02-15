@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FrequentFlyerModule } from './frequent-flyer/frequent-flyer.module';
-import { TokenModule } from './token/token.module';
 
 @Module({
-  imports: [FrequentFlyerModule, TokenModule],
+  imports: [FrequentFlyerModule],
   controllers: [AppController],
   providers: [AppService],
 })

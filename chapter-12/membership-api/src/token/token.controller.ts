@@ -11,8 +11,8 @@ export class TokenController {
     @ApiOperation({summary:'Single-use tokens',
                            description:'Find the current token for a given frequent flyer. Used to generate the validation email.'})
     @ApiResponse({status: 404, description:'Unknown frequent flyer'})
-    findByID(@Param('id') frequentFlyerNumber: number) {
-        const token = this.tokenService.findByFrequentFlyerNumber(frequentFlyerNumber)
+    findByID(@Param('id') frequentFlyerNumber: string) {
+        const token = this.tokenService.findByFrequentFlyerNumber(parseInt(frequentFlyerNumber))
         if (!token) {
             throw new HttpException('Unknown frequent flyer', HttpStatus.NOT_FOUND)
         }
