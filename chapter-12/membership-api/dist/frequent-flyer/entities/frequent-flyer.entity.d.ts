@@ -1,5 +1,6 @@
+import { Status } from "./status";
 export declare class FrequentFlyer {
-    frequentFlyerNumber: string;
+    frequentFlyerNumber: number;
     firstName: string;
     lastName: string;
     title: string;
@@ -7,4 +8,5 @@ export declare class FrequentFlyer {
     password: string;
     address: string;
     country: string;
+    status: Status;
 }

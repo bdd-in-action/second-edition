@@ -26,4 +26,8 @@ describe('TokenController', () => {
     expect(controller.findByEmail("some@email.com")).toEqual(token)
   })
 
+  it('should return an error if no email is present ', () => {
+    expect(() => controller.findByEmail("no.such@email.com")).toThrow('Unknown email')
+  })
+
 });

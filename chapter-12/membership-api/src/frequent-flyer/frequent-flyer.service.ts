@@ -38,12 +38,12 @@ export class FrequentFlyerService {
     return this.frequentFlyerRepository.findByFrequentFlyerNumber(id);
   }
 
-  update(id: number, updateFrequentFlyerDto: UpdateFrequentFlyerDto) {
-    return `This action updates a #${id} frequentFlyer`;
+  findByEmail(email: string) {
+    return this.frequentFlyerRepository.findByEmail(email);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} frequentFlyer`;
+    this.frequentFlyerRepository.removeByFrequentFlyerNumber(id);
   }
 
   confirmEmail(validateEmailDto: ValidateEmailDto) {

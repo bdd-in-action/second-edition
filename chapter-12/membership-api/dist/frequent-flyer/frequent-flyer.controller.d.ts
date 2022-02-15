@@ -1,12 +1,15 @@
 import { FrequentFlyerService } from './frequent-flyer.service';
 import { CreateFrequentFlyerDto } from './dto/create-frequent-flyer.dto';
-import { UpdateFrequentFlyerDto } from './dto/update-frequent-flyer.dto';
+import { ValidateEmailDto } from "./dto/validate-email.dto";
 export declare class FrequentFlyerController {
     private readonly frequentFlyerService;
     constructor(frequentFlyerService: FrequentFlyerService);
-    create(createFrequentFlyerDto: CreateFrequentFlyerDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateFrequentFlyerDto: UpdateFrequentFlyerDto): string;
-    remove(id: string): string;
+    create(createFrequentFlyerDto: CreateFrequentFlyerDto): {
+        frequentFlyerNumber: any;
+        status: import("./entities/status").Status;
+    } & CreateFrequentFlyerDto;
+    confirmEmail(validateEmailDto: ValidateEmailDto): void;
+    findAll(): any[];
+    findByFrequentFlyerNumber(id: string): any;
+    remove(id: string): void;
 }

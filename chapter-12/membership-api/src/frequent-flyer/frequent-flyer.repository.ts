@@ -32,4 +32,8 @@ export class FrequentFlyerRepository {
         }
         return this.frequentFlyers.map( frequentFlyer => frequentFlyer.frequentFlyerNumber).reduce((a,b) => Math.max(a,b))
     }
+
+    removeByFrequentFlyerNumber(frequentFlyerNumber: number) {
+        this.frequentFlyers = this.frequentFlyers.filter( element => element.frequentFlyerNumber != frequentFlyerNumber);
+    }
 }
