@@ -1,6 +1,7 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
-import {Status} from "./entities/status";
+import {AccountStatus} from "./entities/accountStatus";
+import {MembershipTier} from "./entities/MembershipTier";
 
 describe('FrequentFlyerRepository', () => {
     let repository: FrequentFlyerRepository;
@@ -29,7 +30,9 @@ describe('FrequentFlyerRepository', () => {
             title: 'Mr',
             address: 'Travelville',
             country: 'USA',
-            status: Status.Pending
+            accountStatus: AccountStatus.Pending,
+            tier: MembershipTier.Standard,
+            statusPoints: 0
         }
 
         it('should save a new frequent flyer', () => {

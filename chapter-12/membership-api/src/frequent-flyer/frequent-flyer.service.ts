@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateFrequentFlyerDto } from './dto/create-frequent-flyer.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateFrequentFlyerDto} from './dto/create-frequent-flyer.dto';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
-import {Status} from "./entities/status";
+import {AccountStatus} from "./entities/accountStatus";
 import {TokenService} from "../token/token.service";
 import {ValidateEmailDto} from "./dto/validate-email.dto";
+import {MembershipTier} from "./entities/MembershipTier";
+import {FrequentFlyer} from "./entities/frequent-flyer.entity";
 
 @Injectable()
 export class FrequentFlyerService {
@@ -14,9 +16,8 @@ export class FrequentFlyerService {
 
   create(frequentFlyerDetails: CreateFrequentFlyerDto) {
     const nextFrequentFlyerNumber = this.frequentFlyerRepository.findLargestFrequentFlyerNumber(1000000) + 1
-    const newFrequentFlyer = {frequentFlyerNumber: nextFrequentFlyerNumber, status: Status.Pending}
-
-    const frequentFlyer = Object.assign(newFrequentFlyer, frequentFlyerDetails)
+    const frequentFlyer = Object.assign(new FrequentFlyer(), frequentFlyerDetails)
+    frequentFlyer.frequentFlyerNumber = nextFrequentFlyerNumber;
 
     // Save the new member details
     this.frequentFlyerRepository.save(frequentFlyer)
@@ -46,7 +47,7 @@ export class FrequentFlyerService {
   confirmEmail(validateEmailDto: ValidateEmailDto) {
     if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.frequentFlyerNumber, validateEmailDto.token)) {
       let frequentFlyer = this.frequentFlyerRepository.findByEmail(validateEmailDto.email);
-      frequentFlyer.status = Status.Active
+      frequentFlyer.accountStatus = AccountStatus.Active
       return true;
     } else {
       return false;

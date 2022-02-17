@@ -2,7 +2,7 @@ import * as request from 'supertest';
 import {Test} from '@nestjs/testing';
 import {INestApplication} from '@nestjs/common';
 import {FrequentFlyerModule} from "./frequent-flyer.module";
-import {Status} from "./entities/status";
+import {AccountStatus} from "./entities/accountStatus";
 
 describe('Frequent Flyer Registration', () => {
     let app: INestApplication;
@@ -54,7 +54,7 @@ describe('Frequent Flyer Registration', () => {
                 .send(newFrequentFlyer)
                 .expect(201);
 
-            expect(response.body.status).toEqual(Status.Pending);
+            expect(response.body.accountStatus).toEqual(AccountStatus.Pending);
         });
 
         it(`should create a new email token for each new account`, async () => {

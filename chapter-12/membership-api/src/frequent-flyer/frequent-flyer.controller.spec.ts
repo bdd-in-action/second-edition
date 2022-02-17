@@ -2,7 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {FrequentFlyerController} from './frequent-flyer.controller';
 import {FrequentFlyerService} from './frequent-flyer.service';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
-import {Status} from "./entities/status";
+import {AccountStatus} from "./entities/accountStatus";
 import {TokenService} from "../token/token.service";
 
 describe('FrequentFlyerController', () => {
@@ -55,7 +55,7 @@ describe('FrequentFlyerController', () => {
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
-            expect(frequentFlyerAccount.status).toEqual(Status.Pending)
+            expect(frequentFlyerAccount.accountStatus).toEqual(AccountStatus.Pending)
         });
 
         it('should return an error if the email is already used ', () => {
@@ -93,7 +93,7 @@ describe('FrequentFlyerController', () => {
             controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'some@email.com', token: token})
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
-            expect(frequentFlyerAccount.status).toEqual(Status.Active)
+            expect(frequentFlyerAccount.accountStatus).toEqual(AccountStatus.Active)
         })
 
         it('should return an error if the token is incorrect ', () => {
@@ -133,14 +133,6 @@ describe('FrequentFlyerController', () => {
 
             expect(controller.findAll()).toHaveLength(1)
         })
-
-        it('new Frequent Flyer accounts should be Pending', () => {
-            const result = controller.create(newFrequentFlyer);
-            const frequentFlyerNumber = result.frequentFlyerNumber;
-
-            const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
-            expect(frequentFlyerAccount.status).toEqual(Status.Pending)
-        });
 
     });
 });

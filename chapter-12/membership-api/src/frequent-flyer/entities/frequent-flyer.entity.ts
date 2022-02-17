@@ -1,4 +1,5 @@
-import {Status} from "./status";
+import {AccountStatus} from "./accountStatus";
+import {MembershipTier} from "./MembershipTier";
 
 export class FrequentFlyer {
     frequentFlyerNumber: number;
@@ -9,5 +10,7 @@ export class FrequentFlyer {
     password: string;
     address: string;
     country: string;
-    status: Status = Status.Pending;
+    accountStatus: AccountStatus = AccountStatus.Pending;
+    tier: MembershipTier = MembershipTier.Standard;
+    statusPoints: number = 0;
 }

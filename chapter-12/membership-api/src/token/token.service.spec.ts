@@ -46,5 +46,13 @@ describe('TokenService', () => {
       const validated = service.validate('some@email.com', 12345678, token)
       expect(validated).toBeFalsy()
     })
+
+    it('should not allow a token to be validated after it has expired', () => {
+      const token = service.newToken('some@email.com',12345678)
+      service.tokens.get(12345678).created = new Date("2001-01-01");
+
+      const validated = service.validate('some@email.com', 12345678, token)
+      expect(validated).toBeFalsy()
+    })
   })
 });

@@ -2,6 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {FrequentFlyerService} from './frequent-flyer.service';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
 import {TokenService} from "../token/token.service";
+import {MembershipTier} from "./entities/MembershipTier";
 
 describe('FrequentFlyerService', () => {
     let service: FrequentFlyerService;
@@ -50,6 +51,17 @@ describe('FrequentFlyerService', () => {
 
             expect(newFrequentFlyer2.frequentFlyerNumber).toBeGreaterThan(newFrequentFlyer1.frequentFlyerNumber)
         });
+
+        it('the new frequent flyer should be Standard tier', () => {
+            const newFrequentFlyer = service.create(someFrequentFlyer)
+            expect(newFrequentFlyer.tier).toEqual(MembershipTier.Standard)
+        });
+
+        it('the new frequent flyer should have 0 points', () => {
+            const newFrequentFlyer = service.create(someFrequentFlyer)
+            expect(newFrequentFlyer.statusPoints).toEqual(0)
+        });
+
     });
 
     describe('When searching for Frequent Flyers', () => {
@@ -72,7 +84,7 @@ describe('FrequentFlyerService', () => {
         it('should remove the frequent flyer from the list', () => {
             const newFrequentFlyer = service.create(someFrequentFlyer)
 
-            const foundFrequentFlyer = service.remove(newFrequentFlyer.frequentFlyerNumber);
+            service.remove(newFrequentFlyer.frequentFlyerNumber);
 
             expect(service.findAll()).toHaveLength(0)
         });

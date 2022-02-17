@@ -27,10 +27,7 @@ export class FrequentFlyerRepository {
     }
 
     findLargestFrequentFlyerNumber(startingNumber: number) {
-        if (this.frequentFlyers.length == 0) {
-            return startingNumber;
-        }
-        return this.frequentFlyers.map( frequentFlyer => frequentFlyer.frequentFlyerNumber).reduce((a,b) => Math.max(a,b))
+        return startingNumber + this.frequentFlyers.length;
     }
 
     removeByFrequentFlyerNumber(frequentFlyerNumber: number) {

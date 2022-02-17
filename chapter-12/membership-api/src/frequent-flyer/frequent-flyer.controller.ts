@@ -51,7 +51,7 @@ export class FrequentFlyerController {
 
   @Delete(':id')
   @ApiOperation({summary: 'Delete a frequent flyer with a given frequent flyer number'})
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.frequentFlyerService.remove(+id);
   }
 }
