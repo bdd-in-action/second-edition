@@ -36,3 +36,12 @@ jobs:
       - name: Test
         working-directory: chapter-13
         run: npm test
+
+      - name: Archive Serenity BDD reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          retention-days: 3
+          name: chapter-13-reports
+          path: |
+            chapter-13/target/site/serenity/**/*

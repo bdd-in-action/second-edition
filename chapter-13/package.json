@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf target",
     "start": "npm run start --prefix node_modules/@bdd-in-action/flying-high-app",
-    "test": "exit 0",
+    "test:update-serenity": "serenity-bdd update --ignoreSSL",
+    "test:acceptance": "wdio wdio.conf.ts",
+    "test:report": "serenity-bdd run",
+    "test": "failsafe clean test:update-serenity test:acceptance test:report",
     "ci": "start-server-and-test 3000"
   },
   "repository": {
@@ -38,6 +42,7 @@
   },
   "devDependencies": {
     "npm-failsafe": "^0.4.3",
+    "rimraf": "^3.0.2",
     "start-server-and-test": "1.14.0",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5",
