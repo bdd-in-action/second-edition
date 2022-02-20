@@ -28,5 +28,10 @@ jobs:
         with:
           working-directory: chapter-12/membership-api
 
-      - run: npm run build --if-present
-      - run: npm test
+      - name: Build
+        working-directory: chapter-12/membership-api
+        run: npm run build --if-present
+
+      - name: Test
+        working-directory: chapter-12/membership-api
+        run: npm test
