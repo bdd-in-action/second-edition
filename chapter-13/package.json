@@ -22,8 +22,10 @@
     "url": "https://github.com/bdd-in-action/second-edition/issues"
   },
   "homepage": "https://github.com/bdd-in-action/second-edition#readme",
-  "devDependencies": {
-    "start-server-and-test": "1.14.0",
+  "dependencies": {
     "@bdd-in-action/flying-high-app": "file:../flying-high-app"
+  },
+  "devDependencies": {
+    "start-server-and-test": "1.14.0"
   }
 }
