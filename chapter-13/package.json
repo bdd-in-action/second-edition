@@ -1,0 +1,23 @@
+{
+  "name": "@bdd-in-action/chapter-13",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdd-in-action/second-edition.git"
+  },
+  "author": {
+    "name": "Jan Molak",
+    "email": "jan.molak@serenity.io",
+    "url": "https://janmolak.com"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bdd-in-action/second-edition/issues"
+  },
+  "homepage": "https://github.com/bdd-in-action/second-edition#readme"
+}
