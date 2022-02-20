@@ -2,9 +2,10 @@ name: Chapter 12 Membership API CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
+    types: [ opened, synchronize ]
 
 jobs:
   build:
