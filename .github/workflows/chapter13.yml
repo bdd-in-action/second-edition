@@ -23,7 +23,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Node Modules
+      - name: Install Node Modules (Flying High App)
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: flying-high-app
+
+      - name: Install Node Modules (Chapter 13)
         uses: bahmutov/npm-install@v1
         with:
           working-directory: chapter-13
