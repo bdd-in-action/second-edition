@@ -1,14 +1,20 @@
-import { Given, When, Then, DataTable } from '@cucumber/cucumber';
+import { DataTable, Given, Then, When } from '@cucumber/cucumber';
 import { Actor, Log } from '@serenity-js/core';
+import { Navigate } from '@serenity-js/web';
+import { RegisterMembership } from '../../src/flying-high-app/registration/RegisterMembership';
+import { LogIn } from '../../src/flying-high-app/authentication';
 
 Given('{actor} does not have a Frequent Flyer account', (actor: Actor) =>
     actor.attemptsTo(
-        Log.the('TODO: load details, make actor remember them')
+        // todo - https://github.com/serenity-js/serenity-js/issues/817
+        //  LoadNotes.from(travellers[actor.name])
     ));
 
 When('{pronoun} registers as a Frequent Flyer member', (actor: Actor) =>
     actor.attemptsTo(
-        Log.the('TODO: enter the details into the form')
+        // RegisterAnAccount()
+        Navigate.to('/register'),
+        RegisterMembership(),
     ));
 
 Given('{pronoun} has searched for one-way flights from London to New York in Economy', function (actor: Actor) {
@@ -33,7 +39,7 @@ Then('the booking should appear in {pronoun} My Booking section', function (acto
 
 Then('{actor} should be able to log on to the Frequent Flyer application', (actor: Actor) =>
     actor.attemptsTo(
-        Log.the('TODO: enter username & password')
+        LogIn(),
     ));
 
 When('{pronoun} wants to register a new Frequent Flyer account', (actor: Actor) =>

@@ -18,7 +18,7 @@ export const travellers: { [name: string]: Traveller } = {
     "title": "Mr",
     "address": "10 Partridge Street, Dandenong",
     "country": "Australia",
-    "seatPreference": "Aisle"
+    "seatPreference": "aisle"
   },
   "Candy": {
     "firstName": "Candy",
@@ -28,6 +28,6 @@ export const travellers: { [name: string]: Traveller } = {
     "title": "Mrs",
     "address": "10 Partridge Street, Dandenong",
     "country": "Australia",
-    "seatPreference": "Window"
+    "seatPreference": "window"
   }
 }

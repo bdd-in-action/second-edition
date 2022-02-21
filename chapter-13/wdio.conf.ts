@@ -3,12 +3,16 @@ import { ArtifactArchiver } from '@serenity-js/core';
 import { SerenityBDDReporter } from '@serenity-js/serenity-bdd';
 import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 import { resolve } from 'path';
+import { Actors } from './src/Actors';
 
 export const config: WebdriverIOConfig = {
+
+    baseUrl: 'http://localhost:3000',
 
     framework: '@serenity-js/webdriverio',
 
     serenity: {
+        actors: new Actors(),
         runner: 'cucumber',
         crew: [
             ConsoleReporter.forDarkTerminals(),
@@ -65,7 +69,7 @@ export const config: WebdriverIOConfig = {
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                '--headless',
+                // '--headless',
                 '--disable-infobars',
                 '--no-sandbox',
                 '--disable-gpu',

@@ -35,7 +35,7 @@ jobs:
 
       - name: Test
         working-directory: chapter-13
-        run: npm test
+        run: npm run ci
 
       - name: Archive Serenity BDD reports
         uses: actions/upload-artifact@v2

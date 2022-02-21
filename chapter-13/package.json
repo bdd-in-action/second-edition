@@ -31,6 +31,7 @@
     "@serenity-js/console-reporter": "^3.0.0-rc",
     "@serenity-js/core": "^3.0.0-rc",
     "@serenity-js/cucumber": "^3.0.0-rc",
+    "@serenity-js/web": "^3.0.0-rc",
     "@serenity-js/webdriverio": "^3.0.0-rc",
     "@serenity-js/serenity-bdd": "^3.0.0-rc",
     "@wdio/cli": "^7.16.15",
