@@ -2,8 +2,8 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {FrequentFlyerController} from './frequent-flyer.controller';
 import {FrequentFlyerService} from './frequent-flyer.service';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
-import {AccountStatus} from "./entities/accountStatus";
 import {TokenService} from "../token/token.service";
+import {EventBusService} from "../events/eventbus.service";
 
 describe('FrequentFlyerController', () => {
     let controller: FrequentFlyerController;
@@ -12,7 +12,7 @@ describe('FrequentFlyerController', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [FrequentFlyerController],
-            providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService],
+            providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService, EventBusService],
         }).compile();
 
         controller = module.get<FrequentFlyerController>(FrequentFlyerController);
@@ -55,7 +55,7 @@ describe('FrequentFlyerController', () => {
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
-            expect(frequentFlyerAccount.accountStatus).toEqual(AccountStatus.Pending)
+            expect(frequentFlyerAccount.isActivated).toBeFalsy()
         });
 
         it('should return an error if the email is already used ', () => {
@@ -93,7 +93,7 @@ describe('FrequentFlyerController', () => {
             controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'some@email.com', token: token})
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
-            expect(frequentFlyerAccount.accountStatus).toEqual(AccountStatus.Active)
+            expect(frequentFlyerAccount.isActivated)
         })
 
         it('should return an error if the token is incorrect ', () => {

@@ -2,7 +2,6 @@ import * as request from 'supertest';
 import {Test} from '@nestjs/testing';
 import {INestApplication, ValidationPipe} from '@nestjs/common';
 import {AppModule} from "./app.module";
-import {AccountStatus} from "./frequent-flyer/entities/accountStatus";
 
 describe('Frequent Flyer Registration', () => {
     let app: INestApplication;
@@ -48,7 +47,7 @@ describe('Frequent Flyer Registration', () => {
                 .send(aFrequentFlyer())
                 .expect(201);
 
-            expect(response.body.accountStatus).toEqual(AccountStatus.Pending);
+            expect(response.body.isActivated).toBeFalsy()
         });
 
         it(`should return an error if mandatory fields are missing`, async () => {
@@ -73,6 +72,24 @@ describe('Frequent Flyer Registration', () => {
 
             // THEN
             expect(token).toBeDefined()
+        });
+
+        it(`should publish a NewFrequentFlyer event when a new account is created`, async () => {
+            // GIVEN
+            const response = await request(app.getHttpServer())
+                .post('/api/frequent-flyer')
+                .send(aFrequentFlyer())
+                .expect(201);
+            const frequentFlyerNumber = response.body.frequentFlyerNumber;
+
+            // WHEN
+            const newFrequentFlyerEvent = await request(app.getHttpServer())
+                .get('/api/events/NewFrequentFlyerEvent?field=frequentFlyerNumber&value=' + frequentFlyerNumber)
+                .expect(200);
+
+            // THEN
+            expect(newFrequentFlyerEvent.body.data.emailToken).toBeDefined();
+
         });
 
         it(`should be able to activate a new account using the token`, async () => {
@@ -101,7 +118,7 @@ describe('Frequent Flyer Registration', () => {
                 .expect(200);
 
             const loadedFlyer = loadedFlyerResponse.body;
-            expect(loadedFlyer.accountStatus).toEqual(AccountStatus.Active)
+            expect(loadedFlyer.isActivated).toBeTruthy();
         });
 
     })

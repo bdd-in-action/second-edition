@@ -1,17 +1,18 @@
 import {Injectable} from '@nestjs/common';
 import {CreateFrequentFlyerDto} from './dto/create-frequent-flyer.dto';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
-import {AccountStatus} from "./entities/accountStatus";
 import {TokenService} from "../token/token.service";
 import {ValidateEmailDto} from "./dto/validate-email.dto";
-import {MembershipTier} from "./entities/MembershipTier";
 import {FrequentFlyer} from "./entities/frequent-flyer.entity";
+import {EventBusService} from "../events/eventbus.service";
+import {NewFrequentFlyerEvent} from "../events/new-frequent-flyer-event";
 
 @Injectable()
 export class FrequentFlyerService {
   constructor(
       private readonly frequentFlyerRepository: FrequentFlyerRepository,
-      private readonly tokenService : TokenService
+      private readonly tokenService : TokenService,
+      private readonly eventBusService : EventBusService
   ) {}
 
   create(frequentFlyerDetails: CreateFrequentFlyerDto) {
@@ -23,7 +24,16 @@ export class FrequentFlyerService {
     this.frequentFlyerRepository.save(frequentFlyer)
 
     // Generate a token for this member
-    this.tokenService.newToken(frequentFlyerDetails.email, nextFrequentFlyerNumber)
+    const token = this.tokenService.newToken(frequentFlyerDetails.email, nextFrequentFlyerNumber)
+
+    // Publish a NewFrequentFlyer event
+    this.eventBusService.publish(new NewFrequentFlyerEvent({
+      frequentFlyerNumber: frequentFlyer.frequentFlyerNumber,
+      firstName: frequentFlyer.firstName,
+      lastName: frequentFlyer.lastName,
+      email: frequentFlyer.email,
+      emailToken: token
+    }));
 
     return frequentFlyer;
   }
@@ -47,7 +57,7 @@ export class FrequentFlyerService {
   confirmEmail(validateEmailDto: ValidateEmailDto) {
     if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.frequentFlyerNumber, validateEmailDto.token)) {
       let frequentFlyer = this.frequentFlyerRepository.findByEmail(validateEmailDto.email);
-      frequentFlyer.accountStatus = AccountStatus.Active
+      frequentFlyer.isActivated = true;
       return true;
     } else {
       return false;

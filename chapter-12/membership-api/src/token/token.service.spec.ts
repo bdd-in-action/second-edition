@@ -22,6 +22,19 @@ describe('TokenService', () => {
       expect(token).toBeDefined();
     })
 
+    it('should find a token with a given frequent flyer number', () => {
+      const token = service.newToken('some@email.com',12345678)
+      const storedToken = service.findByFrequentFlyerNumber(12345678)
+      expect(token).toEqual(storedToken);
+    })
+
+    it('should not find a token if the frequent flyer number is invalid', () => {
+      service.newToken('some@email.com',12345678)
+      const storedToken = service.findByFrequentFlyerNumber(99999999)
+      expect(storedToken).toBeUndefined()
+    })
+
+
     it('should allow the token validated for the corresponding email', () => {
       const token = service.newToken('some@email.com',12345678)
       const validated = service.validate('some@email.com', 12345678, token)
@@ -49,7 +62,7 @@ describe('TokenService', () => {
 
     it('should not allow a token to be validated after it has expired', () => {
       const token = service.newToken('some@email.com',12345678)
-      service.tokens.get(12345678).created = new Date("2001-01-01");
+      service.tokens[12345678].created = new Date("2001-01-01");
 
       const validated = service.validate('some@email.com', 12345678, token)
       expect(validated).toBeFalsy()

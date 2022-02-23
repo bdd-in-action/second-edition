@@ -2,12 +2,13 @@ export class Token {
     created: Date = new Date();
     email: string;
     frequentFlyerNumber: number;
+    hash: string;
     spent: boolean = false;
 
-    hash = function() {
-        return require('crypto')
+    constructor() {
+        this.hash = require('crypto')
             .createHash('sha256')
-            .update(JSON.stringify(this))
+            .update(`{"email": "$email", "frequentFlyerNumber":"$frequentFlyerNumber", "created":"$created"`)
             .digest('hex');
     }
 

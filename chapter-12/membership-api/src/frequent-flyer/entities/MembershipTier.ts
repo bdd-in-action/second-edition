@@ -1,6 +1,6 @@
 export enum MembershipTier {
-    Standard,
-    Bronze,
-    Siler,
-    Gold
+    Standard = "STANDARD",
+    Bronze = "BRONZE",
+    Siler = "SILVER",
+    Gold = "GOLD"
 }

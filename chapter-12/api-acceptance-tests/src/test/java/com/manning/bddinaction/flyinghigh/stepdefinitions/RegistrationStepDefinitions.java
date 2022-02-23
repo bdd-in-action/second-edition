@@ -1,44 +1,74 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
-import com.manning.bddinaction.flyinghigh.domain.persona.Traveller;
-import com.manning.bddinaction.flyinghigh.domain.persona.TravellerPersona;
+import com.manning.bddinaction.flyinghigh.apis.MembershipAPI;
+import com.manning.bddinaction.flyinghigh.domain.persona.MembershipTier;
+import com.manning.bddinaction.flyinghigh.domain.persona.TravellerAccountStatus;
+import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.Actor;
+import net.thucydides.core.annotations.Steps;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RegistrationStepDefinitions {
+
+    @ParameterType(".*")
+    public MembershipTier tier(String tierLevel) {
+        return MembershipTier.valueOf(tierLevel.toUpperCase());
+    }
+
+    @Steps
+    MembershipAPI membershipAPI;
 
     /**
      * Here we store all the information about the new Frequent Flyer member
      */
-    Traveller newMember;
+    TravellerRegistration newMember;
 
-    @ParameterType(".*")
-    public Traveller traveller(String travellerName) {
-        return TravellerPersona.withName(travellerName);
-    }
+    /**
+     * The Frequent Flyer number attributed to the new member when they register
+     */
+    String newFrequentFlyerNumber;
+    String emailToken;
 
     @Given("{traveller} does not have a Frequent Flyer account")
-    public void user_does_not_have_a_frequent_flyer_account(Traveller traveller) {
+    public void user_does_not_have_a_frequent_flyer_account(TravellerRegistration traveller) {
         newMember = traveller.withAUniqueEmailAddress();
     }
 
-    @When("she registers for a new Frequent Flyer account with valid details")
-    public void she_registers_for_a_new_frequent_flyer_account_with_valid_details() {
-        // registration via the API
+    @When("he/she registers for a new Frequent Flyer account")
+    public void registers_for_a_new_frequent_flyer_account() {
+        newFrequentFlyerNumber = membershipAPI.register(newMember);
+        emailToken = membershipAPI.getEmailToken(newFrequentFlyerNumber);
     }
 
-    @And("she confirms her email address")
+    @And("he/she confirms her email address")
     public void she_confirms_her_email_address() {
-        // confirm email token
+        membershipAPI.confirmEmail(newFrequentFlyerNumber, newMember.email(), emailToken);
     }
 
-    @Then("she should have a new account with {int} points")
-    public void she_should_have_a_new_account_with_points(Integer int1) {
-        // Get account status and details
+    @Then("he/she should have a new {tier} tier account with {int} points")
+    public void she_should_have_a_new_account_with_points(MembershipTier tier, Integer points) {
+        TravellerAccountStatus accountStatus = membershipAPI.findMemberByFrequentFlyerNumber(newFrequentFlyerNumber);
+
+        assertThat(accountStatus.statusPoints()).isEqualTo(points);
+        assertThat(accountStatus.tier()).isEqualTo(tier);
     }
 
+    @Then("he/she should be sent an email with an email validation link")
+    public void sheShouldBeSentAnEmailWithAnEmailValidationLink() {
+
+    }
+
+    @When("{traveller} registers for a new Frequent Flyer account")
+    public void registersForANewFrequentFlyerAccount(TravellerRegistration traveller) {
+
+    }
+
+    @And("his/her account should be pending activation")
+    public void herAccountShouldBePendingActivation() {
+    }
 }

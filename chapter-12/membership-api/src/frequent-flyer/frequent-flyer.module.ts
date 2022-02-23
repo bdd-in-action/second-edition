@@ -4,9 +4,11 @@ import { FrequentFlyerController } from './frequent-flyer.controller';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
 import {TokenService} from "../token/token.service";
 import {TokenController} from "../token/token.controller";
+import {EventBusController} from "../events/eventbus.controller";
+import {EventBusService} from "../events/eventbus.service";
 
 @Module({
-  controllers: [FrequentFlyerController, TokenController],
-  providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService]
+  controllers: [FrequentFlyerController, TokenController, EventBusController],
+  providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService, EventBusService]
 })
 export class FrequentFlyerModule {}

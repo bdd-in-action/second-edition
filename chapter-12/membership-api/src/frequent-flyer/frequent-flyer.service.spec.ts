@@ -3,13 +3,14 @@ import {FrequentFlyerService} from './frequent-flyer.service';
 import {FrequentFlyerRepository} from "./frequent-flyer.repository";
 import {TokenService} from "../token/token.service";
 import {MembershipTier} from "./entities/MembershipTier";
+import {EventBusService} from "../events/eventbus.service";
 
 describe('FrequentFlyerService', () => {
     let service: FrequentFlyerService;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService],
+            providers: [FrequentFlyerService, FrequentFlyerRepository, TokenService, EventBusService],
         }).compile();
 
         service = module.get<FrequentFlyerService>(FrequentFlyerService);
