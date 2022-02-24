@@ -1,14 +1,13 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
+import com.manning.bddinaction.flyinghigh.apis.EventBusAPI;
 import com.manning.bddinaction.flyinghigh.apis.MembershipAPI;
 import com.manning.bddinaction.flyinghigh.domain.persona.MembershipTier;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerAccountStatus;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
+import io.cucumber.java.After;
 import io.cucumber.java.ParameterType;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import net.thucydides.core.annotations.Steps;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,8 +19,16 @@ public class RegistrationStepDefinitions {
         return MembershipTier.valueOf(tierLevel.toUpperCase());
     }
 
+    @ParameterType("activated|pending activation")
+    public boolean activationStatus(String activationStatus) {
+        return activationStatus.equalsIgnoreCase("activated");
+    }
+
     @Steps
     MembershipAPI membershipAPI;
+
+    @Steps
+    EventBusAPI eventBusAPI;
 
     /**
      * Here we store all the information about the new Frequent Flyer member
@@ -38,6 +45,15 @@ public class RegistrationStepDefinitions {
     public void user_does_not_have_a_frequent_flyer_account(TravellerRegistration traveller) {
         newMember = traveller.withAUniqueEmailAddress();
     }
+
+    @Given("{traveller} has registered for a new Frequent Flyer account")
+    public void traveller_has_registered(TravellerRegistration traveller) {
+        newMember = traveller.withAUniqueEmailAddress();
+        registers_for_a_new_frequent_flyer_account();
+    }
+
+    @But("he/she has not yet confirmed her email")
+    public void emailNotConfirmed() {}
 
     @When("he/she registers for a new Frequent Flyer account")
     public void registers_for_a_new_frequent_flyer_account() {
@@ -60,15 +76,18 @@ public class RegistrationStepDefinitions {
 
     @Then("he/she should be sent an email with an email validation link")
     public void sheShouldBeSentAnEmailWithAnEmailValidationLink() {
-
+        assertThat(eventBusAPI.newFrequentFlyerEventWasPublishedFor(newFrequentFlyerNumber)).isTrue();
     }
 
-    @When("{traveller} registers for a new Frequent Flyer account")
-    public void registersForANewFrequentFlyerAccount(TravellerRegistration traveller) {
-
+    @And("his/her account should be {activationStatus}")
+    public void herAccountShouldBe(boolean isActivated) {
+        assertThat(membershipAPI.isActivated(newFrequentFlyerNumber)).isEqualTo(isActivated);
     }
 
-    @And("his/her account should be pending activation")
-    public void herAccountShouldBePendingActivation() {
+    @After
+    public void deleteFrequentFlyerAccount() {
+        if (newFrequentFlyerNumber != null) {
+            membershipAPI.deleteFrequentFlyer(newFrequentFlyerNumber);
+        }
     }
 }

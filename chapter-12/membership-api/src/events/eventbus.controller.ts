@@ -16,9 +16,9 @@ export class EventBusController {
     @Get('/:eventtype')
     @ApiOperation({summary: 'View the event log'})
     findEvent(@Param('eventtype') eventtype: string,
-              @Query('field') fieldName: string,
-              @Query('value') fieldValue: any) {
-        const event = this. eventBusService.findEventMatching(eventtype, fieldName, fieldValue);
+              @Query('field') field: string,
+              @Query('value') value: any) {
+        const event = this. eventBusService.findEventMatching(eventtype, field, value);
         if (event) {
             return event;
         }

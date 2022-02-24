@@ -19,8 +19,8 @@ export class TokenController {
         return token;
     }
 
-    // @Get('/')
-    // findAll() {
-    //     return this.tokenService.findAll();
-    // }
+    @Get('/')
+    findAll() {
+        return this.tokenService.findAll();
+    }
 }

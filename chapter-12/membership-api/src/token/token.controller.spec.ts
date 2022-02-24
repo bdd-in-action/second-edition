@@ -30,4 +30,11 @@ describe('TokenController', () => {
     expect(() => controller.findByID("10000000")).toThrow('Unknown frequent flyer')
   })
 
+
+  it('should list all the current tokens', () => {
+    service.newToken("some@email.com", 12345678);
+
+    expect(controller.findAll()[12345678]).toBeDefined()
+  })
+
 });

@@ -15,8 +15,10 @@ export class FrequentFlyerService {
       private readonly eventBusService : EventBusService
   ) {}
 
+  frequentFlyerNumberCounter = 1000000;
+
   create(frequentFlyerDetails: CreateFrequentFlyerDto) {
-    const nextFrequentFlyerNumber = this.frequentFlyerRepository.findLargestFrequentFlyerNumber(1000000) + 1
+    const nextFrequentFlyerNumber = this.frequentFlyerNumberCounter++;
     const frequentFlyer = Object.assign(new FrequentFlyer(), frequentFlyerDetails)
     frequentFlyer.frequentFlyerNumber = nextFrequentFlyerNumber;
 

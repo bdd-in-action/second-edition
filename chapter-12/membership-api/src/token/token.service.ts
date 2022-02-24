@@ -35,4 +35,8 @@ export class TokenService {
     findByFrequentFlyerNumber(frequentFlyerNumber: number) {
         return this.tokens[frequentFlyerNumber]?.hash;
     }
+
+    findAll() {
+        return this.tokens;
+    }
 }

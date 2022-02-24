@@ -56,8 +56,20 @@ public class MembershipAPI {
         String number = response.jsonPath().getString("frequentFlyerNumber");
         int statusPoints = response.jsonPath().getInt("statusPoints");
         boolean isActivated = response.jsonPath().getBoolean("isActivated");
-        MembershipTier tier  = MembershipTier.valueOf(response.jsonPath().getString("tier"));
+        MembershipTier tier = MembershipTier.valueOf(response.jsonPath().getString("tier"));
 
         return new TravellerAccountStatus(number, statusPoints, tier, isActivated);
+    }
+
+    public boolean isActivated(String frequentFlyerNumber) {
+        return RestAssured.given().pathParam("id", frequentFlyerNumber)
+                .get("http://localhost:3000/api/frequent-flyer/{id}")
+                .jsonPath()
+                .getBoolean("isActivated");
+    }
+
+    public void deleteFrequentFlyer(String frequentFlyerNumber) {
+        RestAssured.given().pathParam("id", frequentFlyerNumber)
+                   .delete("http://localhost:3000/api/frequent-flyer/{id}").then().statusCode(200);
     }
 }

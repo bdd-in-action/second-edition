@@ -79,7 +79,6 @@ describe('FrequentFlyerController', () => {
             const findFrequentFlyerWithIncorrectNumber = () => controller.findByFrequentFlyerNumber(9999999);
             expect(findFrequentFlyerWithIncorrectNumber).toThrow("No matching Frequent Flyer found with this number")
         })
-
     });
 
     describe('When confirming the email address', () => {
@@ -134,5 +133,12 @@ describe('FrequentFlyerController', () => {
             expect(controller.findAll()).toHaveLength(1)
         })
 
+        it('should not reuse account numbers', () => {
+            const flyer1 = controller.create(newFrequentFlyer);
+            controller.remove(flyer1.frequentFlyerNumber)
+
+            const flyer2 = controller.create(anotherFrequentFlyer);
+            expect(flyer2.frequentFlyerNumber).toBeGreaterThan(flyer1.frequentFlyerNumber)
+        })
     });
 });
