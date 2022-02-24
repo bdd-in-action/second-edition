@@ -49,7 +49,7 @@ describe('EventBusService', () => {
             service.publish(event1)
             service.publish(event2)
 
-            const locatedEvent = service.findEventMatching("NewFrequentFlyerEvent", "frequentFlyerNumber", 1)
+            const locatedEvent = service.findEventMatching("NewFrequentFlyerEvent", "frequentFlyerNumber", "1")
 
             expect(locatedEvent).toEqual(event1)
         })

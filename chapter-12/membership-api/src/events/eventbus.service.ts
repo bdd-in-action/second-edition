@@ -9,7 +9,7 @@ export class EventBusService {
         this.eventLog.push(event)
     }
 
-    findEventMatching(eventType: string, fieldname: string, value: any) {
+    findEventMatching(eventType: string, fieldname: string, value: string) {
         return this.eventLog.find(event => event.type == eventType && event.data[fieldname] == value);
     }
 

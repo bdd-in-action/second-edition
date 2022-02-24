@@ -50,13 +50,14 @@ describe('EventBusController', () => {
     service.publish(event1);
     service.publish(event2);
 
-    const event = controller.findEvent("NewFrequentFlyerEvent", "frequentFlyerNumber", 2)
+    const event = controller.findEvent("NewFrequentFlyerEvent", "frequentFlyerNumber", "2")
 
     expect(event.data.firstName).toEqual("Trevor")
   })
 
   it('should produce an error if no such event exists', () => {
-    const findEventWithIncorrectNumber = () => controller.findEvent("NewFrequentFlyerEvent", "frequentFlyerNumber", 999999999);
+    const findEventWithIncorrectNumber = () => controller.findEvent("NewFrequentFlyerEvent", "frequentFlyerNumber", "999999999");
+
     expect(findEventWithIncorrectNumber).toThrow("No matching event found")
   })
 
