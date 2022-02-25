@@ -1,5 +1,8 @@
 # BDD In Action Chapter 12 - Frequent Flyer Membership API 
 
+This application is a set of microservices that we will use to explore writing and automating BDD scenarios that involve microservice architectures.
+It is a [NestJS](https://docs.nestjs.com/) application so you will need to have installed [NodeJS](https://nodejs.org/en/) on your machine to run it.
+
 ## Installation
 
 ```bash
@@ -8,40 +11,11 @@ $ npm install
 
 ## Running the app
 
+You can run the application with the following command:
 ```bash
-# development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## API Documentation
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+When the applicaiton is running, you can read the [Swagger documentation here](http://localhost:3000/api). 

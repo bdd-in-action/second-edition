@@ -17,13 +17,13 @@ describe('Frequent Flyer Registration', () => {
     });
 
     const aFrequentFlyerWithMissingInfo = {
-        email: 'ace@dr.com',
-        password: 'secret',
-        firstName: 'Ace',
-        lastName: '',
-        title: 'Ms',
-        address: 'London',
-        country: 'UK'
+        "email": "ace@dr.com",
+        "password": 'secret',
+        "firstName": 'Ace',
+        "lastName": "",
+        "title": "Ms",
+        "address": "London",
+        "country": "UK"
     }
 
     const aFrequentFlyer = function() {
@@ -76,9 +76,10 @@ describe('Frequent Flyer Registration', () => {
 
         it(`should publish a NewFrequentFlyer event when a new account is created`, async () => {
             // GIVEN
+            const flyer = aFrequentFlyer();
             const response = await request(app.getHttpServer())
                 .post('/api/frequent-flyer')
-                .send(aFrequentFlyer())
+                .send(flyer)
                 .expect(201);
             const frequentFlyerNumber = response.body.frequentFlyerNumber;
 
@@ -89,6 +90,13 @@ describe('Frequent Flyer Registration', () => {
 
             // THEN
             expect(newFrequentFlyerEvent.body.data.emailToken).toBeDefined();
+
+            // AND THE USER SHOULD NOT BE ABLE TO LOGIN WITH THIS ACCOUNT
+
+            await request(app.getHttpServer())
+                .post(`/api/users/authenticate`)
+                .send({email: flyer.email, password: flyer.password})
+                .expect(401);
 
         });
 
@@ -119,8 +127,15 @@ describe('Frequent Flyer Registration', () => {
 
             const loadedFlyer = loadedFlyerResponse.body;
             expect(loadedFlyer.isActivated).toBeTruthy();
-        });
 
+            // AND
+            const loginResponse = await request(app.getHttpServer())
+                .post(`/api/users/authenticate`)
+                .send({email: flyer.email, password: flyer.password})
+                .expect(201);
+            expect(loginResponse).toBeDefined()
+
+        });
     })
 
     afterAll(async () => {

@@ -22,4 +22,8 @@ public record TravellerRegistration(
                 this.email.replace("@", "" + new Random().nextInt() + "@"),
                 password, address, country);
     }
+
+    public TravellerRegistration withEmail(String email) {
+        return new TravellerRegistration(firstName, lastName, title, email, password, address, country);
+    }
 }
