@@ -1,0 +1,53 @@
+{
+  "name": "@bdd-in-action/chapter-13",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf target",
+    "start": "npm run start --prefix node_modules/@bdd-in-action/flying-high-app",
+    "test:update-serenity": "serenity-bdd update --ignoreSSL",
+    "test:acceptance": "wdio wdio.conf.ts",
+    "test:report": "serenity-bdd run",
+    "test": "failsafe clean test:update-serenity test:acceptance test:report",
+    "ci": "start-server-and-test 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdd-in-action/second-edition.git"
+  },
+  "author": {
+    "name": "Jan Molak",
+    "email": "jan.molak@serenity.io",
+    "url": "https://janmolak.com"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bdd-in-action/second-edition/issues"
+  },
+  "homepage": "https://github.com/bdd-in-action/second-edition#readme",
+  "dependencies": {
+    "@cucumber/cucumber": "^7.3.2",
+    "@serenity-js/console-reporter": "^3.0.0-rc",
+    "@serenity-js/core": "^3.0.0-rc",
+    "@serenity-js/cucumber": "^3.0.0-rc",
+    "@serenity-js/web": "^3.0.0-rc",
+    "@serenity-js/webdriverio": "^3.0.0-rc",
+    "@serenity-js/serenity-bdd": "^3.0.0-rc",
+    "@wdio/cli": "^7.16.15",
+    "@wdio/local-runner": "^7.16.15",
+    "@wdio/spec-reporter": "^7.16.14",
+    "@wdio/types": "^7.16.14",
+    "@wdio/reporter": "^7.16.14",
+    "webdriverio": "^7.16.15"
+  },
+  "devDependencies": {
+    "npm-failsafe": "^0.4.3",
+    "rimraf": "^3.0.2",
+    "start-server-and-test": "1.14.0",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5",
+    "chromedriver": "^98.0.1",
+    "@bdd-in-action/flying-high-app": "file:../flying-high-app"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "flying-high-app",
+  "name": "@bdd-in-action/flying-high-app",
   "version": "0.1.0",
   "scripts": {
     "start": "npm start --prefix server",
