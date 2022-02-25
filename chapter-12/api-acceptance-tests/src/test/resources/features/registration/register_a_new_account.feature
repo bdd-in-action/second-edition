@@ -26,8 +26,8 @@ Feature: Register for a Frequent Flyer account
 
     Example: Tracy cannot access her account before having activated her email
       Given Tracy has registered for a new Frequent Flyer account
-      When she has not yet confirmed her email
-      Then she should be invited to first confirm her email address
+      And she has not yet confirmed her email
+      Then she should be invited to confirm her email address when she attempts to login
 
     Example: Tracy confirms her email
       Given Tracy has registered for a new Frequent Flyer account
@@ -42,24 +42,23 @@ Feature: Register for a Frequent Flyer account
     Scenario Outline: Emails must be correctly formed and non-disposable
       Given Tracy does not have a Frequent Flyer account
       When she registers with an email of <email>
-      Then the email address should be: <Accepted/Rejected>
+      Then the email address should be <Accepted/Rejected> with the message "<Reason>"
 
       Examples: Correctly-formed emails should be accepted
-        | email                | Accepted/Rejected |
-        | tracy@example.com    | Accepted          |
-        | sarah-jane@smith.com | Accepted          |
+        | email                  | Accepted/Rejected | Reason |
+        | sarah@example.org      | Accepted          |        |
+        | sarah-jane@example.org | Accepted          |        |
 
       Examples: Invalid emails should be rejected
-        | email                       | Accepted/Rejected |
-        | example.com                 | Rejected          |
-        | #@%^%#$@#$@#.com            | Rejected          |
-        | email@example..com          | Rejected          |
-        | email@inexistant-domain.com | Rejected          |
+        | email                       | Accepted/Rejected | Reason                 |
+        | example.com                 | Rejected          | email must be an email |
+        | #@%^%#$@#$@#.com            | Rejected          | email must be an email |
+        | email@example..com          | Rejected          | email must be an email |
+        | email@inexistant-domain.com | Rejected          | Invalid email address  |
 
       Examples: Disposable emails are not allowed
-        | email                | Accepted/Rejected |
-        | lortufefya@vusra.com | Rejected          |
-        | tracy@example.com    | Rejected          |
+        | email                | Accepted/Rejected | Reason                |
+        | lortufefya@vusra.com | Rejected          | Invalid email address |
 
 
 

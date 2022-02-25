@@ -21,7 +21,7 @@ describe('FrequentFlyerService', () => {
     });
 
     const someFrequentFlyer = {
-        email: 'some@email.com',
+        email: 'joe@example.org',
         password: 'secret',
         firstName: 'Joe',
         lastName: 'Smith',
@@ -31,7 +31,17 @@ describe('FrequentFlyerService', () => {
     }
 
     const someOtherFrequentFlyer = {
-        email: 'someother@email.com',
+        email: 'joesmith@example.org',
+        password: 'secret',
+        firstName: 'Joe',
+        lastName: 'Smith',
+        title: 'Mr',
+        address: 'Travelville',
+        country: 'USA'
+    }
+
+    const frequentFlyerWithFakeEmail = {
+        email: 'joe@doesnotexist.com',
         password: 'secret',
         firstName: 'Joe',
         lastName: 'Smith',

@@ -25,11 +25,6 @@ public class ParameterDefinitions {
         return TravellerPersona.withName(travellerName);
     }
 
-    @ParameterType("(Accepted|Rejected)")
-    public boolean acceptedOrRejected(String value) {
-        return value.equalsIgnoreCase("Accepted");
-    }
-
     @Before
     public void setTheStage() {
         OnStage.setTheStage(new OnlineCast());

@@ -1,9 +1,6 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
-import com.manning.bddinaction.flyinghigh.apis.AuthenticationAPI;
-import com.manning.bddinaction.flyinghigh.apis.AuthenticationException;
-import com.manning.bddinaction.flyinghigh.apis.EventBusAPI;
-import com.manning.bddinaction.flyinghigh.apis.MembershipAPI;
+import com.manning.bddinaction.flyinghigh.apis.*;
 import com.manning.bddinaction.flyinghigh.domain.AuthenticatedUser;
 import com.manning.bddinaction.flyinghigh.domain.persona.MembershipTier;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerAccountStatus;
@@ -28,14 +25,9 @@ public class RegistrationStepDefinitions {
         return activationStatus.equalsIgnoreCase("activated");
     }
 
-    @Steps
-    MembershipAPI membershipAPI;
-
-    @Steps
-    EventBusAPI eventBusAPI;
-
-    @Steps
-    AuthenticationAPI authenticationAPI;
+    MembershipAPI membershipAPI = new MembershipAPI();
+    EventBusAPI eventBusAPI = new EventBusAPI();
+    AuthenticationAPI authenticationAPI = new AuthenticationAPI();
 
     /**
      * Here we store all the information about the new Frequent Flyer member
@@ -95,9 +87,7 @@ public class RegistrationStepDefinitions {
 
     @Then("he/she should not be able to log in")
     public void shouldNotBeAbleToLogIn() {
-        assertThatThrownBy(
-                () -> authenticationAPI.authenticate(newMember.email(), newMember.password())
-        ).isInstanceOf(AuthenticationException.class);
+        assertThatThrownBy(() -> authenticationAPI.authenticate(newMember.email(), newMember.password())).isInstanceOf(AuthenticationException.class);
     }
 
     @Then("he/she should be able to log in")
@@ -108,21 +98,31 @@ public class RegistrationStepDefinitions {
         assertThat(authenticatedUser.jwtToken()).isNotEmpty();
     }
 
-    @Then("he/she should be invited to first confirm her email address")
+    @When("he/she attempts to login")
+    public void sheAttemptsToLogin() {
+    }
+
+    @Then("he/she should be invited to confirm her email address when she attempts to login")
     public void needsToConfirmEmailAddress() {
-        assertThatThrownBy(
-                () -> authenticationAPI.authenticate(newMember.email(), newMember.password())
-        ).hasMessageContaining("Please confirm your email address");
+        assertThatThrownBy(() -> authenticationAPI.authenticate(newMember.email(), newMember.password()))
+                .hasMessageContaining("Please confirm your email address");
     }
 
     @When("he/she registers with an email of {}")
     public void registersWithAnEmailOfEmail(String email) {
         newMember = newMember.withEmail(email);
-        membershipAPI.register(newMember);
     }
 
-    @Then("the email address should be: {acceptedOrRejected}")
-    public void theEmailAddressShouldBeAcceptedAccepted(boolean accepted) {
+    @Then("^the email address should be Accepted.*")
+    public void theEmailAddressShouldBeAccepted() {
+        newFrequentFlyerNumber = membershipAPI.register(newMember);
+        assertThat(newFrequentFlyerNumber).isNotEmpty();
+    }
+
+    @Then("^the email address should be Rejected with the message \"(.*)\"")
+    public void theEmailAddressShouldBeRejected(String reason) {
+        assertThatThrownBy(() -> membershipAPI.register(newMember))
+                .hasMessageContaining(reason);
     }
 
     @After

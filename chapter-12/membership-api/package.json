@@ -27,6 +27,8 @@
     "@nestjs/swagger": "^5.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "deep-email-validator": "^0.1.21",
+    "email-existence": "^0.1.6",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

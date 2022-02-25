@@ -24,7 +24,7 @@ describe('FrequentFlyerController', () => {
     });
 
     const newFrequentFlyer = {
-        email: 'some@email.com',
+        email: 'joe@example.org',
         password: 'secret',
         firstName: 'Joe',
         lastName: 'Smith',
@@ -34,7 +34,17 @@ describe('FrequentFlyerController', () => {
     }
 
     const anotherFrequentFlyer = {
-        email: 'another@email.com',
+        email: 'jane@example.org',
+        password: 'secret',
+        firstName: 'Jane',
+        lastName: 'Smith',
+        title: 'Mrs',
+        address: 'Travelville',
+        country: 'USA'
+    }
+
+    const frequentFlyerWithAnInvalidEmail = {
+        email: 'lortufefya@vusra.com',
         password: 'secret',
         firstName: 'Joe',
         lastName: 'Smith',
@@ -45,31 +55,41 @@ describe('FrequentFlyerController', () => {
 
     describe('When creating a new account', () => {
 
-        it('should generate a new Frequent Flyer number for each account', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('should generate a new Frequent Flyer number for each account', async () => {
+            const result = await controller.create(newFrequentFlyer);
             expect(result.frequentFlyerNumber).toBeDefined()
         })
 
-        it('new Frequent Flyer accounts should be Pending', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('new Frequent Flyer accounts should be Pending', async () => {
+            const result = await controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
             expect(frequentFlyerAccount.isActivated).toBeFalsy()
         });
 
-        it('should return an error if the email is already used ', () => {
-            controller.create(newFrequentFlyer);
+        it('should return an error if the email is invalid ', async () => {
+            // const createANewAccountWithAnExistingEmail = () => controller.create(frequentFlyerWithAnInvalidEmail);
+            // expect(await createANewAccountWithAnExistingEmail).toThrow('Invalid email address')
+            //
 
-            const createANewAccountWithAnExistingEmail = () => controller.create(newFrequentFlyer);
-            expect(createANewAccountWithAnExistingEmail).toThrow('Email already exists')
+            const result = controller.create(frequentFlyerWithAnInvalidEmail);
+            await expect(result).rejects.toThrow("Invalid email address");
         })
+
+        it('should return an error if the email is already used ',  async () => {
+            await controller.create(newFrequentFlyer);
+
+            const result = controller.create(newFrequentFlyer);
+            await expect(result).rejects.toThrow("Email already exists");
+        })
+
     });
 
     describe('When finding a frequent flyer using the frequent flyer number', () => {
 
-        it('should find a frequent flyer with a given number', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('should find a frequent flyer with a given number', async () => {
+            const result = await controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             expect(controller.findByFrequentFlyerNumber(frequentFlyerNumber)).toBeDefined()
@@ -83,20 +103,20 @@ describe('FrequentFlyerController', () => {
 
     describe('When confirming the email address', () => {
 
-        it('the account status should go to Active ', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('the account status should go to Active ', async () => {
+            const result = await controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const token = tokenService.findByFrequentFlyerNumber(frequentFlyerNumber);
 
-            controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'some@email.com', token: token})
+            controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'joe@example.org', token: token})
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
             expect(frequentFlyerAccount.isActivated)
         })
 
-        it('should return an error if the token is incorrect ', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('should return an error if the token is incorrect ', async () => {
+            const result = await controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const confirmWithWrongToken = () => controller.confirmEmail({
@@ -107,8 +127,8 @@ describe('FrequentFlyerController', () => {
             expect(confirmWithWrongToken).toThrow('Could not confirm this email with this token')
         })
 
-        it('should return an error if the email is incorrect ', () => {
-            const result = controller.create(newFrequentFlyer);
+        it('should return an error if the email is incorrect ', async () => {
+            const result = await controller.create(newFrequentFlyer);
             const frequentFlyerNumber = result.frequentFlyerNumber;
 
             const token = tokenService.findByFrequentFlyerNumber(frequentFlyerNumber);
@@ -124,20 +144,20 @@ describe('FrequentFlyerController', () => {
 
     describe('When deleting a frequent flyer account', () => {
 
-        it('should remove the frequent flyer from the list', () => {
-            const flyer1 = controller.create(newFrequentFlyer);
-            controller.create(anotherFrequentFlyer);
+        it('should remove the frequent flyer from the list', async () => {
+            const flyer1 = await controller.create(newFrequentFlyer);
+            await controller.create(anotherFrequentFlyer);
 
             controller.remove(flyer1.frequentFlyerNumber)
 
             expect(controller.findAll()).toHaveLength(1)
         })
 
-        it('should not reuse account numbers', () => {
-            const flyer1 = controller.create(newFrequentFlyer);
+        it('should not reuse account numbers', async () => {
+            const flyer1 = await controller.create(newFrequentFlyer);
             controller.remove(flyer1.frequentFlyerNumber)
 
-            const flyer2 = controller.create(anotherFrequentFlyer);
+            const flyer2 = await controller.create(anotherFrequentFlyer);
             expect(flyer2.frequentFlyerNumber).toBeGreaterThan(flyer1.frequentFlyerNumber)
         })
     });

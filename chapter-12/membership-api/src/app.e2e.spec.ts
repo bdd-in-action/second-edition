@@ -17,7 +17,7 @@ describe('Frequent Flyer Registration', () => {
     });
 
     const aFrequentFlyerWithMissingInfo = {
-        "email": "ace@dr.com",
+        "email": "ace@example.org",
         "password": 'secret',
         "firstName": 'Ace',
         "lastName": "",

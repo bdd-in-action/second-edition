@@ -7,6 +7,7 @@ import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 
@@ -14,17 +15,20 @@ public class MembershipAPI {
 
     EnvironmentVariables environmentVariables;
 
-    @Step("Registers a new Frequent Flyer {0}")
     /**
      * Register a new Frequent Flyer member, returning the new Frequent Flyer number
      */
     public String register(TravellerRegistration newMember) {
-        return RestAssured.given()
+        Response response = SerenityRest.given()
                 .contentType(ContentType.JSON)
                 .body(newMember)
-                .post("http://localhost:3000/api/frequent-flyer")
-                .jsonPath()
-                .getString("frequentFlyerNumber");
+                .post("http://localhost:3000/api/frequent-flyer");
+
+
+        if (response.statusCode() >= 400) {
+            throw new InvalidRegistrationException(response.jsonPath().getString("message"));
+        }
+        return response.jsonPath().getString("frequentFlyerNumber");
     }
 
     /**

@@ -19,7 +19,6 @@ public class AuthenticationAPI {
     /**
      * Attempt to login to the application via the authentication API
      */
-    @Step("Login as {0}")
     public AuthenticatedUser authenticate(String email, String password) {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
