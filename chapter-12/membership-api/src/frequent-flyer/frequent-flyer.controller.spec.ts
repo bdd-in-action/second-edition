@@ -69,10 +69,6 @@ describe('FrequentFlyerController', () => {
         });
 
         it('should return an error if the email is invalid ', async () => {
-            // const createANewAccountWithAnExistingEmail = () => controller.create(frequentFlyerWithAnInvalidEmail);
-            // expect(await createANewAccountWithAnExistingEmail).toThrow('Invalid email address')
-            //
-
             const result = controller.create(frequentFlyerWithAnInvalidEmail);
             await expect(result).rejects.toThrow("Invalid email address");
         })

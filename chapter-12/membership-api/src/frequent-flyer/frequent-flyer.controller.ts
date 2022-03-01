@@ -50,6 +50,33 @@ export class FrequentFlyerController {
         return this.frequentFlyerService.findAll();
     }
 
+    //
+    // @Get(":id/history")
+    // history(@Param('id') id: number) {
+    //     return {
+    //         "frequentFlyerNumber": id,
+    //         "firstName": "Tracy",
+    //         "lastName": "Traveler",
+    //         "email": "tracy@example.org",
+    //         "flightHistory": [
+    //             {
+    //                 "from": "London",
+    //                 "to": "Paris",
+    //                 "date": "2021-12-15"
+    //             },
+    //             {
+    //                 "from": "Paris",
+    //                 "to": "London",
+    //                 "date": "2021-12-21"
+    //             }
+    //         ],
+    //         "passport": {
+    //             "number": "12345678",
+    //             "country": "United Kingdom"
+    //         }
+    //     }
+    // }
+
     @Get(':id')
     @ApiOperation({summary: 'Find a frequent flyer by frequent flyer number'})
     @ApiResponse({status: 400, description: 'Missing mandatory fields'})
@@ -60,6 +87,8 @@ export class FrequentFlyerController {
         } else {
             return frequentFlyer;
         }
+
+
     }
 
     @Delete(':id')

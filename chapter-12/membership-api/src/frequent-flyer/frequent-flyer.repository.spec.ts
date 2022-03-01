@@ -45,7 +45,16 @@ describe('FrequentFlyerRepository', () => {
 
             const loadedFrequentFlyer = repository.findByFrequentFlyerNumber(123456)
 
-            expect(loadedFrequentFlyer).toBe(frequentFlyer);
+            expect(loadedFrequentFlyer).toEqual(frequentFlyer);
+        })
+
+        it('should return undefined if no frequent flyer exists', () => {
+
+            repository.save(frequentFlyer)
+
+            const loadedFrequentFlyer = repository.findByFrequentFlyerNumber(999999999)
+
+            expect(loadedFrequentFlyer).toBeUndefined()
         })
     })
 })

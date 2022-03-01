@@ -6,7 +6,6 @@ import {ValidateEmailDto} from "./dto/validate-email.dto";
 import {FrequentFlyer} from "./entities/frequent-flyer.entity";
 import {EventBusService} from "../events/eventbus.service";
 import {NewFrequentFlyerEvent} from "../events/new-frequent-flyer-event";
-import validate from 'deep-email-validator'
 
 @Injectable()
 export class FrequentFlyerService {
@@ -18,10 +17,6 @@ export class FrequentFlyerService {
     }
 
     frequentFlyerNumberCounter = 1000000;
-
-    isEmailValid = async function (email) {
-        return validate(email)
-    }
 
     create(frequentFlyerDetails: CreateFrequentFlyerDto) {
         const nextFrequentFlyerNumber = this.frequentFlyerNumberCounter++;
@@ -50,23 +45,19 @@ export class FrequentFlyerService {
         return this.frequentFlyerRepository.findAll();
     }
 
-    findByFrequentFlyerNumber(id: number
-    ) {
+    findByFrequentFlyerNumber(id: number) {
         return this.frequentFlyerRepository.findByFrequentFlyerNumber(id);
     }
 
-    findByEmail(email: string
-    ) {
+    findByEmail(email: string) {
         return this.frequentFlyerRepository.findByEmail(email);
     }
 
-    remove(id: number
-    ) {
+    remove(id: number) {
         this.frequentFlyerRepository.removeByFrequentFlyerNumber(id);
     }
 
-    confirmEmail(validateEmailDto: ValidateEmailDto
-    ) {
+    confirmEmail(validateEmailDto: ValidateEmailDto) {
         if (this.tokenService.validate(validateEmailDto.email, validateEmailDto.frequentFlyerNumber, validateEmailDto.token)) {
             let frequentFlyer = this.frequentFlyerRepository.findByEmail(validateEmailDto.email);
             frequentFlyer.isActivated = true;

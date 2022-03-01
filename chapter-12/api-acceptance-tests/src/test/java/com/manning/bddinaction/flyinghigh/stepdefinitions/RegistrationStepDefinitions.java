@@ -1,10 +1,12 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
 import com.manning.bddinaction.flyinghigh.apis.*;
+import com.manning.bddinaction.flyinghigh.apis.EmailMonitor;
 import com.manning.bddinaction.flyinghigh.domain.AuthenticatedUser;
 import com.manning.bddinaction.flyinghigh.domain.persona.MembershipTier;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerAccountStatus;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
+import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistrationConfig;
 import io.cucumber.java.After;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.*;
@@ -25,8 +27,6 @@ public class RegistrationStepDefinitions {
         return activationStatus.equalsIgnoreCase("activated");
     }
 
-    MembershipAPI membershipAPI = new MembershipAPI();
-    EventBusAPI eventBusAPI = new EventBusAPI();
     AuthenticationAPI authenticationAPI = new AuthenticationAPI();
 
     /**
@@ -41,43 +41,49 @@ public class RegistrationStepDefinitions {
     String emailToken;
     AuthenticatedUser authenticatedUser;
 
-    @Given("{traveller} does not have a Frequent Flyer account")
-    public void user_does_not_have_a_frequent_flyer_account(TravellerRegistration traveller) {
-        newMember = traveller.withAUniqueEmailAddress();
+    @Given("{} does not have a Frequent Flyer account")
+    public void user_does_not_have_a_frequent_flyer_account(String travellerName) {
+        newMember = TravellerRegistrationConfig.forTravellerNamed(travellerName);
     }
 
     @Given("{traveller} has registered for a new Frequent Flyer account")
     public void traveller_has_registered(TravellerRegistration traveller) {
-        newMember = traveller.withAUniqueEmailAddress();
-        registers_for_a_new_frequent_flyer_account();
+        newMember = traveller;
+        newFrequentFlyerNumber = membershipAPI.register(newMember);
     }
 
     @But("he/she has not yet confirmed her email")
     public void emailNotConfirmed() {
     }
 
+    MembershipAPI membershipAPI = new MembershipAPI();
+
     @When("he/she registers for a new Frequent Flyer account")
     public void registers_for_a_new_frequent_flyer_account() {
         newFrequentFlyerNumber = membershipAPI.register(newMember);
-        emailToken = membershipAPI.getEmailToken(newFrequentFlyerNumber);
     }
+
+    TokenAPI tokenAPI = new TokenAPI();
 
     @And("he/she confirms her email address")
     public void confirms_email_address() {
+        emailToken = tokenAPI.getEmailToken(newFrequentFlyerNumber);
         membershipAPI.confirmEmail(newFrequentFlyerNumber, newMember.email(), emailToken);
     }
 
     @Then("he/she should have a new {tier} tier account with {int} points")
     public void should_have_a_new_account_with_points(MembershipTier tier, Integer points) {
-        TravellerAccountStatus accountStatus = membershipAPI.findMemberByFrequentFlyerNumber(newFrequentFlyerNumber);
-
+        TravellerAccountStatus accountStatus = membershipAPI.getMemberStatus(newFrequentFlyerNumber);
         assertThat(accountStatus.statusPoints()).isEqualTo(points);
         assertThat(accountStatus.tier()).isEqualTo(tier);
     }
 
+    @Steps
+    EmailMonitor emails;
+
     @Then("he/she should be sent an email with an email validation link")
     public void shouldBeSentAnEmailWithAnEmailValidationLink() {
-        assertThat(eventBusAPI.newFrequentFlyerEventWasPublishedFor(newFrequentFlyerNumber)).isTrue();
+        assertThat(emails.newAccountConfirmationMessageSentTo(newMember.email())).isTrue();
     }
 
     @And("his/her account should be {activationStatus}")
@@ -104,8 +110,9 @@ public class RegistrationStepDefinitions {
 
     @Then("he/she should be invited to confirm her email address when she attempts to login")
     public void needsToConfirmEmailAddress() {
-        assertThatThrownBy(() -> authenticationAPI.authenticate(newMember.email(), newMember.password()))
-                .hasMessageContaining("Please confirm your email address");
+        assertThatThrownBy(
+                () -> authenticationAPI.authenticate(newMember.email(), newMember.password())
+        ).hasMessageContaining("Please confirm your email address");
     }
 
     @When("he/she registers with an email of {}")

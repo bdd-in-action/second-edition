@@ -10,19 +10,17 @@ import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 
-public class EventBusAPI {
-
-    EnvironmentVariables environmentVariables;
+public class EventBusAPI extends ConfigurableAPIClient {
 
     /**
      * Find the NewFrequentFlyerEvent event in the event bus logs.
      */
-    public boolean newFrequentFlyerEventWasPublishedFor(String frequentFlyerNumber) {
+    public boolean newFrequentFlyerEventWasPublishedFor(String email) {
         return RestAssured.given()
                 .contentType(ContentType.JSON)
-                .queryParam("field","frequentFlyerNumber")
-                .queryParam("value",frequentFlyerNumber)
-                .get("http://localhost:3000/api/events/NewFrequentFlyerEvent")
+                .queryParam("field","email")
+                .queryParam("value",email)
+                .get("/events/NewFrequentFlyerEvent")
                 .thenReturn().statusCode() == 200;
     }
 }

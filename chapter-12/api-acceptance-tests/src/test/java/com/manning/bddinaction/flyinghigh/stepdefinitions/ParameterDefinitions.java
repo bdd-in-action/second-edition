@@ -1,7 +1,7 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
-import com.manning.bddinaction.flyinghigh.domain.persona.TravellerPersona;
+import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistrationConfig;
 import io.cucumber.java.Before;
 import io.cucumber.java.ParameterType;
 import net.serenitybdd.screenplay.Actor;
@@ -16,13 +16,13 @@ public class ParameterDefinitions {
     }
 
     /**
-     * Travellers are defined
+     * Travellers are defined in the src/test/resources/testdata/travellers.conf file
      * @param travellerName
-     * @return
+     * @return a TravellerRegistration object representing the named traveller
      */
     @ParameterType(".*")
     public TravellerRegistration traveller(String travellerName) {
-        return TravellerPersona.withName(travellerName);
+        return TravellerRegistrationConfig.forTravellerNamed(travellerName);
     }
 
     @Before

@@ -1,13 +1,11 @@
 package com.manning.bddinaction.flyinghigh.domain.persona;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A summary of the frequent flyer account status
  */
-public record TravellerAccountStatus (
-        @JsonProperty("frequentFlyerNumber") String frequentFlyerNumber,
-        @JsonProperty("statusPoints") int statusPoints,
-        @JsonProperty("tier") MembershipTier tier,
-        @JsonProperty("isActivated") boolean isActivated) {
-}
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record TravellerAccountStatus (int statusPoints,
+                                      MembershipTier tier,
+                                      boolean isActivated) {}

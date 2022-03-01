@@ -12,9 +12,7 @@ import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.util.EnvironmentVariables;
 
-public class AuthenticationAPI {
-
-    EnvironmentVariables environmentVariables;
+public class AuthenticationAPI extends ConfigurableAPIClient {
 
     /**
      * Attempt to login to the application via the authentication API
@@ -23,7 +21,7 @@ public class AuthenticationAPI {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(ImmutableMap.of("email", email,"password", password))
-                .post("http://localhost:3000/api/users/authenticate");
+                .post("/users/authenticate");
 
         if (response.statusCode() >= 400) {
             throw new AuthenticationException(response.jsonPath().getString("message"));

@@ -1,7 +1,12 @@
 {
-  "id": "1001",
+  "isActivated": true,
+  "tier": "STANDARD",
+  "statusPoints": 0,
   "firstName": "Tracy",
-  "lastName": "Traveller",
-  "status": "GOLD",
-  "pointBalance": 5000
+  "lastName": "Traveler",
+  "title": "Mrs",
+  "email": "tracy@example.org",
+  "address": "10 Pinnack Street, Reading",
+  "country": "United Kingdon",
+  "frequentFlyerNumber": 1000018
 }

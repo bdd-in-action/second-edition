@@ -26,10 +26,6 @@ export class FrequentFlyerRepository {
         return this.frequentFlyers.find( frequentFlyer => frequentFlyer.email == email)
     }
 
-    findLargestFrequentFlyerNumber(startingNumber: number) {
-        return startingNumber + this.frequentFlyers.length;
-    }
-
     removeByFrequentFlyerNumber(frequentFlyerNumber: number) {
         this.frequentFlyers = this.frequentFlyers.filter( element => element.frequentFlyerNumber != frequentFlyerNumber);
     }
