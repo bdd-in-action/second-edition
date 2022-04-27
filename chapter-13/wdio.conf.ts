@@ -3,53 +3,53 @@ import { ArtifactArchiver } from '@serenity-js/core';
 import { SerenityBDDReporter } from '@serenity-js/serenity-bdd';
 import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 import { resolve } from 'path';
-import { Actors } from './src/Actors';
+import { Actors } from './src';
+import { Photographer, TakePhotosOfFailures } from '@serenity-js/web';
+
+const baseUrl = 'http://localhost:3000';
 
 export const config: WebdriverIOConfig = {
 
-    baseUrl: 'http://localhost:3000',
+    specs: [
+        './features/**/*.feature',
+    ],
+
+    baseUrl,
 
     framework: '@serenity-js/webdriverio',
 
+// Cucumber.js configuration
+    // see: https://serenity-js.org/modules/cucumber/class/src/cli/CucumberConfig.ts~CucumberConfig.html
     serenity: {
-        actors: new Actors(),
+        actors: new Actors(`${ baseUrl }/api/`),
         runner: 'cucumber',
         crew: [
             ConsoleReporter.forDarkTerminals(),
             new SerenityBDDReporter(),
-            ArtifactArchiver.storingArtifactsAt('./target/site/serenity'),
+            Photographer.whoWill(TakePhotosOfFailures),
+            ArtifactArchiver.storingArtifactsAt('./target/site/serenity')
         ]
     },
-
-// Cucumber.js configuration
-    // see: https://serenity-js.org/modules/cucumber/class/src/cli/CucumberConfig.ts~CucumberConfig.html
+    //
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
         require: [
-            './features/support/*.ts',
-            './features/step_definitions/*.ts'
+            './features/**/*.steps.ts'
         ],
         // <string[]> (type[:path]) specify native Cucumber.js output format, if needed. Optionally supply PATH to redirect formatter output (repeatable)
-        format: [ ],
+        // format: [ ],
         // <string> (name) specify the profile to use
-        profile: '',
+        // profile: '',
         // <string[] | string> (expression) only execute the features or scenarios with tags matching the expression
-        tags: [
-            '@only'
-        ],
-        // <number> timeout for step definitions
-        timeout: 10_000,
+        // tags: [
+            // '@only'
+        // ],
     },
 
-    specs: [
-        './features/**/registering_as_a_new_frequent_flyer.feature',
-        // './features/**/*.feature',
-    ],
-
     reporters: [
-        'spec',
+        // 'spec',
     ],
-
+    //
     autoCompileOpts: {
         autoCompile: true,
         tsNodeOpts: {
@@ -57,13 +57,13 @@ export const config: WebdriverIOConfig = {
             project: resolve(__dirname, './tsconfig.json'),
         },
     },
-
-    automationProtocol: 'devtools',
-
-    runner: 'local',
-
-    maxInstances: 1,
-
+    //
+    // automationProtocol: 'devtools',
+    //
+    // runner: 'local',
+    //
+    // maxInstances: 1,
+    //
     capabilities: [{
 
         browserName: 'chrome',
@@ -79,10 +79,10 @@ export const config: WebdriverIOConfig = {
     }],
 
     logLevel: 'warn',
-
-    waitforTimeout: 10_000,
-
-    connectionRetryTimeout: 90_000,
-
-    connectionRetryCount: 3,
+    //
+    // waitforTimeout: 10_000,
+    //
+    // connectionRetryTimeout: 90_000,
+    //
+    // connectionRetryCount: 3,
 };
