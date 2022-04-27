@@ -44,7 +44,6 @@ let UsersController = class UsersController {
     resetPoints(userId) {
         this.service.resetPoints(userId);
         return this.service.getUserById(userId);
-        ;
     }
     deleteUser(userId) {
         return this.service.deleteUser(userId);

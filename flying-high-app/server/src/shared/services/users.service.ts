@@ -103,11 +103,11 @@ export class UsersService {
                 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle'
             )
         } else if (
-            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MS && user.title !== USER_TITLE.MRS
+            ! [USER_TITLE.MR, USER_TITLE.MS, USER_TITLE.MRS, USER_TITLE.MX].some(title => title === user.title)
         ) {
             throw new BadRequestException(
                 HttpStatus.BAD_REQUEST,
-                'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs'
+                'User title is the type of enum: USER_TITLE: Mr, Ms, Mrs OR Mx'
             )
         }
         // create userId
@@ -122,13 +122,13 @@ export class UsersService {
         if (user.userLevel) {
             newUser.userLevel = user.userLevel;
             switch(newUser.userLevel) {
-                case USER_LEVEL.BRONZE: 
+                case USER_LEVEL.BRONZE:
                     newUser.points = 1000;
                     break;
-                case USER_LEVEL.SILVER: 
+                case USER_LEVEL.SILVER:
                     newUser.points = 2000;
                     break;
-                case USER_LEVEL.GOLD: 
+                case USER_LEVEL.GOLD:
                     newUser.points = 5000;
                     break;
                 default:
@@ -196,11 +196,11 @@ export class UsersService {
                 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle'
             )
         } else if (
-            user.title !== USER_TITLE.MR && user.title !== USER_TITLE.MS && user.title !== USER_TITLE.MRS
+            ! [USER_TITLE.MR, USER_TITLE.MS, USER_TITLE.MRS, USER_TITLE.MX].some(title => title === user.title)
         ) {
             throw new BadRequestException(
                 HttpStatus.BAD_REQUEST,
-                'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs'
+                'User title is the type of enum: USER_TITLE: Mr, Mrs, Ms OR Mx'
             )
         }
         const index = this.users.findIndex(u => userId === u.userId);
@@ -229,7 +229,7 @@ export class UsersService {
         };
     }
 
-    /**  
+    /**
      * Reset earned points to 0 and status level to STANDARD.
      */
     resetPoints(userId: string) {
@@ -243,9 +243,9 @@ export class UsersService {
      *  - SILVER: 2000 points (50% bonus)
      *  - GOLD: 5000 points (100% bonus)
      * Only flights booked at a given status level earn the bonus points at that level.
-     * @param authUser 
-     * @param points 
-     * @returns 
+     * @param authUser
+     * @param points
+     * @returns
      */
     updateUserPointsAndLevel(userEmail: string, points: number): number {
 
@@ -298,7 +298,7 @@ export class UsersService {
             return USER_LEVEL.BRONZE;
         } else {
             return USER_LEVEL.STANDARD;
-        }        
+        }
     }
 
     generateRandomString(length: number, charSet?: string): string {

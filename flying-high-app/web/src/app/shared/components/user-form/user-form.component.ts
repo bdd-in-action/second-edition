@@ -30,7 +30,7 @@ export class UserFormComponent implements OnInit {
       firstName: [this.user ? this.user.firstName : '', Validators.required],
       lastName: [this.user ? this.user.lastName : '', Validators.required],
       address: [this.user ? this.user.address : '', Validators.required],
-      title: [this.user ? this.user.title : USER_TITLE.MR, Validators.required],
+      title: [this.user ? this.user.title : USER_TITLE.MX, Validators.required],
       country: [this.user ? this.user.country : '', Validators.required],
       seatPreference: [this.user ? this.user.seatPreference : SEAT_PREFERENCE.AISLE, Validators.required],
       newsletterSub: [this.user ? this.user.newsletterSub : true, Validators.required],

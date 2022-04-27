@@ -62,7 +62,7 @@ export class UsersController {
     @ApiBearerAuth()
     resetPoints(@Param('userId') userId: string) {
         this.service.resetPoints(userId)
-        return this.service.getUserById(userId);;
+        return this.service.getUserById(userId);
     }
 
     @Delete()

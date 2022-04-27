@@ -44,8 +44,8 @@ __decorate([
 ], UserDto.prototype, "country", void 0);
 __decorate([
     swagger_1.ApiProperty({
-        enum: ['Mr', 'Ms', 'Mrs'],
-        description: 'Only Mr, Ms and Mrs are allowed when creating user'
+        enum: ['Mr', 'Ms', 'Mrs', 'Mx'],
+        description: 'Only Mr, Ms, Mrs and Mx are allowed when creating user'
     }),
     __metadata("design:type", String)
 ], UserDto.prototype, "title", void 0);
@@ -56,7 +56,7 @@ __decorate([
 __decorate([
     swagger_1.ApiProperty({
         enum: ['aisle', 'window'],
-        description: 'Only asisle and window are allowed when creating user'
+        description: 'Only aisle and window are allowed when creating user'
     }),
     __metadata("design:type", String)
 ], UserDto.prototype, "seatPreference", void 0);
