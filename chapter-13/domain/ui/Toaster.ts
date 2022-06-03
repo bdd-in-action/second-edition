@@ -2,7 +2,7 @@ import { By, CssClasses, PageElement } from '@serenity-js/web';
 import { QuestionAdapter } from '@serenity-js/core';
 
 export class Toaster {
-    private static component = () =>
+    static component = () =>
         PageElement.located(By.css(`[toast-component]`))
             .describedAs('toaster');
 

@@ -4,6 +4,11 @@ import { CallAnApi } from '@serenity-js/rest';
 import { TravellerDetails } from './TravellerDetails';
 import { AuthenticationDetails } from './AuthenticationDetails';
 
+export interface TravellerNotes {
+    travellerDetails:       TravellerDetails;
+    authenticationDetails?: AuthenticationDetails;
+}
+
 export class Actors implements Cast {
     constructor(private readonly apiUrl: string) {
     }
@@ -13,9 +18,9 @@ export class Actors implements Cast {
             BrowseTheWebWithWebdriverIO.using(browser),
             CallAnApi.at(this.apiUrl),
             TakeNotes.using(
-                Notepad.with<TravellerDetails & AuthenticationDetails>(
-                    TravellerDetails.of(actor.name)
-                )
+                Notepad.with<TravellerNotes>({
+                    travellerDetails: TravellerDetails.of(actor.name),
+                })
             )
         );
     }

@@ -1,7 +1,7 @@
 import { defineParameterType, setDefaultTimeout } from '@cucumber/cucumber';
 import { actorCalled, actorInTheSpotlight, Duration } from '@serenity-js/core';
 
-setDefaultTimeout(Duration.ofSeconds(10).inMilliseconds());
+setDefaultTimeout(Duration.ofSeconds(30).inMilliseconds());
 
 defineParameterType({
     regexp: /[A-Z][a-z]+/,

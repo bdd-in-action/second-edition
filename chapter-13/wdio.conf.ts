@@ -1,10 +1,10 @@
 import { ConsoleReporter } from '@serenity-js/console-reporter';
 import { ArtifactArchiver } from '@serenity-js/core';
 import { SerenityBDDReporter } from '@serenity-js/serenity-bdd';
+import { Photographer, TakePhotosOfFailures } from '@serenity-js/web';
 import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 import { resolve } from 'path';
-import { Actors } from './src';
-import { Photographer, TakePhotosOfFailures } from '@serenity-js/web';
+import { Actors } from './domain';
 
 const baseUrl = 'http://localhost:3000';
 
@@ -21,7 +21,7 @@ export const config: WebdriverIOConfig = {
 // Cucumber.js configuration
     // see: https://serenity-js.org/modules/cucumber/class/src/cli/CucumberConfig.ts~CucumberConfig.html
     serenity: {
-        actors: new Actors(`${ baseUrl }/api/`),
+        actors: new Actors(baseUrl),
         runner: 'cucumber',
         crew: [
             ConsoleReporter.forDarkTerminals(),
