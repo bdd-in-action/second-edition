@@ -16,7 +16,7 @@ import { ConfirmSubmission, Form } from '../../domain/ui';
 Given('{actor} has signed up', (actor: Actor) =>
     actor.attemptsTo(
         SignUp.viaApiUsing(
-            notes<TravellerNotes>().get('travellerDetails') as QuestionAdapter<TravellerDetails>
+            notes<TravellerNotes>().get('travellerDetails')
         ),
     ));
 
@@ -24,7 +24,7 @@ Given('{actor} has signed up using the following details:', (actor: Actor, data:
     actor.attemptsTo(
         SignUp.viaApiUsing(
             Dictionary.of<TravellerDetails>(
-                notes<TravellerNotes>().get('travellerDetails') as QuestionAdapter<TravellerDetails>,
+                notes<TravellerNotes>().get('travellerDetails'),
                 data.rowsHash() as Partial<TravellerDetails>,
             )
         ),
@@ -33,7 +33,7 @@ Given('{actor} has signed up using the following details:', (actor: Actor, data:
 When('{actor} signs up using valid traveller details', (actor: Actor) =>
     actor.attemptsTo(
         SignUp.using(
-            notes<TravellerNotes>().get('travellerDetails') as QuestionAdapter<TravellerDetails>
+            notes<TravellerNotes>().get('travellerDetails')
         ),
         ConfirmSubmission.succeededWith('registered successfully'),
     ));
@@ -43,7 +43,7 @@ When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
         LocateRegistrationForm.viaMainMenu(),
         FillOutRegistrationForm.using(
             Dictionary.of<TravellerDetails>(
-                notes<TravellerNotes>().get('travellerDetails') as QuestionAdapter<TravellerDetails>,
+                notes<TravellerNotes>().get('travellerDetails'),
                 data.rowsHash() as Partial<TravellerDetails>,
             )
         ),
@@ -51,7 +51,7 @@ When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
     ));
 
 Then('{pronoun} should be able to sign in', async (actor: Actor) => {
-    const details = notes<TravellerNotes>().get('travellerDetails') as QuestionAdapter<TravellerDetails>;
+    const details = notes<TravellerNotes>().get('travellerDetails');
 
     await actor.attemptsTo(
         SignIn.using(details.email, details.password),
@@ -74,7 +74,7 @@ Then('{pronoun} should be presented with an option to reset password', (actor: A
 
 After(() =>
     actorInTheSpotlight().attemptsTo(
-        Check.whether(notes<TravellerNotes>().get('authenticationDetails') as QuestionAdapter<AuthenticationDetails>, isPresent())
+        Check.whether(notes<TravellerNotes>().get('authenticationDetails'), isPresent())
             .andIfSo(
                 SignOut(),
                 RemoveTestAccount(),
