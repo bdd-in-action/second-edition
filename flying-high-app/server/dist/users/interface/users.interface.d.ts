@@ -15,6 +15,7 @@ export interface User {
 export declare enum USER_TITLE {
     MR = "Mr",
     MS = "Ms",
+    MX = "Mx",
     MRS = "Mrs"
 }
 export declare enum SEAT_PREFERENCE {

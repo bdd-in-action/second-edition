@@ -11,7 +11,7 @@ async function bootstrap() {
         .setDescription(`
       Please first scroll to the bottom and read through Schemas.
       Then you need to generate the token by using the first endpoint to get full access to the API.
-      Default email is 'tracy@flyinghigh.com', pasword is 'trac3'
+      Default email is 'admin@flyinghigh.com', pasword is 'admin'
       After you got the token, apply it by clicking the lock icon button.
     `)
         .setVersion('1.0')

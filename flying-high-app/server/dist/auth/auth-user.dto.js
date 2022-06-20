@@ -14,11 +14,11 @@ const swagger_1 = require("@nestjs/swagger");
 class AuthUserDto {
 }
 __decorate([
-    swagger_1.ApiProperty({ description: 'Generate the token and apply it by clicking the lock icon above to get AUTH access. default email tracy@flyinghigh.com' }),
+    swagger_1.ApiProperty({ description: 'Generate the token and apply it by clicking the lock icon above to get AUTH access. default email admin@flyinghigh.com' }),
     __metadata("design:type", String)
 ], AuthUserDto.prototype, "email", void 0);
 __decorate([
-    swagger_1.ApiProperty({ description: 'default password trac3' }),
+    swagger_1.ApiProperty({ description: 'default password admin' }),
     __metadata("design:type", String)
 ], AuthUserDto.prototype, "password", void 0);
 exports.AuthUserDto = AuthUserDto;

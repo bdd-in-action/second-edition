@@ -5,6 +5,7 @@ var USER_TITLE;
 (function (USER_TITLE) {
     USER_TITLE["MR"] = "Mr";
     USER_TITLE["MS"] = "Ms";
+    USER_TITLE["MX"] = "Mx";
     USER_TITLE["MRS"] = "Mrs";
 })(USER_TITLE = exports.USER_TITLE || (exports.USER_TITLE = {}));
 var SEAT_PREFERENCE;

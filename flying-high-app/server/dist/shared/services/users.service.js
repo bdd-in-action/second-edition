@@ -33,6 +33,20 @@ let UsersService = class UsersService {
                 points: 0,
                 country: 'United States of America (the)',
                 seatPreference: users_interface_1.SEAT_PREFERENCE.AISLE
+            },
+            {
+                userId: '8XDGVLsNUq',
+                email: 'bryony@flyinghigh.com',
+                password: 'admin',
+                firstName: 'Bryony',
+                lastName: 'Tripper',
+                address: '100 Main St, St Cloud',
+                title: users_interface_1.USER_TITLE.MS,
+                newsletterSub: true,
+                userLevel: users_interface_1.USER_LEVEL.STANDARD,
+                points: 0,
+                country: 'United States of America (the)',
+                seatPreference: users_interface_1.SEAT_PREFERENCE.AISLE
             }
         ];
     }
@@ -74,8 +88,8 @@ let UsersService = class UsersService {
             user.seatPreference !== users_interface_1.SEAT_PREFERENCE.WINDOW) {
             throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle');
         }
-        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MS && user.title !== users_interface_1.USER_TITLE.MRS) {
-            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs');
+        else if (![users_interface_1.USER_TITLE.MR, users_interface_1.USER_TITLE.MS, users_interface_1.USER_TITLE.MRS, users_interface_1.USER_TITLE.MX].some(title => title === user.title)) {
+            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Ms, Mrs OR Mx');
         }
         const userId = this.generateRandomString(10);
         const newUser = Object.assign(Object.assign({}, user), { userLevel: users_interface_1.USER_LEVEL.STANDARD, points: 0, userId });
@@ -134,8 +148,8 @@ let UsersService = class UsersService {
             user.seatPreference !== users_interface_1.SEAT_PREFERENCE.WINDOW) {
             throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'Seat preference is the type of enum: SEAT_PREFERENCE: window OR aisle');
         }
-        else if (user.title !== users_interface_1.USER_TITLE.MR && user.title !== users_interface_1.USER_TITLE.MS && user.title !== users_interface_1.USER_TITLE.MRS) {
-            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Ms OR Mrs');
+        else if (![users_interface_1.USER_TITLE.MR, users_interface_1.USER_TITLE.MS, users_interface_1.USER_TITLE.MRS, users_interface_1.USER_TITLE.MX].some(title => title === user.title)) {
+            throw new common_1.BadRequestException(common_1.HttpStatus.BAD_REQUEST, 'User title is the type of enum: USER_TITLE: Mr, Mrs, Ms OR Mx');
         }
         const index = this.users.findIndex(u => userId === u.userId);
         const points = this.users[index].points;

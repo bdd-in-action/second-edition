@@ -1,6 +1,7 @@
 export enum USER_TITLE {
     MR = 'Mr',
     MS = 'Ms',
+    MX = 'Mx',
     MRS = 'Mrs'
 }
 

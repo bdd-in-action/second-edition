@@ -16,8 +16,8 @@ export class UserDto {
     country: string;
     @ApiProperty(
         {
-            enum: ['Mr', 'Ms', 'Mrs'],
-            description: 'Only Mr, Ms and Mrs are allowed when creating user'
+            enum: ['Mr', 'Ms', 'Mrs', 'Mx' ],
+            description: 'Only Mr, Ms, Mrs and Mx are allowed when creating user'
         }
     )
     title: USER_TITLE;
@@ -26,7 +26,7 @@ export class UserDto {
     @ApiProperty(
         {
             enum: ['aisle', 'window'],
-            description: 'Only asisle and window are allowed when creating user'
+            description: 'Only aisle and window are allowed when creating user'
         }
     )
     seatPreference: SEAT_PREFERENCE;
