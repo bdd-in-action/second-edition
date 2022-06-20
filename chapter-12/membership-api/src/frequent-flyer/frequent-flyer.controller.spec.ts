@@ -108,6 +108,7 @@ describe('FrequentFlyerController', () => {
             controller.confirmEmail({frequentFlyerNumber: frequentFlyerNumber, email: 'joe@example.org', token: token})
 
             const frequentFlyerAccount = controller.findByFrequentFlyerNumber(frequentFlyerNumber)
+
             expect(frequentFlyerAccount.isActivated)
         })
 

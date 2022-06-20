@@ -69,7 +69,6 @@ describe('Frequent Flyer Registration', () => {
                 .get(`/api/tokens/frequent-flyer/${frequentFlyerNumber}`)
                 .expect(200);
         });
-
     })
 
     afterAll(async () => {
