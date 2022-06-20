@@ -13,7 +13,6 @@ public class MembershipAPI extends ConfigurableAPIClient {
      * Register a new Frequent Flyer member, returning the new Frequent Flyer number
      */
     public String register(TravellerRegistration newMember) {
-        RestAssured.baseURI = "http://localhost:3000/api";
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .body(newMember)

@@ -1,17 +1,27 @@
 package com.manning.bddinaction.flyinghigh.stepdefinitions;
 
 import com.manning.bddinaction.flyinghigh.apis.*;
-import com.manning.bddinaction.flyinghigh.apis.EmailMonitor;
 import com.manning.bddinaction.flyinghigh.domain.AuthenticatedUser;
 import com.manning.bddinaction.flyinghigh.domain.persona.MembershipTier;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerAccountStatus;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
 import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistrationConfig;
+import com.manning.bddinaction.flyinghigh.ui.screenplay.navigation.Navigate;
+import com.manning.bddinaction.flyinghigh.ui.screenplay.registration.CompleteRegistrationForm;
+import com.manning.bddinaction.flyinghigh.ui.screenplay.registration.RegistrationForm;
 import io.cucumber.java.After;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.*;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Steps;
 
+import java.util.List;
+import java.util.Random;
+
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -130,6 +140,31 @@ public class RegistrationStepDefinitions {
     public void theEmailAddressShouldBeRejected(String reason) {
         assertThatThrownBy(() -> membershipAPI.register(newMember))
                 .hasMessageContaining(reason);
+    }
+
+
+    @When("{actor} wants to register a new Frequent Flyer account")
+    public void triesToRegisterANewAccount(Actor actor) {
+        actor.attemptsTo(Navigate.toTheRegistrationPage());
+    }
+
+    @Then("the following information should be mandatory to register:")
+    public void mandatoryFields(List<String> mandatoryFields) {
+
+        for (String mandatoryField : mandatoryFields) {
+            theActorInTheSpotlight().attemptsTo(
+                    CompleteRegistrationForm.withMemberDetailsFrom(
+                            newMember.withEmail(randomEmail()).withMissing(mandatoryField))
+            );
+            theActorInTheSpotlight().attemptsTo(
+                    WaitUntil.the(RegistrationForm.FORM_ERROR_MESSAGES, isVisible()),
+                    Ensure.that(RegistrationForm.FORM_ERROR_MESSAGES).isDisplayed()
+            );
+        }
+    }
+
+    private String randomEmail() {
+        return "traveller" + new Random().nextLong() + "@gmail.com";
     }
 
     @After
