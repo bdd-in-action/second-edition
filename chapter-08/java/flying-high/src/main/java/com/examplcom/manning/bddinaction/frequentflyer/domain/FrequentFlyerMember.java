@@ -19,6 +19,7 @@ public class FrequentFlyerMember {
     @Enumerated(EnumType.ORDINAL)
     private FrequentFlyerStatus status;
 
+//    @OneToMany(cascade = {CascadeType.ALL},fetch= FetchType.EAGER, mappedBy = "member")
     @OneToMany(mappedBy = "member")
     private Collection<RecordedFlight> recordedFlights;
 

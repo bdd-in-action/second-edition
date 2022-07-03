@@ -2,6 +2,7 @@ package com.examplcom.manning.bddinaction.frequentflyer.acceptancetests.stepdefi
 
 import com.examplcom.manning.bddinaction.frequentflyer.acceptancetests.spring.TestDatabase;
 import com.examplcom.manning.bddinaction.frequentflyer.domain.*;
+import com.examplcom.manning.bddinaction.frequentflyer.flights.FlightDatabase;
 import com.examplcom.manning.bddinaction.frequentflyer.repositories.FrequentFlyerMemberRepository;
 import com.examplcom.manning.bddinaction.frequentflyer.repositories.PointsMultiplierRepository;
 import com.examplcom.manning.bddinaction.frequentflyer.repositories.PointsScheduleRepository;
@@ -137,11 +138,16 @@ public class EarningPointsStepDefinitions {
         // TODO: Setup the frequent flyer
     }
 
+    FlightDatabase flightDatabase = FlightDatabase.instance();
+
     @Given("the distance from {} to {} is {int} km")
     public void recordFlightDistance(String departure,
                                      String destination,
                                      int distanceInKm) {
-        // TODO: Record trip distance
+        flightDatabase.recordTripDistance()
+                .from(departure)
+                .to(destination)
+                .as(distanceInKm).kilometres();
     }
 
     @When("he/she completes a flight from {} to {}")
@@ -164,33 +170,5 @@ public class EarningPointsStepDefinitions {
     @Then("the available destinations should be {cities}")
     public void theAvailableDestinationsShouldBe(List<String> cities) {
 
-    }
-
-    @Given("the following Frequent Flyer members:")
-    public void theFollowingFrequentFlyerMembers() {
-    }
-
-    @Given("the following Frequent Flyer account balances:")
-    public void theFollowingFrequentFlyerAccountBalances() {
-    }
-
-    @When("Sarah transfers {int} points to Steve")
-    public void sarahTransfersPointsToSteve(int arg0) {
-    }
-
-    @Then("the accounts should be as follows:")
-    public void theAccountsShouldBeAsFollows() {
-    }
-
-    @When("Sarah tries to transfer {int} points to Fred")
-    public void sarahTriesToTransferPointsToFred(int arg0) {
-    }
-
-    @Then("the transfer should not be allowed")
-    public void theTransferShouldNotBeAllowed() {
-    }
-
-    @When("Steve tries to transfer {int} points to Sarah")
-    public void steveTriesToTransferPointsToSarah(int arg0) {
     }
 }

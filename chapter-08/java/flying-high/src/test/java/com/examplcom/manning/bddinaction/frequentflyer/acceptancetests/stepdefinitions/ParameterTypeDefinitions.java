@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ParameterTypeDefinitions {
-    @ParameterType("(Standard|Bronze|Silver|Gold|) Frequent Flyer member")
+    @ParameterType("(Standard|Bronze|Silver|Gold) Frequent Flyer member")
     public FrequentFlyerMember frequentFlyer(String statusName) {
         FrequentFlyerStatus status = FrequentFlyerStatus.valueOf(statusName);
         return FrequentFlyerMember.newMember().withStatus(status);

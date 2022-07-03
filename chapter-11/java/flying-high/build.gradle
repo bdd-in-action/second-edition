@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         mavenLocal()
+        jcenter()
     }
     dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:2.5.8")
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.3.4")
     }
 }
 
@@ -48,9 +49,9 @@ dependencies {
     }
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.6.2'
 
-    testImplementation 'net.serenity-bdd:serenity-core:2.5.8'
-    testImplementation 'net.serenity-bdd:serenity-spring:2.5.8'
-    testImplementation 'net.serenity-bdd:serenity-cucumber6:2.5.8'
+    testImplementation 'net.serenity-bdd:serenity-core:2.3.4'
+    testImplementation 'net.serenity-bdd:serenity-spring:2.3.4'
+    testImplementation 'net.serenity-bdd:serenity-cucumber6:2.3.4'
     testImplementation 'org.assertj:assertj-core:3.6.2'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
 

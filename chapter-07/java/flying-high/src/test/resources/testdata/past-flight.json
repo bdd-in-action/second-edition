@@ -1,8 +1,0 @@
-{
-  "flightNumber":"FH-101",
-  "scheduledDate":"2020-01-01",
-  "departure":"London",
-  "destination":"New York",
-  "status":"COMPLETED",
-  "wasDelayed":false
-}

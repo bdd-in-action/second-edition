@@ -1,3 +1,5 @@
-Sample code for Chapter 7 of BDD in Action.
+Sample code for Chapter 10 of BDD in Action.
 
-Note that to run these tests you will need Docker installed and running on your machine.
+To run these tests locally, you will need to run the Flying High demo application on your machine. You can find this application in the [flying-high-app](https://github.com/bdd-in-action/second-edition/tree/master/flying-high-app) directory. Open this directory in a console window and follow the instructions in the [README](https://github.com/bdd-in-action/second-edition/tree/master/flying-high-app/README.md) file.
+
+

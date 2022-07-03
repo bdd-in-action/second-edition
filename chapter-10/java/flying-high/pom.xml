@@ -6,23 +6,21 @@
     <artifactId>flying-high</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>flying-high</name>
-    <description>BDD In Action Chapter 7 - sample application</description>
+    <description>BDD In Action Chapter 10 - sample application</description>
 
     <properties>
-        <java.version>12</java.version>
-        <serenity.version>2.4.4</serenity.version>
-        <serenity.maven.version>2.4.4</serenity.maven.version>
-        <serenity.cucumber.version>2.4.4</serenity.cucumber.version>
+        <java.version>17</java.version>
+        <serenity.version>3.2.5</serenity.version>
         <encoding>UTF-8</encoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <!-- CUCUMBER AND SERENITY BDD DEPENDENCIES -->
@@ -34,32 +32,20 @@
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-screenplay</artifactId>
+            <artifactId>serenity-spring</artifactId>
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-screenplay-webdriver</artifactId>
+            <artifactId>serenity-cucumber</artifactId>
             <version>${serenity.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-screenplay-rest</artifactId>
-            <version>${serenity.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-cucumber6</artifactId>
-            <version>${serenity.cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.6.2</version>
+            <version>3.23.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -105,7 +91,7 @@
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
-                <version>${serenity.maven.version}</version>
+                <version>${serenity.version}</version>
                 <configuration>
                     <reports>single-page-html</reports>
                 </configuration>

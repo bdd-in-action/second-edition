@@ -66,12 +66,12 @@ public class RegistrationStepDefinitions {
         driver.findElement(By.id("password")).sendKeys(newMember.getPassword());
         driver.findElement(By.id("login-button")).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         String successMessage = wait.until(
                                   visibilityOfElementLocated(By.cssSelector(".toast-success"))
                                 ).getText();
 
-        assertThat(successMessage).isEqualTo("Logged in as " + newMember.getEmail());
+        assertThat(successMessage).isEqualTo("Logged in as " + newMember.getFirstName());
     }
 
     @Then("he/she should have a Frequent Flyer account with:")
@@ -107,7 +107,6 @@ public class RegistrationStepDefinitions {
                         driver.findElement(By.id("email")).sendKeys(email);
                     }
                     driver.findElement(By.xpath("//button[.='Register']")).click();
-
                     softly.assertThat(displayedErrorMessages())
                             .withFailMessage("Expected error message for email value " + email)
                             .contains("Not a valid email format");
@@ -118,9 +117,6 @@ public class RegistrationStepDefinitions {
 
     private List<String> displayedErrorMessages() {
         WebDriver driver = WebTestSupport.currentDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(visibilityOfElementLocated(By.cssSelector("mat-error")));
-
         return driver.findElements(By.cssSelector("mat-error"))
                 .stream()
                 .map(WebElement::getText)
@@ -138,9 +134,6 @@ public class RegistrationStepDefinitions {
     @Then("she should be told {string}")
     public void shouldBeTold(String errorMessage) {
         WebDriver driver = WebTestSupport.currentDriver();
-
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(visibilityOfElementLocated(By.cssSelector("mat-error")));
         List<String> errorMessages = driver.findElements(By.cssSelector("mat-error"))
                 .stream()
                 .map(WebElement::getText)

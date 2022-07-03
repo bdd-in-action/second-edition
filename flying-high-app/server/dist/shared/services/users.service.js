@@ -22,8 +22,8 @@ let UsersService = class UsersService {
         this.users = [
             {
                 userId: '8XDGVLsNUp',
-                email: 'admin@flyinghigh.com',
-                password: 'admin',
+                email: 'tracy@flyinghigh.com',
+                password: 'trac3',
                 firstName: 'Tracy',
                 lastName: 'Traveller',
                 address: '1677 S Havana St, Aurora',

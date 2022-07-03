@@ -4,7 +4,6 @@ Business Need: Registering as a new Frequent Flyer
   New Frequent Flyer members need to register to book a flight.
 
   Rule: Customers must register to be able to use the Frequent Flyer members area
-    @current
     Example: Trevor registers as a Frequent Flyer member
       Given Trevor does not have a Frequent Flyer account
       When he registers as a Frequent Flyer member
@@ -14,7 +13,6 @@ Business Need: Registering as a new Frequent Flyer
         | Points       | 0        |
 
   Rule: The unique username should be a valid email address
-    @current
     Scenario Outline: Only correctly structured emails should be accepted
       Given Candy does not have a Frequent Flyer account
       When she tries to register with an email of "<email>"
@@ -26,7 +24,6 @@ Business Need: Registering as a new Frequent Flyer
         | candy@#.com  |
 
     @webtest
-    @current
     Scenario: Email addresses need to be well formed
       Given Candy does not have a Frequent Flyer account
       When she wants to register a new Frequent Flyer account
@@ -52,7 +49,6 @@ Business Need: Registering as a new Frequent Flyer
 
   Rule: New members need to complete all the mandatory fields and approve the terms & conditions
     Scenario: Mandatory fields for registration
-      Given Candy does not have a Frequent Flyer account
       When Candy wants to register for a Frequent Flyer account
       Then the following information should be mandatory to register:
         | Field     | Error Message If Missing     |
