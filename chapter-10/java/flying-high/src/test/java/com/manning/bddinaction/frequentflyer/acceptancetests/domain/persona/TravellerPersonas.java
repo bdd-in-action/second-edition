@@ -18,7 +18,8 @@ public class TravellerPersonas {
                 travellerDetails.getString("lastName"),
                 travellerDetails.getString("address"),
                 travellerDetails.getString("country"),
-                travellerDetails.getString("seatPreference")
+                travellerDetails.getString("seatPreference"),
+                true
         );
     }
 }

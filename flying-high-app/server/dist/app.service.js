@@ -17,7 +17,7 @@ let AppService = class AppService {
     }
     async getCountryList(search) {
         try {
-            const result = (await this.http.get(`https://restcountries.eu/rest/v2/name/${search}`).toPromise()).data.map((res) => {
+            const result = (await this.http.get(`https://restcountries.eu/rest/v3.1/name/${search}`).toPromise()).data.map((res) => {
                 return ({ name: res.name, flag: res.flag });
             });
             return result;

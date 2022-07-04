@@ -36,7 +36,9 @@ public class AuthenticationStepDefinitions {
     @Then("he/she should be given access to his/her account")
     public void heShouldBeGivenAccessToHisAccount() {
         WebDriver driver = WebTestSupport.currentDriver();
-        String currentUser = driver.findElement(By.id("current-user")).getText();
-        assertThat(currentUser).isEqualTo(frequentFlyer.email);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        String currentUserEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("current-user"))).getText();
+        assertThat(currentUserEmail).isEqualTo(frequentFlyer.email);
     }
 }

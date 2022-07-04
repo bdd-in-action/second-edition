@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.2.5")
+    }
+}
+
+plugins {
+    id 'java'
+}
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group = 'com.manning.bddinaction'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '18'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation(platform("org.junit:junit-bom:5.8.2"))
+
+    testImplementation("org.junit.jupiter:junit-jupiter") {
+        because 'allows to write and run Jupiter tests'
+    }
+
+    testImplementation("junit:junit:4.13.1")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine") {
+        because 'allows JUnit 3 and JUnit 4 tests to run'
+    }
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
+        because 'allows tests to run from IDEs that bundle older version of launcher'
+    }
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.2'
+    testImplementation 'net.serenity-bdd:serenity-core:3.2.5'
+    testImplementation 'net.serenity-bdd:serenity-ensure:3.2.5'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:3.2.5'
+    testImplementation 'org.assertj:assertj-core:3.6.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+test.finalizedBy(aggregate)

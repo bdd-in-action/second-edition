@@ -35,21 +35,10 @@ Business Need: Registering as a new Frequent Flyer
         | wrong@#.com  | Invalid characters |
         |              | Cannot be empty    |
 
-  Rule: Duplicate usernames are not allowed
-    Example: Someone tries to register with an email that is already used
-    Mike Smith is an existing Frequent Flyer member.
-    His wife Jenny Smith does not have a Frequent Flyer account
-      Given Mike Smith is a Frequent Flyer member with the following details:
-        | username | smiths@example.org |
-        | password | correct-password   |
-      When Jenny tries to register with a username of "smiths@example.org"
-      Then she should be presented with an error message containing "Email exists, please try another name"
-      And she should also be presented with a "Forgot your password?" link
-
-
   Rule: New members need to complete all the mandatory fields and approve the terms & conditions
     Scenario: Mandatory fields for registration
-      When Candy wants to register for a Frequent Flyer account
+      Given Candy does not have a Frequent Flyer account
+      When she wants to register a new Frequent Flyer account
       Then the following information should be mandatory to register:
         | Field     | Error Message If Missing     |
         | email     | Please enter your email      |

@@ -1,0 +1,22 @@
+{
+  "frequentFlyerNumber": 1000036,
+  "firstName": "Tracy",
+  "lastName": "Traveler",
+  "email": "tracy@example.org",
+  "flightHistory": [
+    {
+      "from": "London",
+      "to": " Paris",
+      "date": "2021-12-15"
+    },
+    {
+      "from": "Paris",
+      "to": " London",
+      "date": "2021-12-21"
+    }
+  ],
+  "passport": {
+    "number": "12345678",
+    "country": "United Kingdom"
+  }
+}

@@ -2,7 +2,7 @@
     <h2 class="section-title">Where do you want to go today?</h2>
     <form class="search-container" [formGroup]="form" (submit)="submit(form)">
         <mat-form-field class="input-align">
-            <input type="text" placeholder="From *" matInput formControlName="departure" [matAutocomplete]="auto" id="departure" data-testid="departure">
+            <input type="text" placeholder="From" matInput formControlName="departure" [matAutocomplete]="auto" id="departure" data-testid="departure">
             <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let city of cities" [value]="city.name">
                     {{city.name}} - {{city.short}}
