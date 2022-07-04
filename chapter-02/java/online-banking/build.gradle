@@ -1,0 +1,75 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.5"
+  }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+ext {
+    slf4jVersion = '1.7.7'
+    serenityVersion = '3.2.5'
+    junitVersion = '5.8.2'
+    assertJVersion = '3.22.0'
+    logbackVersion = '1.2.10'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:${junitVersion}'
+
+    testCompileOnly 'junit:junit:4.13.1'
+
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityVersion}",
+            "org.junit.vintage:junit-vintage-engine:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
+            "org.junit.platform:junit-platform-launcher:1.8.2",
+            "org.assertj:assertj-core:${assertJVersion}"
+
+}
+
+test {
+    systemProperties System.getProperties()
+    maxParallelForks = 8
+}
+
+serenity {
+    // Specify the root package of any JUnit acceptance tests
+    testRoot="banking"
+
+    // Specify the root directory of any Cucumber feature files
+    requirementsDir = "src/test/resources/features"
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+require('ts-node/register')
+
+const port = process.env.PORT || 3000
+const host = process.env.HOST || 'localhost'
+const mode = process.env.NODE_ENV || 'development'
+
+require('../src/bootstrap')(port, host, mode)
