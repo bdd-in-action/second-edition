@@ -8,15 +8,25 @@ import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.account.
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.login.Login;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.navigation.CurrentUser;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.navigation.Navigate;
+import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.navigation.OpenTheApplicationOn;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.registration.RegisterAsAFrequentFlyer;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.ensure.SoftlyEnsure;
+import net.serenitybdd.screenplay.questions.Text;
+import org.assertj.core.api.SoftAssertions;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+
+import static com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.registration.RegistrationForm.ERROR_MESSAGE;
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 public class RegistrationStepDefinitions {
 
@@ -27,9 +37,24 @@ public class RegistrationStepDefinitions {
         this.traveller = TravellerPersonas.findByName(actor.getName()).withARandomEmail();
     }
 
-    @When("{actor} registers as a Frequent Flyer member")
-    public void registersAsAFrequentFlyerMember(Actor actor) {
-        actor.attemptsTo(RegisterAsAFrequentFlyer.withMemberDetailsFrom(traveller));
+    @When("{actor} wants to register as a Frequent Flyer member")
+    public void wantsToRegisterAs(Actor actor) {
+        actor.attemptsTo(OpenTheApplicationOn.theRegistrationPage());
+    }
+
+    @Then("the following information should be mandatory:")
+    public void mandatoryFields(List<Map<String, String>> mandatoryFields) {
+        Actor actor = theActorInTheSpotlight();
+
+        SoftAssertions softly = new SoftAssertions();
+        mandatoryFields.forEach(
+                entry -> {
+                    actor.attemptsTo(RegisterAsAFrequentFlyer.withMemberDetailsFrom(traveller.withAnEmptyValueFor(entry.get("Field"))));
+                    Collection<String> errorMessages = actor.asksFor(Text.ofEach(ERROR_MESSAGE));
+                    softly.assertThat(errorMessages).contains(entry.get("Error Message If Missing"));
+                }
+        );
+        softly.assertAll();
     }
 
     @When("{actor} should be able to log on to the Frequent Flyer application")
@@ -39,6 +64,13 @@ public class RegistrationStepDefinitions {
                 Ensure.that(CurrentUser.EMAIL).isEqualTo(traveller.getEmail())
         );
     }
+
+    @When("{actor} registers as a Frequent Flyer member")
+    public void registersAsAFrequentFlyerMember(Actor actor) {
+        actor.attemptsTo(RegisterAsAFrequentFlyer.withMemberDetailsFrom(traveller));
+    }
+
+
 
     @DataTableType
     public AccountStatus accountStatus(Map<String, String> statusValues) {

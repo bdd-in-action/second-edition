@@ -56,6 +56,23 @@ public class Traveller {
     }
 
     public Traveller withARandomEmail() {
-        return new Traveller(email + "-" + new Random().nextLong(), password, title, firstName, lastName, address, country, seatPreference);
+        return new Traveller(random(email), password, title, firstName, lastName, address, country, seatPreference);
+    }
+
+    private String random(String value) {
+        return value + "-" + new Random().nextLong();
+    }
+
+    public Traveller withAnEmptyValueFor(String field) {
+        return switch (field) {
+            case "email" -> new Traveller("", password, title, firstName, lastName, address, country, seatPreference);
+            case "password" -> new Traveller(random(email), "", title, firstName, lastName, address, country, seatPreference);
+            case "firstName" -> new Traveller(random(email), password, title, "", lastName, address, country, seatPreference);
+            case "lastName" -> new Traveller(random(email), password, title, firstName, "", address, country, seatPreference);
+            case "address" -> new Traveller(random(email), password, title, firstName, lastName, "", country, seatPreference);
+            case "country" -> new Traveller(random(email), password, title, firstName, lastName, address, "", seatPreference);
+            case "agreesToTerms" -> new Traveller(random(email), password, title, firstName, lastName, address, country, seatPreference);
+            default -> this;
+        };
     }
 }

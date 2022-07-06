@@ -11,3 +11,17 @@ Business Need: Registering as a new Frequent Flyer
       And he should have a Frequent Flyer account with:
         | Status Level | Points |
         | STANDARD     | 0      |
+
+  Rule: New members need to complete all the mandatory fields and approve the terms & conditions
+    @current
+    Scenario: Mandatory fields for registration
+      Given Candy does not have a Frequent Flyer account
+      When she wants to register as a Frequent Flyer member
+      Then the following information should be mandatory:
+        | Field     | Error Message If Missing     |
+        | email     | Please enter your email      |
+        | password  | Please enter your password   |
+        | firstName | Please enter your first name |
+        | lastName  | Please enter your last name  |
+        | address   | Please enter your address    |
+        | country   | Please enter a valid country |
