@@ -1,4 +1,4 @@
-name: Chapter 13 - Serenity/JS examples
+name: Chapter 14 - Serenity/JS examples
 
 on:
   push:
@@ -28,13 +28,13 @@ jobs:
         with:
           working-directory: flying-high-app
 
-      - name: Install Node Modules (Chapter 13)
+      - name: Install Node Modules (Chapter 14)
         uses: bahmutov/npm-install@v1
         with:
-          working-directory: chapter-13
+          working-directory: chapter-14
 
       - name: Test
-        working-directory: chapter-13
+        working-directory: chapter-14
         run: npm run ci
 
       - name: Archive Serenity BDD reports
@@ -42,6 +42,6 @@ jobs:
         if: always()
         with:
           retention-days: 3
-          name: chapter-13-reports-${{ matrix.node-version }}
+          name: chapter-14-reports-${{ matrix.node-version }}
           path: |
-            chapter-13/target/site/serenity/**/*
+            chapter-14/target/site/serenity/**/*
