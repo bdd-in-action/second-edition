@@ -1,15 +1,16 @@
 import { Ensure, includes, isPresent } from '@serenity-js/assertions';
 import { After, DataTable, Given, Then, When } from '@cucumber/cucumber';
-import { Actor, actorInTheSpotlight, Check, Dictionary, Notepad, notes, QuestionAdapter } from '@serenity-js/core';
+import { Actor, actorInTheSpotlight, Check, notes, Question } from '@serenity-js/core';
 import {
-    AuthenticationDetails,
     FillOutRegistrationForm,
     LocateRegistrationForm,
     RemoveTestAccount,
     SignIn,
     SignOut,
-    SignUp, SubmitRegistrationForm,
-    TravellerDetails, TravellerNotes,
+    SignUp,
+    SubmitRegistrationForm,
+    TravellerDetails,
+    TravellerNotes,
 } from '../../domain';
 import { ConfirmSubmission, Form } from '../../domain/ui';
 
@@ -23,7 +24,7 @@ Given('{actor} has signed up', (actor: Actor) =>
 Given('{actor} has signed up using the following details:', (actor: Actor, data: DataTable) =>
     actor.attemptsTo(
         SignUp.viaApiUsing(
-            Dictionary.of<TravellerDetails>(
+            Question.fromObject<TravellerDetails>(
                 notes<TravellerNotes>().get('travellerDetails'),
                 data.rowsHash() as Partial<TravellerDetails>,
             )
@@ -42,7 +43,7 @@ When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
     actor.attemptsTo(
         LocateRegistrationForm.viaMainMenu(),
         FillOutRegistrationForm.using(
-            Dictionary.of<TravellerDetails>(
+            Question.fromObject<TravellerDetails>(
                 notes<TravellerNotes>().get('travellerDetails'),
                 data.rowsHash() as Partial<TravellerDetails>,
             )
