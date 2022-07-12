@@ -32,6 +32,8 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: chapter-14
+        env:
+          CHROMEDRIVER_FILEPATH: "/usr/bin/chromedriver"
 
       - name: Test
         working-directory: chapter-14
