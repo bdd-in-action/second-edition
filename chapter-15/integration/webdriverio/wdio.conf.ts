@@ -29,7 +29,7 @@ export const config: WebdriverIOConfig = {
             ConsoleReporter.forDarkTerminals(),
             new SerenityBDDReporter(),
             Photographer.whoWill(TakePhotosOfFailures),
-            ArtifactArchiver.storingArtifactsAt(projectRoot, '/target/site/serenity')
+            ArtifactArchiver.storingArtifactsAt(projectRoot, 'reports/wdio')
         ]
     },
     //

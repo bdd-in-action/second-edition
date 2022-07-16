@@ -11,8 +11,7 @@ import {
     SubmitRegistrationForm,
 } from '../../domain';
 import { ConfirmSubmission, Form } from '../../domain/ui';
-import { TravelerNotes } from '../../integration/TravelerNotes';
-import { TravelerDetails } from '../../integration';
+import { TravelerDetails, TravelerNotes } from '../../integration';
 
 Given('{actor} has signed up', (actor: Actor) =>
     actor.attemptsTo(

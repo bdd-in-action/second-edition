@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf target",
+    "postinstall": "serenity-bdd update --ignoreSSL",
+    "clean": "rimraf reports",
     "start": "npm run start --prefix node_modules/@bdd-in-action/flying-high-app",
-    "test:update-serenity": "serenity-bdd update --ignoreSSL",
-    "test:acceptance": "wdio integration/webdriverio/wdio.conf.ts",
-    "test:report": "serenity-bdd run",
-    "test": "failsafe clean test:update-serenity test:acceptance test:report",
-    "ci": "start-server-and-test 3000"
+
+    "test": "npm run test:wdio",
+
+    "pretest:playwright": "rimraf reports/playwright",
+    "test:playwright": "start-server-and-test 3000 'failsafe test:playwright:run test:playwright:report'",
+    "test:playwright:run": "cucumber-js -p playwright",
+    "test:playwright:report": "serenity-bdd run --destination reports/playwright --source reports/playwright",
+
+    "pretest:wdio": "rimraf reports/wdio",
+    "test:wdio": "start-server-and-test 3000 'failsafe test:wdio:run test:wdio:report'",
+    "test:wdio:run": "wdio integration/webdriverio/wdio.conf.ts",
+    "test:wdio:report": "serenity-bdd run --destination reports/wdio --source reports/wdio"
   },
   "repository": {
     "type": "git",
@@ -33,6 +41,7 @@
     "@serenity-js/cucumber": "^3.0.0-rc",
     "@serenity-js/web": "^3.0.0-rc",
     "@serenity-js/webdriverio": "^3.0.0-rc",
+    "@serenity-js/playwright": "^3.0.0-rc",
     "@serenity-js/rest": "^3.0.0-rc",
     "@serenity-js/serenity-bdd": "^3.0.0-rc",
     "@wdio/cli": "^7.20.1",
@@ -40,14 +49,15 @@
     "@wdio/spec-reporter": "^7.20.0",
     "@wdio/types": "^7.20.0",
     "@wdio/reporter": "^7.20.0",
+    "playwright": "^1.23.4",
     "webdriverio": "^7.20.1"
   },
   "devDependencies": {
     "npm-failsafe": "^0.4.3",
     "rimraf": "^3.0.2",
     "start-server-and-test": "^1.14.0",
-    "ts-node": "^10.8.2",
-    "typescript": "^4.6.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4",
     "chromedriver": "^103.0.0",
     "@bdd-in-action/flying-high-app": "file:../flying-high-app"
   }

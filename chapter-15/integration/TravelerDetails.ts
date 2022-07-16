@@ -15,7 +15,7 @@ export abstract class TravelerDetails {
             email:          `${ actorName }.Traveler@example.org`,
             password:       'P@ssw0rd',
             title:          'Mx',
-            address:        '10 Partridge Street, Dandenong',
+            address:        '35 Victoria Street, Alexandria',
             country:        'Australia',
             seatPreference: 'window'
         }

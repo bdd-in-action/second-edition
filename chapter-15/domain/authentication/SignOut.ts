@@ -1,6 +1,6 @@
 import { isPresent, not } from '@serenity-js/assertions';
-import { Task } from '@serenity-js/core';
-import { Click, Wait } from '@serenity-js/web';
+import { Task, Wait } from '@serenity-js/core';
+import { Click } from '@serenity-js/web';
 
 import { Form } from '../ui';
 

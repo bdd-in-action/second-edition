@@ -5,8 +5,8 @@ import {
   isPresent,
   not
 } from '@serenity-js/assertions';
-import { Task } from '@serenity-js/core';
-import { Click, isVisible, Text, Wait } from '@serenity-js/web';
+import { Duration, Task, Wait } from '@serenity-js/core';
+import { Click, isVisible, Text } from '@serenity-js/web';
 import { Toaster } from '../ui';
 
 export class ConfirmSubmission {
@@ -44,7 +44,7 @@ export class ConfirmSubmission {
     return Task.where(`#actor dismisses the message`,
       Wait.until(Toaster.message(), isPresent()),
       Click.on(Toaster.message()),
-      Wait.until(Toaster.component(), not(isVisible())),
+      Wait.until(Toaster.message(), not(isVisible())),
     );
   }
 }
