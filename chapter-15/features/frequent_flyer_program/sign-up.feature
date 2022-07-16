@@ -5,9 +5,9 @@ Feature: Sign up
 
   Rule: Registered Frequent Flyer account is required to use the system
 
-    Scenario: Sign up using valid traveller details
+    Scenario: Sign up using valid traveler details
 
-       When Tracy signs up using valid traveller details
+       When Tracy signs up using valid traveler details
        Then she should be able to sign in
 
     Scenario Outline: Sign up using invalid email address details

@@ -10,6 +10,6 @@ module.exports = {
         `--require-module 'ts-node/register'`,                      // use TypeScript in-memory transpiler, ts-node
         `--format "@serenity-js/cucumber"`,                         // use Serenity/JS Cucumber adapter - https://serenity-js.org/modules/cucumber/
         `--require "./features/**/*.steps.ts"`,                     // load step definition libraries
-        `--require './integration/playwright/serenity.config.ts'`   // load configuration files, such as features/support/
+        `--require './integration/playwright/serenity.config.ts'`   // load Serenity/JS configuration
     ].join(' ')
 };

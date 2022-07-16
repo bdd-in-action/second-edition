@@ -14,16 +14,16 @@ import {
 import { TravelerDetails } from '../../integration';
 
 export class FillOutRegistrationForm {
-    static using(travellerDetails: QuestionAdapter<TravelerDetails> | TravelerDetails) {
+    static using(travelerDetails: QuestionAdapter<TravelerDetails> | TravelerDetails) {
         return Task.where(`#actor fills out the registration form`,
-            SpecifyEmailAddress(travellerDetails.email),
-            SpecifyPassword(travellerDetails.password),
-            SpecifySalutation(travellerDetails.title),
-            SpecifyFirstName(travellerDetails.firstName),
-            SpecifyLastName(travellerDetails.lastName),
-            SpecifyHomeAddress(travellerDetails.address),
-            SpecifyCountryOfResidence(travellerDetails.country),
-            SpecifySeatPreference(travellerDetails.seatPreference),
+            SpecifyEmailAddress(travelerDetails.email),
+            SpecifyPassword(travelerDetails.password),
+            SpecifySalutation(travelerDetails.title),
+            SpecifyFirstName(travelerDetails.firstName),
+            SpecifyLastName(travelerDetails.lastName),
+            SpecifyHomeAddress(travelerDetails.address),
+            SpecifyCountryOfResidence(travelerDetails.country),
+            SpecifySeatPreference(travelerDetails.seatPreference),
             ToggleNewsletterSubscription.off(),
             ToggleTermsAndConditions.on(),
         );

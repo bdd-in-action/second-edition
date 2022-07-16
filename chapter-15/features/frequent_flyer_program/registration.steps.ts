@@ -30,7 +30,7 @@ Given('{actor} has signed up using the following details:', (actor: Actor, data:
         ),
     ));
 
-When('{actor} signs up using valid traveller details', (actor: Actor) =>
+When('{actor} signs up using valid traveler details', (actor: Actor) =>
     actor.attemptsTo(
         SignUp.using(
             notes<TravelerNotes>().get('travelerDetails')

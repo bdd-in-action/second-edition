@@ -16,9 +16,9 @@ export class SignUp {
         );
     }
 
-    static viaApiUsing(travellerDetails: Answerable<TravelerDetails>) {
+    static viaApiUsing(travelerDetails: Answerable<TravelerDetails>) {
         return Task.where(`#actor signs up (via API)`,
-            Send.a(PostRequest.to('/api/auth/register').with(travellerDetails)),
+            Send.a(PostRequest.to('/api/auth/register').with(travelerDetails)),
             Ensure.that(LastResponse.status(), equals(201)),
         );
     }
