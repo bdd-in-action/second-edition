@@ -40,4 +40,4 @@ jobs:
           retention-days: 3
           name: chapter-14-reports
           path: |
-            chapter-14/reports/**/*
+            chapter-14/target/**/*
