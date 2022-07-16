@@ -44,6 +44,6 @@ jobs:
         if: always()
         with:
           retention-days: 3
-          name: chapter-15-reports-${{ matrix.node-version }}
+          name: chapter-15-reports-${{ matrix.integration-tool }}
           path: |
             chapter-15/reports/**/*
