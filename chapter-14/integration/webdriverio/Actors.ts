@@ -1,11 +1,11 @@
 import { Actor, Cast, Notepad, TakeNotes } from '@serenity-js/core';
 import { BrowseTheWebWithWebdriverIO } from '@serenity-js/webdriverio';
 import { CallAnApi } from '@serenity-js/rest';
-import { TravellerDetails } from './TravellerDetails';
-import { AuthenticationDetails } from './AuthenticationDetails';
+import { TravelerDetails } from '../TravelerDetails';
+import { AuthenticationDetails } from '../AuthenticationDetails';
 
 export interface TravellerNotes {
-    travellerDetails:       TravellerDetails;
+    travelerDetails:        TravelerDetails;
     authenticationDetails?: AuthenticationDetails;
 }
 
@@ -19,7 +19,7 @@ export class Actors implements Cast {
             CallAnApi.at(this.apiUrl),
             TakeNotes.using(
                 Notepad.with<TravellerNotes>({
-                    travellerDetails: TravellerDetails.of(actor.name),
+                    travelerDetails: TravelerDetails.of(actor.name),
                 })
             )
         );

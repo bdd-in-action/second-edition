@@ -1,4 +1,4 @@
-export abstract class TravellerDetails {
+export abstract class TravelerDetails {
     firstName:      string;
     lastName:       string;
     email:          string;
@@ -8,11 +8,11 @@ export abstract class TravellerDetails {
     country:        string;
     seatPreference: string;
 
-    static of(actorName: string): TravellerDetails {
+    static of(actorName: string): TravelerDetails {
         return {
             firstName:      actorName,
-            lastName:       'Traveller',
-            email:          `${ actorName }.Traveller@example.org`,
+            lastName:       'Traveler',
+            email:          `${ actorName }.Traveler@example.org`,
             password:       'P@ssw0rd',
             title:          'Mx',
             address:        '10 Partridge Street, Dandenong',

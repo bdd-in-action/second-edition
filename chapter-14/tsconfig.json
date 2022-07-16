@@ -3,11 +3,7 @@
     "target": "es2019",
     "lib": ["es2019", "dom"],
     "module": "commonjs",
-    "sourceMap": true,
-    "types": [
-      "node",
-      "webdriverio/async"
-    ]
+    "sourceMap": true
   },
 
   "exclude": [

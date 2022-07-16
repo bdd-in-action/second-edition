@@ -1,11 +1,9 @@
-import { notes, Task } from '@serenity-js/core';
+import { QuestionAdapter, Task } from '@serenity-js/core';
 import { ChangeApiConfig, DeleteRequest, LastResponse, Send } from '@serenity-js/rest';
 import { Ensure, equals, or } from '@serenity-js/assertions';
-import { TravellerNotes } from '../actors';
+import { AuthenticationDetails } from '../../integration';
 
-export const RemoveTestAccount = () => {
-    const authenticationDetails = notes<TravellerNotes>().get('authenticationDetails');
-
+export const RemoveTestAccount = (authenticationDetails: QuestionAdapter<AuthenticationDetails>) => {
     return Task.where(`#actor removes their test account`,
         ChangeApiConfig.setHeader(
             'Authorization',

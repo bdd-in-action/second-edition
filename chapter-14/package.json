@@ -7,7 +7,7 @@
     "clean": "rimraf target",
     "start": "npm run start --prefix node_modules/@bdd-in-action/flying-high-app",
     "test:update-serenity": "serenity-bdd update --ignoreSSL",
-    "test:acceptance": "wdio wdio.conf.ts",
+    "test:acceptance": "wdio integration/webdriverio/wdio.conf.ts",
     "test:report": "serenity-bdd run",
     "test": "failsafe clean test:update-serenity test:acceptance test:report",
     "ci": "start-server-and-test 3000"

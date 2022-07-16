@@ -11,10 +11,10 @@ import {
     ToggleNewsletterSubscription,
     ToggleTermsAndConditions,
 } from './form';
-import { TravellerDetails } from '../actors';
+import { TravelerDetails } from '../../integration';
 
 export class FillOutRegistrationForm {
-    static using(travellerDetails: QuestionAdapter<TravellerDetails> | TravellerDetails) {
+    static using(travellerDetails: QuestionAdapter<TravelerDetails> | TravelerDetails) {
         return Task.where(`#actor fills out the registration form`,
             SpecifyEmailAddress(travellerDetails.email),
             SpecifyPassword(travellerDetails.password),

@@ -9,24 +9,24 @@ import {
     SignOut,
     SignUp,
     SubmitRegistrationForm,
-    TravellerDetails,
-    TravellerNotes,
 } from '../../domain';
 import { ConfirmSubmission, Form } from '../../domain/ui';
+import { TravelerNotes } from '../../integration/TravelerNotes';
+import { TravelerDetails } from '../../integration';
 
 Given('{actor} has signed up', (actor: Actor) =>
     actor.attemptsTo(
         SignUp.viaApiUsing(
-            notes<TravellerNotes>().get('travellerDetails')
+            notes<TravelerNotes>().get('travelerDetails')
         ),
     ));
 
 Given('{actor} has signed up using the following details:', (actor: Actor, data: DataTable) =>
     actor.attemptsTo(
         SignUp.viaApiUsing(
-            Question.fromObject<TravellerDetails>(
-                notes<TravellerNotes>().get('travellerDetails'),
-                data.rowsHash() as Partial<TravellerDetails>,
+            Question.fromObject<TravelerDetails>(
+                notes<TravelerNotes>().get('travelerDetails'),
+                data.rowsHash() as Partial<TravelerDetails>,
             )
         ),
     ));
@@ -34,7 +34,7 @@ Given('{actor} has signed up using the following details:', (actor: Actor, data:
 When('{actor} signs up using valid traveller details', (actor: Actor) =>
     actor.attemptsTo(
         SignUp.using(
-            notes<TravellerNotes>().get('travellerDetails')
+            notes<TravelerNotes>().get('travelerDetails')
         ),
         ConfirmSubmission.succeededWith('registered successfully'),
     ));
@@ -43,16 +43,16 @@ When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
     actor.attemptsTo(
         LocateRegistrationForm.viaMainMenu(),
         FillOutRegistrationForm.using(
-            Question.fromObject<TravellerDetails>(
-                notes<TravellerNotes>().get('travellerDetails'),
-                data.rowsHash() as Partial<TravellerDetails>,
+            Question.fromObject<TravelerDetails>(
+                notes<TravelerNotes>().get('travelerDetails'),
+                data.rowsHash() as Partial<TravelerDetails>,
             )
         ),
         SubmitRegistrationForm(),
     ));
 
 Then('{pronoun} should be able to sign in', async (actor: Actor) => {
-    const details = notes<TravellerNotes>().get('travellerDetails');
+    const details = notes<TravelerNotes>().get('travelerDetails');
 
     await actor.attemptsTo(
         SignIn.using(details.email, details.password),
@@ -75,9 +75,9 @@ Then('{pronoun} should be presented with an option to reset password', (actor: A
 
 After(() =>
     actorInTheSpotlight().attemptsTo(
-        Check.whether(notes<TravellerNotes>().get('authenticationDetails'), isPresent())
+        Check.whether(notes<TravelerNotes>().get('authenticationDetails'), isPresent())
             .andIfSo(
                 SignOut(),
-                RemoveTestAccount(),
+                RemoveTestAccount(notes<TravelerNotes>().get('authenticationDetails')),
             ),
     ));

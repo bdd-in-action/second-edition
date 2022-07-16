@@ -4,14 +4,16 @@ import { SerenityBDDReporter } from '@serenity-js/serenity-bdd';
 import { Photographer, TakePhotosOfFailures } from '@serenity-js/web';
 import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 import { resolve } from 'path';
-import { Actors } from './domain';
 
-const baseUrl = 'http://localhost:3000';
+import { Actors } from './Actors';
+
+const baseUrl       = 'http://localhost:3000';
+const projectRoot   = resolve(__dirname, '../..');
 
 export const config: WebdriverIOConfig = {
 
     specs: [
-        './features/**/*.feature',
+        `${ projectRoot }/features/**/*.feature`,
     ],
 
     baseUrl,
@@ -27,14 +29,14 @@ export const config: WebdriverIOConfig = {
             ConsoleReporter.forDarkTerminals(),
             new SerenityBDDReporter(),
             Photographer.whoWill(TakePhotosOfFailures),
-            ArtifactArchiver.storingArtifactsAt('./target/site/serenity')
+            ArtifactArchiver.storingArtifactsAt(projectRoot, '/target/site/serenity')
         ]
     },
     //
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
         require: [
-            './features/**/*.steps.ts'
+            `${ projectRoot }/features/**/*.steps.ts`
         ],
         // <string[]> (type[:path]) specify native Cucumber.js output format, if needed. Optionally supply PATH to redirect formatter output (repeatable)
         // format: [ ],
