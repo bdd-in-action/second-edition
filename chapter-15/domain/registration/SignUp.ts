@@ -10,8 +10,8 @@ export class SignUp {
 
     static using(details: QuestionAdapter<TravelerDetails>) {
         return Task.where(`#actor signs up using valid details`,
-            LocateRegistrationForm.viaMainMenu(),
-            FillOutRegistrationForm.using(details),
+            LocateRegistrationForm.viaHomePage(),
+            FillOutRegistrationForm(details),
             SubmitRegistrationForm(),
         );
     }

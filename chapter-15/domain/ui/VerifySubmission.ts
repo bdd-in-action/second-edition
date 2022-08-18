@@ -1,28 +1,23 @@
-import {
-  Ensure,
-  equals,
-  includes,
-  isPresent,
-  not
-} from '@serenity-js/assertions';
-import { Duration, Task, Wait } from '@serenity-js/core';
-import { Click, isVisible, Text } from '@serenity-js/web';
-import { Toaster } from '../ui';
+import { Ensure, equals, includes, isPresent, not } from '@serenity-js/assertions';
+import { Task, Wait } from '@serenity-js/core';
+import { Click, Text } from '@serenity-js/web';
+import { Toaster } from './Toaster';
 
-export class ConfirmSubmission {
+export class VerifySubmission {
+
   static succeededWith(expectedMessage: string) {
     return Task.where(`#actor confirms successful form submission`,
-      ConfirmSubmission.hasMessage(expectedMessage),
-      ConfirmSubmission.hasStatus('success'),
-      ConfirmSubmission.dismissMessage(),
+      VerifySubmission.hasMessage(expectedMessage),
+      VerifySubmission.hasStatus('success'),
+      VerifySubmission.dismissMessage(),
     );
   }
 
   static failedWith(expectedMessage: string) {
     return Task.where(`#actor confirms failed form submission`,
-      ConfirmSubmission.hasMessage(expectedMessage),
-      ConfirmSubmission.hasStatus('error'),
-      ConfirmSubmission.dismissMessage(),
+      VerifySubmission.hasMessage(expectedMessage),
+      VerifySubmission.hasStatus('error'),
+      VerifySubmission.dismissMessage(),
     );
   }
 
@@ -44,8 +39,7 @@ export class ConfirmSubmission {
     return Task.where(`#actor dismisses the message`,
       Wait.until(Toaster.message(), isPresent()),
       Click.on(Toaster.message()),
-      Wait.until(Toaster.message(), not(isVisible())),
+      Wait.until(Toaster.message(), not(isPresent())),
     );
   }
 }
-

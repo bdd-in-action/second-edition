@@ -13,9 +13,9 @@ import {
 } from './form';
 import { TravelerDetails } from '../../integration';
 
-export class FillOutRegistrationForm {
-    static using(travelerDetails: QuestionAdapter<TravelerDetails> | TravelerDetails) {
-        return Task.where(`#actor fills out the registration form`,
+export const FillOutRegistrationForm =
+    (travelerDetails: QuestionAdapter<TravelerDetails> | TravelerDetails) =>
+        Task.where(`#actor fills out the registration form`,
             SpecifyEmailAddress(travelerDetails.email),
             SpecifyPassword(travelerDetails.password),
             SpecifySalutation(travelerDetails.title),
@@ -26,6 +26,4 @@ export class FillOutRegistrationForm {
             SpecifySeatPreference(travelerDetails.seatPreference),
             ToggleNewsletterSubscription.off(),
             ToggleTermsAndConditions.on(),
-        );
-    }
-}
+        )

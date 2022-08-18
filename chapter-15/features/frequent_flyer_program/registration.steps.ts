@@ -1,16 +1,8 @@
 import { Ensure, includes, isPresent } from '@serenity-js/assertions';
 import { After, DataTable, Given, Then, When } from '@cucumber/cucumber';
 import { Actor, actorInTheSpotlight, Check, notes, Question } from '@serenity-js/core';
-import {
-    FillOutRegistrationForm,
-    LocateRegistrationForm,
-    RemoveTestAccount,
-    SignIn,
-    SignOut,
-    SignUp,
-    SubmitRegistrationForm,
-} from '../../domain';
-import { ConfirmSubmission, Form } from '../../domain/ui';
+import { RemoveTestAccount, SignIn, SignOut, SignUp } from '../../domain';
+import { VerifySubmission, Form } from '../../domain/ui';
 import { TravelerDetails, TravelerNotes } from '../../integration';
 
 Given('{actor} has signed up', (actor: Actor) =>
@@ -35,19 +27,17 @@ When('{actor} signs up using valid traveler details', (actor: Actor) =>
         SignUp.using(
             notes<TravelerNotes>().get('travelerDetails')
         ),
-        ConfirmSubmission.succeededWith('registered successfully'),
+        VerifySubmission.succeededWith('registered successfully'),
     ));
 
 When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
     actor.attemptsTo(
-        LocateRegistrationForm.viaMainMenu(),
-        FillOutRegistrationForm.using(
+        SignUp.using(
             Question.fromObject<TravelerDetails>(
                 notes<TravelerNotes>().get('travelerDetails'),
                 data.rowsHash() as Partial<TravelerDetails>,
             )
-        ),
-        SubmitRegistrationForm(),
+        )
     ));
 
 Then('{pronoun} should be able to sign in', async (actor: Actor) => {
@@ -65,7 +55,7 @@ Then('{pronoun} should be advised of an {word} input error: {string}', (actor: A
 
 Then('{pronoun} should be advised of an error: {string}', (actor: Actor, expectedMessage: string) =>
     actor.attemptsTo(
-        ConfirmSubmission.failedWith(expectedMessage),
+        VerifySubmission.failedWith(expectedMessage),
     ));
 
 Then('{pronoun} should be presented with an option to reset password', (actor: Actor) => {

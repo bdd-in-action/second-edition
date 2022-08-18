@@ -3,11 +3,11 @@ import { QuestionAdapter } from '@serenity-js/core';
 
 export class Toaster {
     static component = () =>
-        PageElement.located(By.css(`[toast-component]`))
+        PageElement.located(By.css(`.ngx-toastr`))
             .describedAs('toaster');
 
     static message = () =>
-        PageElement.located(By.css(`div[role='alert']`))
+        PageElement.located(By.css(`.toast-message`))
             .of(Toaster.component())
             .describedAs('message');
 
