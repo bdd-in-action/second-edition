@@ -10,7 +10,7 @@ import {
     SignUp,
     SubmitRegistrationForm,
 } from '../../domain';
-import { ConfirmSubmission } from '../../domain/ui';
+import { VerifySubmission } from '../../domain/ui';
 import { TravelerDetails, TravelerNotes } from '../../integration';
 
 Given('{actor} has signed up using the following details:', (actor: Actor, data: DataTable) =>
@@ -28,7 +28,7 @@ When('{actor} signs up using valid traveler details', (actor: Actor) =>
         SignUp.using(
             notes<TravelerNotes>().get('travelerDetails')
         ),
-        ConfirmSubmission.succeededWith('registered successfully'),
+        VerifySubmission.succeededWith('registered successfully'),
     ));
 
 When('{actor} tries to sign up using:', (actor: Actor, data: DataTable) =>
@@ -53,7 +53,7 @@ Then('{pronoun} should be able to sign in', async (actor: Actor) => {
 
 Then('{pronoun} should be advised of an error: {string}', (actor: Actor, expectedMessage: string) =>
     actor.attemptsTo(
-        ConfirmSubmission.failedWith(expectedMessage),
+        VerifySubmission.failedWith(expectedMessage),
     ));
 
 Then('{pronoun} should be presented with an option to reset password', (actor: Actor) => {
