@@ -10,7 +10,7 @@
     "posttest": "$npm_config_github || pkill -f npm"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.1102.8",
+    "@angular-devkit/build-angular": "^13.3.4",
     "@angular/common": "^13.3.4",
     "@angular/compiler": "^13.3.4",
     "@angular/compiler-cli": "^13.3.4",
@@ -19,10 +19,10 @@
     "@nestjs/mapped-types": "^0.4.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.6.4"
   },
   "devDependencies": {
-    "@angular/cli": "^11.2.8",
+    "@angular/cli": "^13.3.4",
     "cypress": "^7.1.0"
   }
 }
