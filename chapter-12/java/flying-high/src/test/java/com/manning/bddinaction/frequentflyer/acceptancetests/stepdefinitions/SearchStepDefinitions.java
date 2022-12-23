@@ -2,9 +2,13 @@ package com.manning.bddinaction.frequentflyer.acceptancetests.stepdefinitions;
 
 import com.manning.bddinaction.frequentflyer.acceptancetests.domain.FlightSearch;
 import com.manning.bddinaction.frequentflyer.acceptancetests.domain.TravelClass;
+import com.manning.bddinaction.frequentflyer.acceptancetests.domain.persona.Traveller;
+import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.login.Login;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.search.SearchFlights;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.search.SearchResult;
 import com.manning.bddinaction.frequentflyer.acceptancetests.screenplay.search.SearchResults;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;

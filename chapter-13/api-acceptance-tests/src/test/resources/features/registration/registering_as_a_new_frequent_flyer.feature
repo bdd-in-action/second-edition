@@ -6,7 +6,6 @@ Business Need: Registering as a new Frequent Flyer
 
   New Frequent Flyer members need to register to book a flight.
 
-  @current
   Example: Candy fails to enter to enter a mandatory field
     Given Candy does not have a Frequent Flyer account
     When Candy wants to register a new Frequent Flyer account

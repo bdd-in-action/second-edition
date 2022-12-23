@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<serenity.version>3.2.5</serenity.version>
+		<serenity.version>3.5.1</serenity.version>
 		<testcontainers.version>1.17.3</testcontainers.version>
 		<encoding>UTF-8</encoding>
 	</properties>

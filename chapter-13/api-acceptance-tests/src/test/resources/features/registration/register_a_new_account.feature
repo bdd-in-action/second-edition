@@ -8,6 +8,7 @@ Feature: Register for a Frequent Flyer account
   # A high level user journey scenario
   #
   Rule: Travelers can register as new members on the Flying High website
+    @current
     Example: Tracy registers as a new Frequent Flyer
       Given Tracy does not have a Frequent Flyer account
       When she registers for a new Frequent Flyer account

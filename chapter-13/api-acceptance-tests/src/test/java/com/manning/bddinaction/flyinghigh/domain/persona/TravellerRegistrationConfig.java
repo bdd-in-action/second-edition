@@ -14,10 +14,14 @@ public class TravellerRegistrationConfig {
                 travellerDetails.getString("firstName"),
                 travellerDetails.getString("lastName"),
                 travellerDetails.getString("title"),
-                travellerDetails.getString("email"),
+                randomised(travellerDetails.getString("email")),
                 travellerDetails.getString("password"),
                 travellerDetails.getString("address"),
                 travellerDetails.getString("country")
         );
+    }
+
+    private static String randomised(String email) {
+        return "email_" + System.currentTimeMillis() + "_" + email;
     }
 }

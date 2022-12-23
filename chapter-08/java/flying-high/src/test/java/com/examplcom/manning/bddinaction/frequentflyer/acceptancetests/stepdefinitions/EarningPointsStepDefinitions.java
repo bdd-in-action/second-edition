@@ -120,8 +120,8 @@ public class EarningPointsStepDefinitions {
 
     List<PastFlight> pastFlights;
 
-    @Given("{member} has travelled on the following flight(s):")
-    public void travelledOnTheFollowingFlights(FrequentFlyerMember member, List<PastFlight> flights) {
+    @Given("{member} has traveled on the following flight(s):")
+    public void traveledOnTheFollowingFlights(FrequentFlyerMember member, List<PastFlight> flights) {
         this.member = frequentFlyerMemberRepository.save(member);
         this.pastFlights = flights;
     }
@@ -133,25 +133,21 @@ public class EarningPointsStepDefinitions {
         );
     }
 
-    @Given("{word} is a Frequent Flyer traveller")
-    public void createFrequentFlyerNamed(String name) {
-        // TODO: Setup the frequent flyer
-    }
-
     FlightDatabase flightDatabase = FlightDatabase.instance();
 
     @Given("the distance from {} to {} is {int} km")
     public void recordFlightDistance(String departure,
                                      String destination,
                                      int distanceInKm) {
-        flightDatabase.recordTripDistance()
-                .from(departure)
-                .to(destination)
-                .as(distanceInKm).kilometres();
+        // TODO: Record trip distance
     }
 
+    @Given("{word} is a Frequent Flyer traveler")
+    public void createFrequentFlyerNamed(String name) {
+        // TODO: Setup the frequent flyer
+    }
     @When("he/she completes a flight from {} to {}")
-    public void travellerCompletesAFlight(String departure,
+    public void travelerCompletesAFlight(String departure,
                                           String destination) {
         // TODO: Record the flight details
     }
@@ -170,5 +166,9 @@ public class EarningPointsStepDefinitions {
     @Then("the available destinations should be {cities}")
     public void theAvailableDestinationsShouldBe(List<String> cities) {
 
+    }
+
+    @When("she completes a flight between {} and {}")
+    public void sheCompletesAFlightBetween(String departure, String destination) {
     }
 }

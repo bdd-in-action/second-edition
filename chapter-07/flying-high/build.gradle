@@ -1,0 +1,36 @@
+repositories {
+    jcenter()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.1.0")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation ('net.serenity-bdd:serenity-core:2.1.0')  {
+        exclude group: "io.cucumber", module: "cucumber-core"
+    }
+    implementation('net.serenity-bdd:serenity-cucumber4:2.1.0')
+    implementation('io.cucumber:cucumber-java:4.8.0')
+    implementation('io.cucumber:cucumber-junit:4.8.0')
+    testImplementation('org.assertj:assertj-core:3.8.0')
+    testImplementation("junit:junit:4.13")
+}
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

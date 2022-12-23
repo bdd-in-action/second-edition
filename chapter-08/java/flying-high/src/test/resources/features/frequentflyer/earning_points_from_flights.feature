@@ -3,7 +3,7 @@
 Feature: Earning Frequent Flyer points from flights
   In order to improve customer loyalty
   As an airline sales manager
-  I want travellers to earn frequent flyer points when they fly with us
+  I want travelers to earn frequent flyer points when they fly with us
 
   Background:
     Given the following flight points schedule:
@@ -20,12 +20,18 @@ Feature: Earning Frequent Flyer points from flights
       | Silver   | 1.5        |
       | Gold     | 2.0        |
 
-  Scenario: Travellers earn points depending on the points schedule
+  Scenario: Flights outside Europe earn points based on distance traveled
+    Given the distance from London to New York is 5500 km
+    And Tara is a Frequent Flyer traveler
+    When she completes a flight between London and New York
+    Then she should earn 550 points
+
+  Scenario: Travelers earn points depending on the points schedule
     Given Stacy is a Standard Frequent Flyer member
     When she flies from London to New York in Economy class
     Then she should earn 550 points
 
-  Scenario Outline: Travellers earn more points in higher cabin classes
+  Scenario Outline: Travelers earn more points in higher cabin classes
     Given Silvia is a Silver Frequent Flyer member
     When she flies from <From> to <To> in <Cabin> class
     Then she should earn <Points Earned> points
@@ -46,7 +52,7 @@ Feature: Earning Frequent Flyer points from flights
       | New York | London      | Gold     | 1600          |
 
   @section:7.1
-  Scenario: Flights outside Europe earn points based on distance travelled
+  Scenario: Flights outside Europe earn points based on distance traveled
     Given the distance from London to New York is 5500 km
     And Tara is a Standard Frequent Flyer member
     When she flies from London to New York in Economy class
@@ -79,14 +85,14 @@ Feature: Earning Frequent Flyer points from flights
 
   Scenario: Flights outside Europe earn points based on distance
     Given the distance from London to New York is 5500 km
-    And Tara is a Frequent Flyer traveller
+    And Tara is a Frequent Flyer traveler
     When she completes a flight from London to New York
     Then she should earn 550 points
 
 
   Scenario Outline: Frequent flyer members are awarded extra points for late flights
   10 extra points are earned for each hour delayed after 1 hour.
-    Given Tracy has travelled on the following flights:
+    Given Tracy has traveled on the following flights:
       | Flight Number   | Delayed   | Delayed By   | Extra Points   |
       | <Flight Number> | <Delayed> | <Delayed By> | <Extra Points> |
     When the flight is credited to her account
@@ -98,4 +104,3 @@ Feature: Earning Frequent Flyer points from flights
       | Yes     | 60m        | 10           |
       | Yes     | 2h30m      | 20           |
       | Yes     | 5h         | 50           |
-

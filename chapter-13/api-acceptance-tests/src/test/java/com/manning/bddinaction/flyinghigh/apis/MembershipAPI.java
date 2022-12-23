@@ -6,6 +6,7 @@ import com.manning.bddinaction.flyinghigh.domain.persona.TravellerRegistration;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import net.serenitybdd.rest.SerenityRest;
 
 public class MembershipAPI extends ConfigurableAPIClient {
 
@@ -13,8 +14,9 @@ public class MembershipAPI extends ConfigurableAPIClient {
      * Register a new Frequent Flyer member, returning the new Frequent Flyer number
      */
     public String register(TravellerRegistration newMember) {
-        Response response = RestAssured.given()
+        Response response = SerenityRest.given()
                 .contentType(ContentType.JSON)
+                .accept(ContentType.ANY)
                 .body(newMember)
                 .post("/frequent-flyer");
 
